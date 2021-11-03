@@ -1,0 +1,13 @@
+version: "3.6"
+
+services:
+  pro-deputy-hub:
+    build:
+      context: ..
+      dockerfile: ./docker/sirius-pro-deputy-hub/Dockerfile
+    ports:
+      - '8888:1234'
+    volumes:
+      - ..:/app:rw,delegated
+    environment:
+      PREFIX: /supervision/deputies/professional
