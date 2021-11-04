@@ -22,6 +22,7 @@ services:
     build: ./puppeteer
     depends_on:
       - pro-deputy-hub
+      - json-server
     environment:
       - LHCI_BUILD_CONTEXT__CURRENT_HASH=$GITHUB_SHA
       - LHCI_BUILD_CONTEXT__GITHUB_REPO_SLUG=ministryofjustice/opg-sirius-supervision-pro-deputy-hub
