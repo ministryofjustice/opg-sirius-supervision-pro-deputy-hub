@@ -2,7 +2,7 @@ describe("Pro Deputy Hub", () => {
   beforeEach(() => {
       cy.setCookie("Other", "other");
       cy.setCookie("XSRF-TOKEN", "abcde");
-      cy.visit("/supervision/deputies/professional/");
+      cy.visit("/supervision/deputies/professional/deputy/1");
   });
 
     describe("Header", () => {
@@ -37,6 +37,24 @@ describe("Pro Deputy Hub", () => {
 
         it("the nav link should contain the crown copyright logo", () => {
             cy.get(".govuk-footer__copyright-logo").should("have.attr", "href", "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/")
+        })
+    });
+
+    describe("Pro deputy details", () => {
+        it("the page should contain the deputy name", () => {
+            cy.get('.govuk-heading-m').should("contain", "firstname surname")
+        })
+
+        it("the page should contain the firm", () => {
+            cy.get('.govuk-grid-column-full > :nth-child(2)').should("contain", "Firm:")
+        })
+
+        it("the page should contain the deputy number", () => {
+            cy.get('.govuk-grid-column-full > :nth-child(3)').should("contain", "Deputy Number: 1000")
+        })
+
+        it("the page should contain the executive case manager", () => {
+            cy.get('.govuk-grid-column-full > :nth-child(4)').should("contain", "Executive Case Manager: displayName")
         })
     });
 });
