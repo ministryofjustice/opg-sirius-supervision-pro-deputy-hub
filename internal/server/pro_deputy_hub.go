@@ -1,18 +1,23 @@
 package server
 
 import (
-	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
+	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 )
 
 type ProDeputyHubInformation interface {
+	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
 }
 
 type proDeputyHubVars struct {
-	Path      string
-	XSRFToken string
-	Error     string
-	Errors    sirius.ValidationErrors
+	Path             string
+	XSRFToken        string
+	ProDeputyDetails sirius.ProDeputyDetails
+	Error            string
+	Errors           sirius.ValidationErrors
 }
 
 func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template) Handler {
@@ -23,16 +28,19 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 
 		ctx := getContext(r)
 
-		vars := proDeputyHubVars{
-			Path:      r.URL.Path,
-			XSRFToken: ctx.XSRFToken,
+		routeVars := mux.Vars(r)
+		deputyId, _ := strconv.Atoi(routeVars["id"])
+		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+		if err != nil {
+			return err
 		}
 
-		switch r.Method {
-		case http.MethodGet:
-			return tmpl.ExecuteTemplate(w, "page", vars)
-		default:
-			return StatusError(http.StatusMethodNotAllowed)
+		vars := proDeputyHubVars{
+			Path:             r.URL.Path,
+			XSRFToken:        ctx.XSRFToken,
+			ProDeputyDetails: proDeputyDetails,
 		}
+
+		return tmpl.ExecuteTemplate(w, "page", vars)
 	}
 }
