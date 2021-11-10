@@ -10,16 +10,14 @@ import (
 
 type ProDeputyHubInformation interface {
 	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
-	// GetFirmDetails(sirius.Context, int) (sirius.FirmDetails, error)
 }
 
 type proDeputyHubVars struct {
 	Path             string
 	XSRFToken        string
 	ProDeputyDetails sirius.ProDeputyDetails
-	// FirmDetails      sirius.FirmDetails
-	Error  string
-	Errors sirius.ValidationErrors
+	Error            string
+	Errors           sirius.ValidationErrors
 }
 
 func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template) Handler {
@@ -33,7 +31,6 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
 		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
-		// firmDetails, err := client.GetFirmDetails(ctx, deputyId)
 		if err != nil {
 			return err
 		}
@@ -42,7 +39,6 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			Path:             r.URL.Path,
 			XSRFToken:        ctx.XSRFToken,
 			ProDeputyDetails: proDeputyDetails,
-			// FirmDetails:      firmDetails,
 		}
 
 		return tmpl.ExecuteTemplate(w, "page", vars)

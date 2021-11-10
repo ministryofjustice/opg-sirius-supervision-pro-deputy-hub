@@ -17,6 +17,6 @@
         ]
     },
     "urls": [
-        "http://pro-deputy-hub:8888/supervision/deputies/professional/"
+        "http://pro-deputy-hub:8888/supervision/deputies/professional/deputy/1"
     ]
   }
