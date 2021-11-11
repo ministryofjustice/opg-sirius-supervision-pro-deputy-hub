@@ -12,12 +12,21 @@ type executiveCaseManager struct {
 }
 
 type ProDeputyDetails struct {
-	ID                   int                  `json:"id"`
-	DeputyFirstName      string               `json:"firstname"`
-	DeputySurname        string               `json:"surname"`
-	DeputyNumber         int                  `json:"deputyNumber"`
-	OrganisationName     string               `json:"organisationName"`
-	ExecutiveCaseManager executiveCaseManager `json:"executiveCaseManager"`
+	ID                               int                  `json:"id"`
+	DeputyFirstName                  string               `json:"firstname"`
+	DeputySurname                    string               `json:"surname"`
+	DeputyNumber                     int                  `json:"deputyNumber"`
+	OrganisationName                 string               `json:"organisationName"`
+	OrganisationTeamOrDepartmentName string               `json:"organisationTeamOrDepartmentName"`
+	ExecutiveCaseManager             executiveCaseManager `json:"executiveCaseManager"`
+	Email                            string               `json:"email"`
+	PhoneNumber                      string               `json:"phoneNumber"`
+	AddressLine1                     string               `json:"addressLine1"`
+	AddressLine2                     string               `json:"addressLine2"`
+	AddressLine3                     string               `json:"addressLine3"`
+	Town                             string               `json:"town"`
+	County                           string               `json:"county"`
+	Postcode                         string               `json:"postcode"`
 }
 
 func (c *Client) GetProDeputyDetails(ctx Context, deputyId int) (ProDeputyDetails, error) {
