@@ -20,18 +20,10 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Telephone
+                        Firm
                     </dt>
-                    <dd class="govuk-summary-list__value hook_deputy_phone_number">
-                        {{ .ProDeputyDetails.PhoneNumber }}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Email
-                    </dt>
-                    <dd class="govuk-summary-list__value hook_deputy_email">
-                        <a href="mailto:{{.ProDeputyDetails.Email}}">{{ .ProDeputyDetails.Email }}</a>
+                    <dd class="govuk-summary-list__value hook_deputy_firm_name">
+                        Place holder firm name
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -46,6 +38,22 @@
                         {{ .ProDeputyDetails.Town }} <br>
                         {{ .ProDeputyDetails.County }} <br>
                         {{ .ProDeputyDetails.Postcode }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Telephone
+                    </dt>
+                    <dd class="govuk-summary-list__value hook_deputy_phone_number">
+                        {{ .ProDeputyDetails.PhoneNumber }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Email
+                    </dt>
+                    <dd class="govuk-summary-list__value hook_deputy_email">
+                        <a href="mailto:{{.ProDeputyDetails.Email}}">{{ .ProDeputyDetails.Email }}</a>
                     </dd>
                 </div>
             </dl>
