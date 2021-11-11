@@ -43,7 +43,7 @@
         "id": 223,
         "displayName": "displayName"
       },
-      "email": "",
+      "email": "email@something.com",
       "dob": "",
       "dateOfDeath": "",
       "salutation": "",
@@ -51,25 +51,25 @@
       "surname": "surname",
       "deputyNumber": 1000,
       "otherNames": "",
-      "addressLine1": "",
-      "addressLine2": "",
-      "addressLine3": "",
-      "town": "",
-      "county": "",
-      "postcode": "",
-      "country": "",
+      "addressLine1": "addressLine1",
+      "addressLine2": "addressLine2",
+      "addressLine3": "addressLine3",
+      "town": "town",
+      "county": "county",
+      "postcode": "postcode",
+      "country": "country",
       "isAirmailRequired": false,
-      "phoneNumber": "",
+      "phoneNumber": "1111111",
       "phoneNumbers": [
         {
           "id": 95,
-          "phoneNumber": "",
+          "phoneNumber": "22222222",
           "type": "Work",
           "default": false
         },
         {
           "id": 96,
-          "phoneNumber": "",
+          "phoneNumber": "333333",
           "type": "Home",
           "default": false
         }
