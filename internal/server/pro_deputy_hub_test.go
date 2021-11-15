@@ -23,7 +23,7 @@ func (m *mockProDeputyHubInformation) GetProDeputyDetails(ctx sirius.Context, de
 	return m.deputyData, m.err
 }
 
-func TestNavigateToDeputyHub(t *testing.T) {
+func TestNavigateToProDeputyHub(t *testing.T) {
 	assert := assert.New(t)
 
 	client := &mockProDeputyHubInformation{}
