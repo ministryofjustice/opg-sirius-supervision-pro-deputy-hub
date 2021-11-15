@@ -18,6 +18,7 @@ type Logger interface {
 type Client interface {
 	ErrorHandlerClient
 	ProDeputyHubInformation
+	ProDeputyHubTimelineInformation
 }
 
 type Template interface {
@@ -31,6 +32,10 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 	router.Handle("/deputy/{id}",
 		wrap(
 			renderTemplateForProDeputyHub(client, templates["pro-dashboard.gotmpl"])))
+
+	router.Handle("/deputy/{id}/timeline",
+		wrap(
+			renderTemplateForProDeputyHubTimeline(client, templates["timeline.gotmpl"])))
 
 	router.Handle("/health-check", healthCheck())
 
