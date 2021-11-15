@@ -2,7 +2,7 @@
      <nav class="moj-sub-navigation" aria-label="Primary navigation">
          <ul class="moj-sub-navigation__list">
              <li class="moj-sub-navigation__item">
-                 <a class="moj-sub-navigation__link" {{ if eq .Path (printf "/deputy/%d/" .ProDeputyDetails.ID) }} aria-current="page"{{ end }} href="{{ prefix (printf "/deputy/%d/" .ProDeputyDetails.ID) }}">Dashboard</a>
+                 <a class="moj-sub-navigation__link" {{ if eq .Path (printf "/deputy/%d/" .ProDeputyDetails.ID) }} aria-current="page"{{ end }} href="{{ prefix (printf "/deputy/%d" .ProDeputyDetails.ID) }}">Dashboard</a>
              </li>
              <li class="moj-sub-navigation__item">
                  <a class="moj-sub-navigation__link" {{ if eq .Path (printf "/deputy/%d/timeline" .ProDeputyDetails.ID) }} aria-current="page"{{ end }} href="{{ prefix (printf "/deputy/%d/timeline" .ProDeputyDetails.ID) }}">Timeline</a>

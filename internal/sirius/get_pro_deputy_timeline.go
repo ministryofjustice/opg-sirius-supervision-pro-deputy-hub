@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"time"
 )
 
 type ProDeputyEventCollection []ProDeputyEvent
@@ -72,18 +73,18 @@ func (c *Client) GetProDeputyTimeline(ctx Context, deputyId int) (ProDeputyEvent
 	}
 	err = json.NewDecoder(resp.Body).Decode(&v)
 
-	DeputyEvents := EditProDeputyEvents(v)
+	DeputyEvents := editProDeputyEvents(v)
 
 	return DeputyEvents, err
 
 }
 
-func EditProDeputyEvents(v ProDeputyEventCollection) ProDeputyEventCollection {
+func editProDeputyEvents(v ProDeputyEventCollection) ProDeputyEventCollection {
 	var list ProDeputyEventCollection
 	for _, s := range v {
 		event := ProDeputyEvent{
-			Timestamp:       ReformatTimestamp(s),
-			EventType:       ReformatEventType(s),
+			Timestamp:       reformatTimestamp(s.Timestamp),
+			EventType:       reformatEventType(s.EventType),
 			TimelineEventId: s.TimelineEventId,
 			User:            s.User,
 			Event:           s.Event,
@@ -94,12 +95,14 @@ func EditProDeputyEvents(v ProDeputyEventCollection) ProDeputyEventCollection {
 	return list
 }
 
-func ReformatTimestamp(s ProDeputyEvent) string {
-	return s.Timestamp
+func reformatTimestamp(dateString string) string {
+	stringTodateTime, _ := time.Parse("2006-01-02 15:04:05", dateString)
+	dateTime := stringTodateTime.Format("02/01/2006 15:04:05")
+	return dateTime
 }
 
-func ReformatEventType(s ProDeputyEvent) string {
-	eventTypeArray := strings.Split(s.EventType, "\\")
+func reformatEventType(event string) string {
+	eventTypeArray := strings.Split(event, "\\")
 	eventTypeArrayLength := len(eventTypeArray)
 	eventTypeName := eventTypeArray[eventTypeArrayLength-1]
 	return eventTypeName

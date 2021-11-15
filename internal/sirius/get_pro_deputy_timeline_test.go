@@ -119,3 +119,15 @@ func TestGetDeputyEventsReturnsUnauthorisedClientError(t *testing.T) {
 	assert.Equal(t, ErrUnauthorized, err)
 	assert.Equal(t, expectedResponse, deputyEvents)
 }
+
+func TestFormatDateAndTime(t *testing.T) {
+	unsortedData := "2020-10-18 10:11:08"
+	expectedResponse := "18/10/2020 10:11:08"
+	assert.Equal(t, expectedResponse, reformatTimestamp(unsortedData))
+}
+
+func TestReformatEventType(t *testing.T) {
+	expectedResponse := "DeputyLinkedToOrder"
+	testDeputyEvent := "Opg\\Core\\Model\\Event\\Order\\DeputyLinkedToOrder"
+	assert.Equal(t, expectedResponse, reformatEventType(testDeputyEvent))
+}
