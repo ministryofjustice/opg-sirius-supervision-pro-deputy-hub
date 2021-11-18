@@ -37,9 +37,9 @@ func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) error {
 	if err != nil {
 		return err
 	}
-	requestURL := fmt.Sprintf("/api/v1/firm")
+	// requestURL := fmt.Sprintf("/api/v1/firm")
 
-	req, err := c.newRequest(ctx, http.MethodPost, requestURL, &body)
+	req, err := c.newRequest(ctx, http.MethodPost, "/api/v1/firm", &body)
 	// fmt.Println(req)
 	if err != nil {
 		return err
