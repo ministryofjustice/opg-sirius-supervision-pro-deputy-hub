@@ -1,5 +1,7 @@
 {{ template "page" . }}
-{{ define "main" }}
+  {{ define "main" }}
+  {{ template "pro-deputy" . }}
+  <div class="govuk-grid-row govuk-!-margin-top-5">
     <div class="govuk-grid-column-full">
       <header>
         <h1 class="govuk-heading-l  govuk-!-margin-bottom-1">Change firm</h1>
@@ -32,4 +34,5 @@
         </div>
       </div>
     </div>
+  </div>
 {{ end }}
