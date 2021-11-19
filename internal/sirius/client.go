@@ -75,9 +75,6 @@ type Client struct {
 }
 
 func (c *Client) newRequest(ctx Context, method, path string, body io.Reader) (*http.Request, error) {
-	fmt.Println("Context")
-	fmt.Println(ctx.Cookies)
-	fmt.Printf("%+v\n", ctx.Cookies)
 	req, err := http.NewRequestWithContext(ctx.Context, method, c.baseURL+path, body)
 	if err != nil {
 		return nil, err

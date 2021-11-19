@@ -36,7 +36,6 @@ func (c *Client) GetProDeputyDetails(ctx Context, deputyId int) (ProDeputyDetail
 	if err != nil {
 		return v, err
 	}
-	fmt.Println(req)
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return v, err
