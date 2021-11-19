@@ -3,7 +3,6 @@ package sirius
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -37,10 +36,8 @@ func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) error {
 	if err != nil {
 		return err
 	}
-	// requestURL := fmt.Sprintf("/api/v1/firm")
 
 	req, err := c.newRequest(ctx, http.MethodPost, "/api/v1/firm", &body)
-	// fmt.Println(req)
 	if err != nil {
 		return err
 	}
@@ -53,13 +50,13 @@ func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) error {
 	}
 
 	defer resp.Body.Close()
-	fmt.Println(resp.StatusCode)
 	if resp.StatusCode == http.StatusUnauthorized {
-		fmt.Println("error")
 		return ErrUnauthorized
 	}
 
-	if resp.StatusCode != http.StatusOK {
+	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
+
+	if !statusOK {
 		var v struct {
 			ValidationErrors ValidationErrors `json:"validation_errors"`
 		}
