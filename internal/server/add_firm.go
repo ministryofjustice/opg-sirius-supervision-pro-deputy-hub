@@ -10,7 +10,8 @@ import (
 )
 
 type FirmInformation interface {
-	AddFirmDetails(sirius.Context, sirius.FirmDetails) error
+	AddFirmDetails(sirius.Context, sirius.FirmDetails) (int, error)
+	AssignDeputyToFirm(sirius.Context, int, int) error
 }
 
 type addFrimVars struct {
@@ -54,7 +55,7 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 				Email:        r.PostFormValue("email"),
 			}
 
-			err := client.AddFirmDetails(ctx, addFirmDetailForm)
+			firmId, err := client.AddFirmDetails(ctx, addFirmDetailForm)
 
 			if verr, ok := err.(sirius.ValidationError); ok {
 				verr.Errors = renameEditDeputyValidationErrorMessages(verr.Errors)
@@ -66,6 +67,12 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 				}
 				return tmpl.ExecuteTemplate(w, "page", vars)
 			}
+
+			assignDeputyToFirmErr := client.AssignDeputyToFirm(ctx, deputyId, firmId)
+			if assignDeputyToFirmErr != nil {
+				return assignDeputyToFirmErr
+			}
+
 			return Redirect(fmt.Sprintf("/deputy/%d", deputyId))
 		default:
 			return StatusError(http.StatusMethodNotAllowed)
