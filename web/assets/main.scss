@@ -5,8 +5,6 @@ $moj-assets-path: "/supervision/deputies/professional/assets/";
 @import "node_modules/govuk-frontend/govuk/all";
 @import "node_modules/@ministryofjustice/frontend/moj/all";
 @import "./scss/pro-hub";
-<<<<<<< HEAD
-=======
 
 .moj-header__container {
   max-width: 98%;
@@ -19,4 +17,4 @@ $moj-assets-path: "/supervision/deputies/professional/assets/";
   border-bottom: 1px solid #b1b4b6;
   margin-bottom: 2em;
 }
->>>>>>> sw-5276 endpoint not working #minor
+

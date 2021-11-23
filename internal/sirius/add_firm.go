@@ -19,10 +19,10 @@ type FirmDetails struct {
 	PhoneNumber  string `json:"phoneNumber"`
 }
 
-func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) error {
+func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) (int, error) {
+	var k FirmDetails
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(FirmDetails{
-		ID:           addFirmForm.ID,
 		FirmName:     addFirmForm.FirmName,
 		AddressLine1: addFirmForm.AddressLine1,
 		AddressLine2: addFirmForm.AddressLine2,
@@ -34,24 +34,24 @@ func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) error {
 		PhoneNumber:  addFirmForm.PhoneNumber,
 	})
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	req, err := c.newRequest(ctx, http.MethodPost, "/api/v1/firm", &body)
 	if err != nil {
-		return err
+		return 0, err
 	}
 	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := c.http.Do(req)
 
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	defer resp.Body.Close()
 	if resp.StatusCode == http.StatusUnauthorized {
-		return ErrUnauthorized
+		return 0, ErrUnauthorized
 	}
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
@@ -62,13 +62,14 @@ func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) error {
 		}
 
 		if err := json.NewDecoder(resp.Body).Decode(&v); err == nil {
-			return ValidationError{
+			return 0, ValidationError{
 				Errors: v.ValidationErrors,
 			}
 		}
 
-		return newStatusError(resp)
+		return 0, newStatusError(resp)
 	}
 
-	return nil
+	err = json.NewDecoder(resp.Body).Decode(&k)
+	return k.ID, nil
 }

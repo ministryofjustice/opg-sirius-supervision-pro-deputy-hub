@@ -46,7 +46,7 @@ describe("Pro Deputy Hub", () => {
         })
 
         it("the page should contain the firm", () => {
-            cy.get('.govuk-grid-column-full > :nth-child(2)').should("contain", "Firm:")
+            cy.get('.hook_firm_name').should("contain", "This is the Firm Name")
         })
 
         it("the page should contain the deputy number", () => {

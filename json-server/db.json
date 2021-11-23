@@ -60,6 +60,9 @@
         "id": 223,
         "displayName": "displayName"
       },
+      "firm": {
+        "firmName": "This is the Firm Name" 
+      },
       "email": "email@something.com",
       "dob": "",
       "dateOfDeath": "",
