@@ -1210,7 +1210,6 @@
       }
     }
   ],
-<<<<<<< HEAD
   "notes": [
     {
       "personId": 1,
@@ -1265,9 +1264,33 @@
           "isEmpty": "Value is required and can't be empty"
         },
       "id": "firm",
-      "validation_errors": {
-        "firmName": {
-          "isEmpty": "The firm name is required and can't be empty"
+        "validation_errors": {
+          "firmName": {
+            "isEmpty": "The firm name is required and can't be empty"
+          },
+          "addressLine1": {
+            "stringLengthTooLong": "The building or street must be 255 characters or fewer"
+          },
+          "addressLine2": {
+            "stringLengthTooLong": "Address line 2 must be 255 characters or fewer"
+          },
+          "addressLine3": {
+            "stringLengthTooLong": "Address line 3 must be 255 characters or fewer"
+          },
+          "town": {
+            "stringLengthTooLong": "The town or city must be 255 characters or fewer"
+          },
+          "county": {
+            "stringLengthTooLong": "The county must be 255 characters or fewer"
+          },
+          "postcode": {
+            "stringLengthTooLong": "The postcode must be 255 characters or fewer"
+          },
+          "phoneNumber": {
+            "stringLengthTooLong": "The telephone number must be 255 characters or fewer"
+          },
+          "email": {
+            "stringLengthTooLong": "The email must be 255 characters or fewer"
           }
         }
       }
