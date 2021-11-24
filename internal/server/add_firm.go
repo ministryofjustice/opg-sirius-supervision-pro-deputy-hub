@@ -97,7 +97,7 @@ func renameEditDeputyValidationErrorMessages(siriusError sirius.ValidationErrors
 				err[errorType] = "Address line 2 must be 255 characters or fewer"
 				errorCollection["addressLine2"] = err
 			} else if fieldName == "addressLine3" && errorType == "stringLengthTooLong" {
-				err[errorType] = "AddressLine 3 must be 255 characters or fewer"
+				err[errorType] = "Address line 3 must be 255 characters or fewer"
 				errorCollection["addressLine3"] = err
 			} else if fieldName == "town" && errorType == "stringLengthTooLong" {
 				err[errorType] = "The town or city must be 255 characters or fewer"
@@ -112,7 +112,7 @@ func renameEditDeputyValidationErrorMessages(siriusError sirius.ValidationErrors
 				err[errorType] = "The telephone number must be 255 characters or fewer"
 				errorCollection["phoneNumber"] = err
 			} else if fieldName == "email" && errorType == "stringLengthTooLong" {
-				err[errorType] = "The email number must be 255 characters or fewer"
+				err[errorType] = "The email must be 255 characters or fewer"
 				errorCollection["email"] = err
 			} else {
 				err[errorType] = errorMessage
