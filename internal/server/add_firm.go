@@ -33,7 +33,6 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 
 		switch r.Method {
 		case http.MethodGet:
-
 			vars := addFrimVars{
 				Path:      r.URL.Path,
 				XSRFToken: ctx.XSRFToken,
@@ -43,6 +42,7 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
 		case http.MethodPost:
+
 			addFirmDetailForm := sirius.FirmDetails{
 				FirmName:     r.PostFormValue("name"),
 				AddressLine1: r.PostFormValue("address-line-1"),
@@ -59,7 +59,6 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 
 			if verr, ok := err.(sirius.ValidationError); ok {
 				verr.Errors = renameEditDeputyValidationErrorMessages(verr.Errors)
-
 				vars := addFrimVars{
 					Path:      r.URL.Path,
 					XSRFToken: ctx.XSRFToken,
@@ -82,11 +81,9 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 
 func renameEditDeputyValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
 	errorCollection := sirius.ValidationErrors{}
-
 	for fieldName, value := range siriusError {
 		for errorType, errorMessage := range value {
 			err := make(map[string]string)
-
 			if fieldName == "firmName" && errorType == "stringLengthTooLong" {
 				err[errorType] = "The firm name must be 255 characters or fewer"
 				errorCollection["firmName"] = err

@@ -1210,6 +1210,7 @@
       }
     }
   ],
+<<<<<<< HEAD
   "notes": [
     {
       "personId": 1,
@@ -1240,6 +1241,19 @@
       "direction": null
     }
   ],
+  "addFirm": [
+    {
+      "FirmName":     "name",
+      "AddressLine1": "address-line-1",
+      "AddressLine2": "address-line-2",
+      "AddressLine3": "address-line-3",
+      "Town":         "town",
+      "County":       "county",
+      "Postcode":     "postcode",
+      "PhoneNumber":  "telephone",
+      "Email":        "email"
+    }
+  ],
   "errors": [
     {
       "id": "notes",
@@ -1249,6 +1263,12 @@
         },
         "description": {
           "isEmpty": "Value is required and can't be empty"
+        },
+      "id": "firm",
+      "validation_errors": {
+        "firmName": {
+          "isEmpty": "The firm name is required and can't be empty"
+          }
         }
       }
     }
