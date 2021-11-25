@@ -18,8 +18,8 @@ type ProDeputyHubNotesInformation interface {
 
 type proDeputyHubNotesVars struct {
 	Path           string
-	XSRFToken      string
-	DeputyDetails  sirius.ProDeputyDetails
+	XSRFToken      	string
+	ProDeputyDetails  sirius.ProDeputyDetails
 	DeputyNotes    sirius.DeputyNoteCollection
 	Error          string
 	Errors         sirius.ValidationErrors
@@ -37,7 +37,7 @@ type addNoteVars struct {
 	Error         sirius.ValidationError
 	Errors        sirius.ValidationErrors
 	ErrorMessage  string
-	DeputyDetails sirius.ProDeputyDetails
+	ProDeputyDetails sirius.ProDeputyDetails
 }
 
 func hasSuccessInUrl(url string, prefix string) bool {
@@ -69,7 +69,7 @@ func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmp
 			vars := proDeputyHubNotesVars{
 				Path:           r.URL.Path,
 				XSRFToken:      ctx.XSRFToken,
-				DeputyDetails:  deputyDetails,
+				ProDeputyDetails:  deputyDetails,
 				DeputyNotes:    deputyNotes,
 				Success:        hasSuccess,
 				SuccessMessage: "Note added",
@@ -106,7 +106,7 @@ func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmp
 					Title:         title,
 					Note:          note,
 					Errors:        verr.Errors,
-					DeputyDetails: deputyDetails,
+					ProDeputyDetails: deputyDetails,
 				}
 
 				w.WriteHeader(http.StatusBadRequest)

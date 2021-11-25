@@ -11,7 +11,7 @@
                  <a class="moj-sub-navigation__link" {{ if eq .Path (printf "/deputy/%d/timeline" .ProDeputyDetails.ID) }} aria-current="page"{{ end }} href="{{ prefix (printf "/deputy/%d/timeline" .ProDeputyDetails.ID) }}">Timeline</a>
              </li>
               <li class="moj-sub-navigation__item">
-                  <a class="moj-sub-navigation__link" {{ if eq .Path (printf "/deputy/%d/notes" .DeputyDetails.ID) }} aria-current="page"{{ end }} href="{{ prefix (printf "/deputy/%d/notes" .DeputyDetails.ID) }}">Notes</a>
+                  <a class="moj-sub-navigation__link" {{ if eq .Path (printf "/deputy/%d/notes" .ProDeputyDetails.ID) }} aria-current="page"{{ end }} href="{{ prefix (printf "/deputy/%d/notes" .ProDeputyDetails.ID) }}">Notes</a>
               </li>
          </ul>
      </nav>
