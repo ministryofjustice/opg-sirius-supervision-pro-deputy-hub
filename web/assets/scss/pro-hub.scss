@@ -12,4 +12,29 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .govuk-button-group .govuk-link {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1;
+    padding: 8px 10px 7px;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+
+  main {
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 1em 0 0.5em;
+      border-bottom: 1px solid #b1b4b6;
+      margin-bottom: 2em;
+    }
+
+    .moj-sub-navigation {
+      margin-bottom: 0;
+    }
+  }
 }
