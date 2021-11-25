@@ -9,7 +9,10 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
           <form class="" method="post">
-            <p class="govuk-body govuk-!-margin-bottom-5" for="autocomplete-default">Current firm: Thorntons Law LLP</p>
+            <p class="govuk-body govuk-!-margin-bottom-5" for="autocomplete-default">Current firm: 
+            {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
+            {{ .ProDeputyDetails.Firm.FirmName }}
+            {{ end }}</p>
               <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
                   <legend class="govuk-fieldset__legend">
