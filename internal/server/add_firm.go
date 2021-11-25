@@ -14,7 +14,7 @@ type FirmInformation interface {
 	AssignDeputyToFirm(sirius.Context, int, int) error
 }
 
-type addFrimVars struct {
+type addFirmVars struct {
 	Path          string
 	XSRFToken     string
 	DeputyDetails sirius.ProDeputyDetails
@@ -33,7 +33,7 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 
 		switch r.Method {
 		case http.MethodGet:
-			vars := addFrimVars{
+			vars := addFirmVars{
 				Path:      r.URL.Path,
 				XSRFToken: ctx.XSRFToken,
 				DeputyId:  deputyId,
@@ -58,8 +58,8 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 			firmId, err := client.AddFirmDetails(ctx, addFirmDetailForm)
 
 			if verr, ok := err.(sirius.ValidationError); ok {
-				verr.Errors = renameEditDeputyValidationErrorMessages(verr.Errors)
-				vars := addFrimVars{
+				verr.Errors = renameAddFirmValidationErrorMessages(verr.Errors)
+				vars := addFirmVars{
 					Path:      r.URL.Path,
 					XSRFToken: ctx.XSRFToken,
 					Errors:    verr.Errors,
@@ -79,7 +79,7 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 	}
 }
 
-func renameEditDeputyValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
+func renameAddFirmValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
 	errorCollection := sirius.ValidationErrors{}
 	for fieldName, value := range siriusError {
 		for errorType, errorMessage := range value {

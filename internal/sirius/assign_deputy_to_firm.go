@@ -8,7 +8,7 @@ import (
 )
 
 type FirmId struct {
-	FirmId int
+	FirmId int `json:"firmId"`
 }
 
 func (c *Client) AssignDeputyToFirm(ctx Context, deputyId int, firmId int) error {
