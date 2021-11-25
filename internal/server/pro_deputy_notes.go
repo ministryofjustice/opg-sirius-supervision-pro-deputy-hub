@@ -10,7 +10,7 @@ import (
 )
 
 type ProDeputyHubNotesInformation interface {
-	GetDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
+	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
 	GetDeputyNotes(sirius.Context, int) (sirius.DeputyNoteCollection, error)
 	AddNote(ctx sirius.Context, title, note string, deputyId, userId int) error
 	GetUserDetails(sirius.Context) (sirius.UserDetails, error)
@@ -55,7 +55,7 @@ func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmp
 		switch r.Method {
 		case http.MethodGet:
 
-			deputyDetails, err := client.GetDeputyDetails(ctx, deputyId)
+			deputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
 			if err != nil {
 				return err
 			}
@@ -89,7 +89,7 @@ func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmp
 				return err
 			}
 
-			deputyDetails, err := client.GetDeputyDetails(ctx, deputyId)
+			deputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
 			if err != nil {
 				return err
 			}

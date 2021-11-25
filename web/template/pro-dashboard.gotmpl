@@ -1,6 +1,9 @@
 {{ template "page" . }}
     {{ define "main" }} 
         {{ template "pro-deputy" . }}
+        {{ if .Success }}
+               {{ template "success-banner" . }}
+        {{ end }}
         {{ template "navigation" . }}
 
     <div class="govuk-grid-row">

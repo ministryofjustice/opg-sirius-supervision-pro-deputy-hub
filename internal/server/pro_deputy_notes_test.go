@@ -21,7 +21,7 @@ type mockProDeputyHubNotesInformation struct {
 	userDetailsData sirius.UserDetails
 }
 
-func (m *mockProDeputyHubNotesInformation) GetDeputyDetails(ctx sirius.Context, deputyId int) (sirius.ProDeputyDetails, error) {
+func (m *mockProDeputyHubNotesInformation) GetProDeputyDetails(ctx sirius.Context, deputyId int) (sirius.ProDeputyDetails, error) {
 	m.count += 1
 	m.lastCtx = ctx
 

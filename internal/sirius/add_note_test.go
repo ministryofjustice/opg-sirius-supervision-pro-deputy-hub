@@ -22,7 +22,7 @@ func TestAddNote(t *testing.T) {
 	"userPhoneNumber":"12345678",
 	"id":127,
 	"type":null,
-	"noteType":"PA_DEPUTY_NOTE_CREATED",
+	"noteType":"PRO_DEPUTY_NOTE_CREATED",
 	"description":"fake note text",
 	"name":"fake note title",
 	"createdTime":"28\/09\/2021 09:30:27",
