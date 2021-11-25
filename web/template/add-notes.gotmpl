@@ -22,7 +22,7 @@
                                 <label class="govuk-label" for="note">Note (required)</label>
                                 <textarea class="govuk-textarea govuk-js-character-count" id="note"
                                 name="note" rows="10" aria-describedby="note-info note-hint">{{ if .Errors }}{{ .Note }}{{ end }}</textarea>
-                                <div id="note-info" class="govuk-hint govuk-character-count__message" aria-live="polite">You have 1000 characters remaining</div>
+                                <div id="note-info" class="govuk-hint govuk-character-count__message" aria-live="polite" aria-label="Character count">You have 1000 characters remaining</div>
                             </div>
                         </div>
                         <div class="govuk-button-group govuk-!-margin-top-7">
