@@ -9,6 +9,7 @@ describe("Navigation bar", () => {
         ["Dashboard", "/supervision/deputies/professional/deputy/1"],
         ["Clients", "/supervision/deputies/professional/deputy/1/clients"],
         ["Timeline", "/supervision/deputies/professional/deputy/1/timeline"],
+        ["Notes", "/supervision/deputies/professional/deputy/1/notes"],
     ];
 
     it("has titles and working nav links for all tabs in the correct order", () => {
