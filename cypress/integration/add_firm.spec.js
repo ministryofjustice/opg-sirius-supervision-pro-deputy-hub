@@ -25,5 +25,12 @@ describe("Firm", () => {
                 cy.get("li").eq(8).should("contain", "The town or city must be 255 characters or fewer");
             })
         });
+
+        it("allows me to fill in and submit the firm form", () => {
+            cy.setCookie("success-route", "firm");
+            cy.get("#f-firmName").type('The Firm Name');
+            cy.get("#add-firm-form").submit();
+            cy.get('.govuk-heading-l').should("contain", "Deputy details");
+        })
     })
 });
