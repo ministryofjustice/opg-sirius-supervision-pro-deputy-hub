@@ -6,7 +6,11 @@
         {{ else }}
         <h1 class="govuk-heading-m govuk-!-margin-bottom-0">{{ .ProDeputyDetails.OrganisationName }}</h1>
       {{ end }}
-        <span class="govuk-caption-m  govuk-!-margin-bottom-0">Firm: </span>
+        <span class="govuk-caption-m  govuk-!-margin-bottom-0 hook_firm_name">Firm: 
+        {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
+        {{ .ProDeputyDetails.Firm.FirmName }}
+        {{ end }}
+        </span>
         <span class="govuk-caption-m  govuk-!-margin-bottom-2">Deputy Number: {{ .ProDeputyDetails.DeputyNumber }}</span>
         <span class="govuk-caption-m  govuk-!-margin-bottom-2">Executive Case Manager: {{ .ProDeputyDetails.ExecutiveCaseManager.EcmName }}</span>
       </div>
