@@ -1,19 +1,14 @@
 {{ define "pro-deputy" }}
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-      {{ if ne .ProDeputyDetails.DeputyFirstName ""}}
-        <h1 class="govuk-heading-m govuk-!-margin-bottom-0">{{ .ProDeputyDetails.DeputyFirstName }} {{ .ProDeputyDetails.DeputySurname }}</h1>
-        {{ else }}
-        <h1 class="govuk-heading-m govuk-!-margin-bottom-0">{{ .ProDeputyDetails.OrganisationName }}</h1>
-      {{ end }}
-        <span class="govuk-caption-m  govuk-!-margin-bottom-0">Firm: </span>
-        <span class="govuk-caption-m  govuk-!-margin-bottom-2">Deputy Number: {{ .ProDeputyDetails.DeputyNumber }}</span>
-        <span class="govuk-caption-m  govuk-!-margin-bottom-2">Executive Case Manager: {{ .ProDeputyDetails.ExecutiveCaseManager.EcmName }}</span>
-      </div>
-    </div>
-    <div class="govuk-grid-row govuk-!-margin-top-5">
-      <div class="govuk-grid-column-full">
-          {{ template "navigation" . }}
-      </div>
+        <div class="govuk-grid-column-full">
+            {{ if ne .ProDeputyDetails.DeputyFirstName ""}}
+                <h2 class="govuk-heading-m govuk-!-margin-bottom-0">{{ .ProDeputyDetails.DeputyFirstName }} {{ .ProDeputyDetails.DeputySurname }}</h2>
+            {{ else }}
+                <h2 class="govuk-heading-m govuk-!-margin-bottom-0">{{ .ProDeputyDetails.OrganisationName }}</h2>
+            {{ end }}
+            <span class="govuk-caption-m  govuk-!-margin-bottom-0">Firm: </span>
+            <span class="govuk-caption-m  govuk-!-margin-bottom-2">Deputy Number: {{ .ProDeputyDetails.DeputyNumber }}</span>
+            <span class="govuk-caption-m  govuk-!-margin-bottom-2">Executive Case Manager: {{ .ProDeputyDetails.ExecutiveCaseManager.EcmName }}</span>
+        </div>
     </div>
 {{ end }}
