@@ -31,6 +31,7 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
 		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+
 		if err != nil {
 			return err
 		}

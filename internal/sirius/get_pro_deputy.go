@@ -11,6 +11,10 @@ type executiveCaseManager struct {
 	EcmName string `json:"displayName"`
 }
 
+type firm struct {
+	FirmName string `json:"firmName"`
+}
+
 type ProDeputyDetails struct {
 	ID                               int                  `json:"id"`
 	DeputyFirstName                  string               `json:"firstname"`
@@ -19,6 +23,7 @@ type ProDeputyDetails struct {
 	OrganisationName                 string               `json:"organisationName"`
 	OrganisationTeamOrDepartmentName string               `json:"organisationTeamOrDepartmentName"`
 	ExecutiveCaseManager             executiveCaseManager `json:"executiveCaseManager"`
+	Firm                             firm                 `json:"firm"`
 	Email                            string               `json:"email"`
 	PhoneNumber                      string               `json:"phoneNumber"`
 	AddressLine1                     string               `json:"addressLine1"`
@@ -36,7 +41,6 @@ func (c *Client) GetProDeputyDetails(ctx Context, deputyId int) (ProDeputyDetail
 	if err != nil {
 		return v, err
 	}
-
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return v, err
