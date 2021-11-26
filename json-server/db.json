@@ -1221,7 +1221,8 @@
       "Postcode":     "postcode",
       "PhoneNumber":  "telephone",
       "Email":        "email"
-    },
+    }
+  ],
   "notes": [
     {
       "personId": 1,
@@ -1291,7 +1292,7 @@
       "id": "firm",
       "firmId": 2
     },
-    }
+    {
       "id": "notes",
       "validation_errors": {
         "name": {
