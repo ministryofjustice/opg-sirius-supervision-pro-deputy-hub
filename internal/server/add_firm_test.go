@@ -12,11 +12,10 @@ import (
 )
 
 type mockFirmInformation struct {
-	count            int
-	lastCtx          sirius.Context
-	err              error
-	addFirm          int
-	deputToFirmyData error
+	count   int
+	lastCtx sirius.Context
+	err     error
+	addFirm int
 }
 
 func (m *mockFirmInformation) AddFirmDetails(ctx sirius.Context, deputyId sirius.FirmDetails) (int, error) {
