@@ -71,5 +71,5 @@ func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) (int, erro
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(&k)
-	return k.ID, nil
+	return k.ID, err
 }
