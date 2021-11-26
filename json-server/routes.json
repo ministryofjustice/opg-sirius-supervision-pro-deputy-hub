@@ -3,4 +3,6 @@
   "/deputies/pro/:id/clients": "/clients",
   "/timeline/:personId": "/timeline",
   "/firm": "/addFirm"
+  "/deputy/:personId/notes": "/notes",
+  "/users/current": "/users"
 }

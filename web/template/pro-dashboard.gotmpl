@@ -1,6 +1,14 @@
 {{ template "page" . }}
     {{ define "main" }} 
         {{ template "pro-deputy" . }}
+        {{ if .Success }}
+               {{ template "success-banner" . }}
+        {{ end }}
+        {{ template "navigation" . }}
+
+    <header>
+        <h1 class="govuk-heading-l  govuk-!-margin-bottom-0  govuk-!-margin-top-0">Deputy Details</h1>
+    </header>
 
     <header class="title-and-buttons-inline">
       <h1 class="govuk-heading-l govuk-!-margin-bottom-0  govuk-!-margin-top-0">Deputy details</h1>
