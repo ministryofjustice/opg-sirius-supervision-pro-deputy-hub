@@ -1,52 +1,52 @@
 // Sirius specific styles
 
 .sirius-prohub {
-  .govuk-width-container,
-  .moj-header__container,
-  .moj-primary-navigation__container {
-    max-width: none;
-    padding: 0 15px;
-  }
-
-  .flex-container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .govuk-button-group .govuk-link {
-    font-size: 19px;
-    font-size: 1.1875rem;
-    line-height: 1;
-    padding: 8px 10px 7px;
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 20px;
-    margin-top: 0;
-  }
-
-  main {
-    header {
-      display: flex;
-      justify-content: space-between;
-      padding: 1em 0 0.5em;
-      border-bottom: 1px solid #b1b4b6;
-      margin-bottom: 2em;
+    .govuk-width-container,
+    .moj-header__container,
+    .moj-primary-navigation__container {
+        max-width: none;
+        padding: 0 15px;
     }
 
-    .moj-sub-navigation {
-      margin-bottom: 0;
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
     }
-  }
 
-  .moj-header__container {
-      max-width: 98%;
-   }
+    .govuk-button-group .govuk-link {
+        font-size: 19px;
+        font-size: 1.1875rem;
+        line-height: 1;
+        padding: 8px 10px 7px;
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 20px;
+        margin-top: 0;
+    }
 
-  .moj-timeline__item {
-      max-width: 60em;
-  }
+    main {
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 1em 0 0.5em;
+            border-bottom: 1px solid #b1b4b6;
+            margin-bottom: 2em;
+        }
 
-  .govuk-form-group {
-      max-width: 40em;
-  }
+        .moj-sub-navigation {
+            margin-bottom: 0;
+        }
+    }
+
+    .moj-header__container {
+        max-width: 98%;
+    }
+
+    .moj-timeline__item {
+        max-width: 60em;
+    }
+
+    .govuk-form-group {
+        max-width: 40em;
+    }
 }

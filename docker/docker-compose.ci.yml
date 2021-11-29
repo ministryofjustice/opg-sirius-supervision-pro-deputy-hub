@@ -1,38 +1,38 @@
 version: "3.6"
 
 services:
-  pro-deputy-hub:
-    build:
-      context: ..
-      dockerfile: ./docker/sirius-pro-deputy-hub/Dockerfile
-    ports: ["8888:1234"]
-    environment:
-      PORT: 8888
-      SIRIUS_URL: http://json-server:3000
-      PREFIX: /supervision/deputies/professional
+    pro-deputy-hub:
+        build:
+            context: ..
+            dockerfile: ./docker/sirius-pro-deputy-hub/Dockerfile
+        ports: ["8888:1234"]
+        environment:
+            PORT: 8888
+            SIRIUS_URL: http://json-server:3000
+            PREFIX: /supervision/deputies/professional
 
-  json-server:
-    build:
-      context: ..
-      dockerfile: ./docker/json-server/Dockerfile
-    ports:
-      - '3000:3000'
+    json-server:
+        build:
+            context: ..
+            dockerfile: ./docker/json-server/Dockerfile
+        ports:
+            - "3000:3000"
 
-  puppeteer:
-    build: ./puppeteer
-    depends_on:
-      - pro-deputy-hub
-      - json-server
-    environment:
-      - LHCI_BUILD_CONTEXT__CURRENT_HASH=$GITHUB_SHA
-      - LHCI_BUILD_CONTEXT__GITHUB_REPO_SLUG=ministryofjustice/opg-sirius-supervision-pro-deputy-hub
-      - LHCI_GITHUB_APP_TOKEN
+    puppeteer:
+        build: ./puppeteer
+        depends_on:
+            - pro-deputy-hub
+            - json-server
+        environment:
+            - LHCI_BUILD_CONTEXT__CURRENT_HASH=$GITHUB_SHA
+            - LHCI_BUILD_CONTEXT__GITHUB_REPO_SLUG=ministryofjustice/opg-sirius-supervision-pro-deputy-hub
+            - LHCI_GITHUB_APP_TOKEN
 
-  cypress:
-    build:
-      context: ..
-      dockerfile: ./docker/cypress/Dockerfile
-    command: ["--headless", "-b", "chrome"]
-    depends_on:
-      - pro-deputy-hub
-      - json-server
+    cypress:
+        build:
+            context: ..
+            dockerfile: ./docker/cypress/Dockerfile
+        command: ["--headless", "-b", "chrome"]
+        depends_on:
+            - pro-deputy-hub
+            - json-server
