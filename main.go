@@ -14,7 +14,6 @@ import (
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/logging"
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/server"
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
-
 )
 
 func main() {
