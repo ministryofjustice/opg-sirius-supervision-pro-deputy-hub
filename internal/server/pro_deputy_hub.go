@@ -18,8 +18,8 @@ type proDeputyHubVars struct {
 	ProDeputyDetails sirius.ProDeputyDetails
 	Error            string
 	Errors           sirius.ValidationErrors
-	Success        	 bool
-	SuccessMessage 	 string
+	Success          bool
+	SuccessMessage   string
 }
 
 func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template) Handler {

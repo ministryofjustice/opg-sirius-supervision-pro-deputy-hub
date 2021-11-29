@@ -17,26 +17,26 @@ type ProDeputyHubNotesInformation interface {
 }
 
 type proDeputyHubNotesVars struct {
-	Path           string
-	XSRFToken      	string
-	ProDeputyDetails  sirius.ProDeputyDetails
-	DeputyNotes    sirius.DeputyNoteCollection
-	Error          string
-	Errors         sirius.ValidationErrors
-	ErrorMessage   string
-	Success        bool
-	SuccessMessage string
+	Path             string
+	XSRFToken        string
+	ProDeputyDetails sirius.ProDeputyDetails
+	DeputyNotes      sirius.DeputyNoteCollection
+	Error            string
+	Errors           sirius.ValidationErrors
+	ErrorMessage     string
+	Success          bool
+	SuccessMessage   string
 }
 
 type addNoteVars struct {
-	Path          string
-	XSRFToken     string
-	Title         string
-	Note          string
-	Success       bool
-	Error         sirius.ValidationError
-	Errors        sirius.ValidationErrors
-	ErrorMessage  string
+	Path             string
+	XSRFToken        string
+	Title            string
+	Note             string
+	Success          bool
+	Error            sirius.ValidationError
+	Errors           sirius.ValidationErrors
+	ErrorMessage     string
 	ProDeputyDetails sirius.ProDeputyDetails
 }
 
@@ -67,12 +67,12 @@ func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmp
 			hasSuccess := hasSuccessInUrl(r.URL.String(), "/deputy/"+strconv.Itoa(deputyId)+"/notes")
 
 			vars := proDeputyHubNotesVars{
-				Path:           r.URL.Path,
-				XSRFToken:      ctx.XSRFToken,
-				ProDeputyDetails:  deputyDetails,
-				DeputyNotes:    deputyNotes,
-				Success:        hasSuccess,
-				SuccessMessage: "Note added",
+				Path:             r.URL.Path,
+				XSRFToken:        ctx.XSRFToken,
+				ProDeputyDetails: deputyDetails,
+				DeputyNotes:      deputyNotes,
+				Success:          hasSuccess,
+				SuccessMessage:   "Note added",
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
@@ -101,11 +101,11 @@ func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmp
 				verr.Errors = renameValidationErrorMessages(verr.Errors)
 
 				vars = addNoteVars{
-					Path:          r.URL.Path,
-					XSRFToken:     ctx.XSRFToken,
-					Title:         title,
-					Note:          note,
-					Errors:        verr.Errors,
+					Path:             r.URL.Path,
+					XSRFToken:        ctx.XSRFToken,
+					Title:            title,
+					Note:             note,
+					Errors:           verr.Errors,
 					ProDeputyDetails: deputyDetails,
 				}
 
