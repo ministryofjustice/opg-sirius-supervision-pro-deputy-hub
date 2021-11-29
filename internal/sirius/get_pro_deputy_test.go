@@ -24,6 +24,9 @@ func TestProDeputyDetailsReturned(t *testing.T) {
 		"executiveCaseManager": {
 			"id": 223,
     		"displayName": "displayName"
+		},
+		"firm": {
+			"firmName": "This is the Firm Name"
 		}
     }`
 
@@ -45,6 +48,9 @@ func TestProDeputyDetailsReturned(t *testing.T) {
 		ExecutiveCaseManager: executiveCaseManager{
 			EcmId:   223,
 			EcmName: "displayName",
+		},
+		Firm: firm{
+			FirmName: "This is the Firm Name",
 		},
 	}
 

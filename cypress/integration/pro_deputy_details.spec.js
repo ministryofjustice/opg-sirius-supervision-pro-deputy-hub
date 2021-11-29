@@ -10,7 +10,6 @@ describe("Pro Deputy Hub", () => {
             cy.get('.hook_deputy_name').contains('firstname surname')
             cy.get('.hook_deputy_phone_number').contains('1111111')
             cy.get('.hook_deputy_email').contains('email@something.com')
-            cy.get('.hook_deputy_address').contains("Place holder for the firm name")
         });
     });
 });

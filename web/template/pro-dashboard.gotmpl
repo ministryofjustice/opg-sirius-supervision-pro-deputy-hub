@@ -6,8 +6,15 @@
         {{ end }}
         {{ template "navigation" . }}
 
-    <header>
-        <h1 class="govuk-heading-l  govuk-!-margin-bottom-0  govuk-!-margin-top-0">Deputy Details</h1>
+    <header class="title-and-buttons-inline">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-0  govuk-!-margin-top-0">Deputy details</h1>
+      <div class="moj-button-menu">
+        <div class="moj-button-menu__wrapper">
+          <a href="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary " data-module="govuk-button">
+            Change firm
+          </a>
+        </div>
+      </div>
     </header>
 
     <div class="govuk-grid-row">
@@ -31,7 +38,9 @@
                         Firm
                     </dt>
                     <dd class="govuk-summary-list__value hook_deputy_firm_name">
-                        Place holder firm name
+                        {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
+                        {{ .ProDeputyDetails.Firm.FirmName }}
+                        {{ end }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -39,7 +48,9 @@
                         Postal address
                     </dt>
                     <dd class="govuk-summary-list__value hook_deputy_address">
-                        Place holder for the firm name <br>
+                        {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
+                        {{ .ProDeputyDetails.Firm.FirmName }}
+                        {{ end }}
                         {{ .ProDeputyDetails.AddressLine1 }} <br>
                         {{ .ProDeputyDetails.AddressLine2 }} <br>
                         {{ .ProDeputyDetails.AddressLine3 }} <br>
