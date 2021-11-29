@@ -17,7 +17,10 @@ describe("Navigation bar", () => {
             .children()
             .each(($el, index) => {
                 cy.wrap($el).should("contain", expected[index][0]);
-                cy.wrap($el).find('a').should("have.attr", "href").and("contain", expected[index][1]);
+                cy.wrap($el)
+                    .find("a")
+                    .should("have.attr", "href")
+                    .and("contain", expected[index][1]);
             });
     });
 });
