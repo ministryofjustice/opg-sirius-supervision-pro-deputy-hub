@@ -20,6 +20,23 @@
       ]
     }
   },
+  "users": {
+    "id": 51,
+    "name": "case",
+    "phoneNumber": "12345678",
+    "teams": [],
+    "displayName": "case manager",
+    "deleted": false,
+    "email": "case.manager@opgtest.com",
+    "firstname": "case",
+    "surname": "manager",
+    "roles": [
+      "OPG User",
+      "Case Manager"
+    ],
+    "locked": false,
+    "suspended": false
+  },
   "deputies": [
     {
       "id": 1,
@@ -42,6 +59,9 @@
       "executiveCaseManager": {
         "id": 223,
         "displayName": "displayName"
+      },
+      "firm": {
+        "firmName": "This is the Firm Name" 
       },
       "email": "email@something.com",
       "dob": "",
@@ -1132,7 +1152,7 @@
         "courtReferenceNumber": "03305972",
         "courtReference": "03305972",
         "personType": "Deputy",
-        "personId": "76",
+        "personId": "1",
         "personUid": "7000-0000-2530",
         "personName": "Mr Bob Builder",
         "personCourtRef": null,
@@ -1174,7 +1194,7 @@
           }
         ],
         "personType": "Deputy",
-        "personId": "76",
+        "personId": "1",
         "personUid": "7000-0000-2530",
         "personName": "Mx Bob Builder",
         "personCourtRef": null,
@@ -1188,6 +1208,100 @@
           }
         ]
       }
+    }
+  ],
+  "notes": [
+    {
+      "personId": 1,
+      "userId": 68,
+      "userDisplayName": "Finance User Testing",
+      "userEmail": "finance.user.testing@opgtest.com",
+      "userPhoneNumber": "12345678",
+      "id": 65,
+      "type": "NEW DEPUTY",
+      "noteType": "ORDER_CREATED",
+      "description": "notes",
+      "name": "Note added",
+      "createdTime": "20/09/2021 08:50:13",
+      "direction": null
+    },
+    {
+      "personId": 1,
+      "userId": 68,
+      "userDisplayName": "Finance User Testing",
+      "userEmail": "finance.user.testing@opgtest.com",
+      "userPhoneNumber": "12345678",
+      "id": 64,
+      "type": "OPEN",
+      "noteType": "ORDER_STATUS_UPDATED",
+      "description": "...and here are the notes",
+      "name": "Email received",
+      "createdTime": "20/09/2021 08:50:12",
+      "direction": null
+    }
+  ],
+  "addFirm": [
+    {
+      "FirmName":     "name",
+      "AddressLine1": "address-line-1",
+      "AddressLine2": "address-line-2",
+      "AddressLine3": "address-line-3",
+      "Town":         "town",
+      "County":       "county",
+      "Postcode":     "postcode",
+      "PhoneNumber":  "telephone",
+      "Email":        "email"
+    }
+  ],
+  "errors": [
+    {
+      "id": "notes",
+      "validation_errors": {
+        "name": {
+          "stringLengthTooLong": "The title must be 255 characters or fewer"
+        },
+        "description": {
+          "isEmpty": "Value is required and can't be empty"
+        }
+      }
+    },
+    {
+    "id": "firm",
+      "validation_errors": {
+        "firmName": {
+          "isEmpty": "The firm name is required and can't be empty"
+        },
+        "addressLine1": {
+          "stringLengthTooLong": "The building or street must be 255 characters or fewer"
+        },
+        "addressLine2": {
+          "stringLengthTooLong": "Address line 2 must be 255 characters or fewer"
+        },
+        "addressLine3": {
+          "stringLengthTooLong": "Address line 3 must be 255 characters or fewer"
+        },
+        "town": {
+          "stringLengthTooLong": "The town or city must be 255 characters or fewer"
+        },
+        "county": {
+          "stringLengthTooLong": "The county must be 255 characters or fewer"
+        },
+        "postcode": {
+          "stringLengthTooLong": "The postcode must be 255 characters or fewer"
+        },
+        "phoneNumber": {
+          "stringLengthTooLong": "The telephone number must be 255 characters or fewer"
+        },
+        "email": {
+          "stringLengthTooLong": "The email must be 255 characters or fewer"
+        }
+      }
+    }
+  ],
+  "successes": [
+    {
+      "id": "firm",
+      "firmId": 2
     }
   ]
 }

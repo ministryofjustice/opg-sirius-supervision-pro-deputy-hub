@@ -18,6 +18,8 @@ type proDeputyHubVars struct {
 	ProDeputyDetails sirius.ProDeputyDetails
 	Error            string
 	Errors           sirius.ValidationErrors
+	Success        	 bool
+	SuccessMessage 	 string
 }
 
 func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template) Handler {
@@ -31,14 +33,19 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
 		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+
 		if err != nil {
 			return err
 		}
+
+		hasSuccess := hasSuccessInUrl(r.URL.String(), "/deputy/"+strconv.Itoa(deputyId)+"/")
 
 		vars := proDeputyHubVars{
 			Path:             r.URL.Path,
 			XSRFToken:        ctx.XSRFToken,
 			ProDeputyDetails: proDeputyDetails,
+			Success:          hasSuccess,
+			SuccessMessage:   "Team details updated",
 		}
 
 		return tmpl.ExecuteTemplate(w, "page", vars)
