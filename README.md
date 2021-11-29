@@ -33,9 +33,11 @@ there are assets missing) as the developer version of the docker compose file do
 -   `go build main.go `
 -   `./main `
 
-    ***
+---
 
-## Run Cypress tests
+## Tests
+
+### Run Cypress tests
 
 `docker-compose -f docker/docker-compose.dev.yml up -d --build `
 
@@ -43,8 +45,16 @@ there are assets missing) as the developer version of the docker compose file do
 
 ---
 
-## Run the unit/functional tests
+### Run the unit/functional tests
 
-test sirius files: `test-sirius`
+test sirius files: `yarn test-sirius`
+test server files: `yarn test-server`
+Run all Go tests: `go test ./...`
 
-test server files: `test-server`
+---
+
+## Formatting
+
+This project uses the standard Golang styleguide, and can be autoformatting by running `gofmt -s -w .`.
+
+To format .gotmpl files and other assets, we use Prettier, which can be run using `yarn fmt`.
