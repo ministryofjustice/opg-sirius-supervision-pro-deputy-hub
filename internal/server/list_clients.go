@@ -50,7 +50,7 @@ func renderTemplateForClientTab(client ProDeputyHubClientInformation, tmpl Templ
 			Path:                 r.URL.Path,
 			XSRFToken:            ctx.XSRFToken,
 			DeputyClientsDetails: deputyClientsDetails,
-			ProDeputyDetails:        deputyDetails,
+			ProDeputyDetails:     deputyDetails,
 			AriaSorting:          ariaSorting,
 		}
 
