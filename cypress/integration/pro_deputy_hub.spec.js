@@ -49,25 +49,28 @@ describe("Pro Deputy Hub", () => {
 
     describe("Pro deputy details", () => {
         it("the page should contain the deputy name", () => {
-            cy.get(".govuk-heading-m").should("contain", "firstname surname");
+            cy.get(".hook_header_deputy_name").should(
+                "contain",
+                "firstname surname"
+            );
         });
 
         it("the page should contain the firm", () => {
-            cy.get(".hook_firm_name").should(
+            cy.get(".hook_header_firm_name").should(
                 "contain",
                 "This is the Firm Name"
             );
         });
 
         it("the page should contain the deputy number", () => {
-            cy.get(".govuk-grid-column-full > :nth-child(3)").should(
+            cy.get(".hook_header_deputy_number").should(
                 "contain",
                 "Deputy Number: 1000"
             );
         });
 
         it("the page should contain the executive case manager", () => {
-            cy.get(".govuk-grid-column-full > :nth-child(4)").should(
+            cy.get(".hook_header_ecm").should(
                 "contain",
                 "Executive Case Manager: displayName"
             );
