@@ -5,3 +5,16 @@ $moj-assets-path: "/supervision/deputies/professional/assets/";
 @import "node_modules/govuk-frontend/govuk/all";
 @import "node_modules/@ministryofjustice/frontend/moj/all";
 @import "./scss/pro-hub";
+
+.moj-header__container {
+  max-width: 98%;
+}
+
+.title-and-buttons-inline {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0 0.5em;
+  border-bottom: 1px solid #b1b4b6;
+  margin-bottom: 2em;
+}
+
