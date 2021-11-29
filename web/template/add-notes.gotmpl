@@ -22,9 +22,9 @@
                             name="xsrfToken"
                             value="{{ .XSRFToken }}" />
                         <div class="govuk-form-group">
-                            <label class="govuk-label" for="title"
-                                >Title (required)</label
-                            >
+                            <label class="govuk-label" for="title">
+                                Title (required)
+                            </label>
                             <input
                                 class="govuk-input"
                                 id="title"
@@ -37,16 +37,17 @@
                             data-module="govuk-character-count"
                             data-maxlength="1000">
                             <div class="govuk-form-group">
-                                <label class="govuk-label" for="note"
-                                    >Note (required)</label
-                                >
+                                <label class="govuk-label" for="note">
+                                    Note (required)
+                                </label>
                                 <textarea
                                     class="govuk-textarea govuk-js-character-count"
                                     id="note"
                                     name="note"
                                     rows="10"
                                     aria-describedby="note-info note-hint">
-{{ if .Errors }}{{ .Note }}{{ end }}</textarea
+                                    {{ if .Errors }}{{ .Note }}{{ end }}
+                                </textarea
                                 >
                                 <div
                                     id="note-info"
@@ -66,9 +67,9 @@
                             </button>
                             <a
                                 class="govuk-link"
-                                href="{{ prefix (printf "/deputy/%d/notes" .ProDeputyDetails.ID) }}"
-                                >Cancel</a
-                            >
+                                href="{{ prefix (printf "/deputy/%d/notes" .ProDeputyDetails.ID) }}">
+                                Cancel
+                            </a>
                         </div>
                     </form>
                 </div>
