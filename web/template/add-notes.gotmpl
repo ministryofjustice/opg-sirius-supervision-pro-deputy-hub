@@ -40,15 +40,15 @@
                                 <label class="govuk-label" for="note">
                                     Note (required)
                                 </label>
+                                {{/* prettier-ignore-start */}}
                                 <textarea
                                     class="govuk-textarea govuk-js-character-count"
                                     id="note"
                                     name="note"
                                     rows="10"
-                                    aria-describedby="note-info note-hint">
-                                    {{ if .Errors }}{{ .Note }}{{ end }}
-                                </textarea
-                                >
+                                    aria-describedby="note-info note-hint"
+									>{{ if .Errors }}{{ .Note }}{{ end }}</textarea>
+                                {{/* prettier-ignore-end */}}
                                 <div
                                     id="note-info"
                                     class="govuk-hint govuk-character-count__message"
