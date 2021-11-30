@@ -30,7 +30,7 @@
                     <div class="moj-timeline__header">
                         <h2 class="moj-timeline__title">{{ .Name }}</h2>
                         <p class="moj-timeline__byline">
-                            by {{ .UserDisplayName }} ({{ .UserPhoneNumber }})
+                            {{ printf "by %v %v" .UserDisplayName .UserPhoneNumber }}
                         </p>
                     </div>
                     <p class="moj-timeline__date">

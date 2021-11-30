@@ -6,7 +6,6 @@
     {{ end }}
     {{ template "navigation" . }}
 
-
     <header class="title-and-buttons-inline">
         <h1
             class="govuk-heading-l govuk-!-margin-bottom-0  govuk-!-margin-top-0">
@@ -36,8 +35,7 @@
                     <dt class="govuk-summary-list__key">Deputy name</dt>
                     <dd class="govuk-summary-list__value hook_deputy_name">
                         {{ if ne .ProDeputyDetails.DeputyFirstName "" }}
-                            {{ .ProDeputyDetails.DeputyFirstName }}
-                            {{ .ProDeputyDetails.DeputySurname }}
+                            {{ printf "%v %v" .ProDeputyDetails.DeputyFirstName .ProDeputyDetails.DeputySurname }}
                         {{ else }}
                             {{ .ProDeputyDetails.OrganisationName }}
                         {{ end }}

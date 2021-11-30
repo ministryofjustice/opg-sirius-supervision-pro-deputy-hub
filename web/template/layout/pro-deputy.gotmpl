@@ -4,7 +4,7 @@
             {{ if ne .ProDeputyDetails.DeputyFirstName "" }}
                 <h2
                     class="govuk-heading-m govuk-!-margin-bottom-0 hook_header_deputy_name">
-                    {{ .ProDeputyDetails.DeputyFirstName }}{{ " " }}{{ .ProDeputyDetails.DeputySurname }}
+                    {{ printf "%v %v" .ProDeputyDetails.DeputyFirstName .ProDeputyDetails.DeputySurname }}
                 </h2>
             {{ else }}
                 <h2
@@ -14,18 +14,15 @@
             {{ end }}
             <span
                 class="govuk-caption-m  govuk-!-margin-bottom-0 hook_header_firm_name">
-                {{ "Firm: " }}
-                {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
-                    {{ .ProDeputyDetails.Firm.FirmName }}
-                {{ end }}
+                {{ printf "Firm: %v" .ProDeputyDetails.Firm.FirmName }}
             </span>
             <span
                 class="govuk-caption-m  govuk-!-margin-bottom-0  hook_header_deputy_number">
-                {{ "Deputy Number: " }}{{ .ProDeputyDetails.DeputyNumber }}
+                {{ printf "Deputy Number: %v" .ProDeputyDetails.DeputyNumber }}
             </span>
             <span
                 class="govuk-caption-m  govuk-!-margin-bottom-2  hook_header_ecm">
-                {{ "Executive Case Manager: " }}{{ .ProDeputyDetails.ExecutiveCaseManager.EcmName }}
+                {{ printf "Executive Case Manager: %v" .ProDeputyDetails.ExecutiveCaseManager.EcmName }}
             </span>
         </div>
     </div>
