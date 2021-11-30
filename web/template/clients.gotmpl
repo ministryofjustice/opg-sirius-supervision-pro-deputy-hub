@@ -187,7 +187,7 @@
                             {{ if ne .LatestCompletedVisit.VisitCompletedDate "" }}
                                 {{ .LatestCompletedVisit.VisitCompletedDate }}
                                 <span class="secondary">
-                            {{ printf "%v visit" .LatestCompletedVisit.VisitUrgency }}
+                                    {{ printf "%v visit" .LatestCompletedVisit.VisitUrgency }}
                                 </span>
                                 <span
                                     class="secondary rag {{ .LatestCompletedVisit.RagRatingLowerCase }}">
