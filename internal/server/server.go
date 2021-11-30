@@ -100,6 +100,7 @@ type errorVars struct {
 	Path      string
 	Code      int
 	Error     string
+	Errors    bool
 }
 
 type ErrorHandlerClient interface {
@@ -137,10 +138,7 @@ func errorHandler(logger Logger, client ErrorHandlerClient, tmplError Template, 
 
 				w.WriteHeader(code)
 				err = tmplError.ExecuteTemplate(w, "page", errorVars{
-					Firstname: "",
-					Surname:   "",
 					SiriusURL: siriusURL,
-					Path:      "",
 					Code:      code,
 					Error:     err.Error(),
 				})

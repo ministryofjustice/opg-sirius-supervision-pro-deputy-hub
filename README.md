@@ -2,13 +2,13 @@
 
 ### Major dependencies
 
-- [Go](https://golang.org/) (>= 1.17)
-- [docker-compose](https://docs.docker.com/compose/install/) (>= 1.27.4)
+-   [Go](https://golang.org/) (>= 1.17)
+-   [docker-compose](https://docs.docker.com/compose/install/) (>= 1.27.4)
 
 #### Installing dependencies locally:
-- `yarn install`
-- `go mod download`
- -------------------------------------------------------------------
+
+-   `yarn install`
+-   ## `go mod download`
 
 ## Local development
 
@@ -29,21 +29,32 @@ will rebuild and restart the application without requiring manually stopping and
 Alternatively to set it up not using Docker use below. This may be necessary to build the assets folder locally (if
 there are assets missing) as the developer version of the docker compose file does not pass the Air stage. This hosts it on `localhost:1234`
 
-- `yarn install && yarn build ` #run this to build your assets folder locally
-- `go build main.go `
-- `./main `
+-   `yarn install && yarn build ` #run this to build your assets folder locally
+-   `go build main.go `
+-   `./main `
 
-  -------------------------------------------------------------------
+---
 
-## Run Cypress tests
+## Tests
+
+### Run Cypress tests
 
 `docker-compose -f docker/docker-compose.dev.yml up -d --build `
 
 `yarn && yarn cypress `
 
- -------------------------------------------------------------------
-## Run the unit/functional tests
+---
 
-test sirius files: `test-sirius`
+### Run the unit/functional tests
 
-test server files: `test-server`
+test sirius files: `yarn test-sirius`
+test server files: `yarn test-server`
+Run all Go tests: `go test ./...`
+
+---
+
+## Formatting
+
+This project uses the standard Golang styleguide, and can be autoformatting by running `gofmt -s -w .`.
+
+To format .gotmpl files and other assets, we use Prettier, which can be run using `yarn fmt`.
