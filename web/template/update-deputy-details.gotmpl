@@ -1,0 +1,111 @@
+{{ template "page" . }}
+{{ define "main" }}
+{{ template "pro-deputy" . }}
+{{ template "navigation" . }}
+
+<div class="govuk-grid-row govuk-!-margin-top-5">
+    <div class="govuk-grid-column-full">
+        <header>
+            <h1 class="govuk-heading-l  govuk-!-margin-bottom-1">Manage deputy contact details</h1>
+        </header>
+
+        <div class="govuk-grid-row">
+
+            <div class="govuk-grid-column-one-half">
+                <p class="govuk-body govuk-!-margin-bottom-5"><a href="">Change the deputy&apos;s firm</a> if they&apos;ve moved to a different organisation</p>
+
+                <form class="">
+                    <div class="govuk-form-group">
+                            <label class="govuk-label" for="deputy-name">
+                        Deputy first name (required)
+                        </label>
+                        <input class="govuk-input" id="deputy-name" name="deputy-name" type="text" value="{{ .ProDeputyDetails.DeputyFirstName }}" required>
+                    </div>
+
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="deputy-name">
+                            Deputy last name (required)
+                        </label>
+                        <input class="govuk-input" id="deputy-name" name="deputy-name" type="text" value="{{ .ProDeputyDetails.DeputySurname }}" required>
+                    </div>
+
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                            Address
+                        </legend>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="firm">
+                                Firm
+                            </label>
+                            <input class="govuk-input" id="firm" name="firm" type="text" value="{{ .ProDeputyDetails.Firm }}" disabled>
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="address-line-1">
+                                Building and street <span class="govuk-visually-hidden">line 1 of 3</span>
+                            </label>
+                            <input class="govuk-input" id="address-line-1" name="address-line-1" type="text" autocomplete="address-line1" value="{{ .ProDeputyDetails.AddressLine1 }}">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="address-line-2">
+                                <span class="govuk-visually-hidden">Building and street line 2 of 3</span>
+                            </label>
+                            <input class="govuk-input" id="address-line-2" name="address-line-2" type="text" autocomplete="address-line2" value="{{ .ProDeputyDetails.AddressLine2 }}">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="address-line-3">
+                                <span class="govuk-visually-hidden">Building and street line 3 of 3</span>
+                            </label>
+                            <input class="govuk-input" id="address-line-3" name="address-line-3" type="text" autocomplete="address-line3" value="{{ .ProDeputyDetails.AddressLine3 }}">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-!-width-two-thirds" for="town">
+                                Town or city
+                            </label>
+                            <input class="govuk-input" id="town" name="town" type="text" value="{{ .ProDeputyDetails.Town }}">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-!-width-two-thirds" for="county">
+                                County
+                            </label>
+                            <input class="govuk-input" id="county" name="county" type="text" value="{{ .ProDeputyDetails.County }}">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="postcode">
+                                Postcode
+                            </label>
+                            <input class="govuk-input govuk-input--width-10" id="postcode" name="postcode" type="text" value="{{ .ProDeputyDetails.Postcode }}">
+                        </div>
+                    </fieldset>
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="telephone">
+                            Telephone number
+                        </label>
+                        <input class="govuk-input" id="telephone" name="telephone" type="text" value="{{ .ProDeputyDetails.PhoneNumber }}">
+                    </div>
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="email">
+                            Email address
+                        </label>
+                        <input class="govuk-input" id="email" name="email" type="text" value="{{ .ProDeputyDetails.Email }}">
+                    </div>
+                    <div class="govuk-button-group govuk-!-margin-top-7">
+                        <button type="submit" class="govuk-button" data-module="govuk-button">
+                            Save deputy contact details
+                        </button>
+                        <a class="govuk-link" href="{{ prefix (printf "/deputy/%d/" .ProDeputyDetails.ID) }}">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
