@@ -66,6 +66,8 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 	router.PathPrefix("/javascript/").Handler(static)
 	router.PathPrefix("/stylesheets/").Handler(static)
 
+	router.NotFoundHandler = notFoundHandler(templates["error.gotmpl"], siriusPublicURL)
+
 	return http.StripPrefix(prefix, router)
 }
 
@@ -100,6 +102,7 @@ type errorVars struct {
 	Path      string
 	Code      int
 	Error     string
+	Errors	  string
 }
 
 type ErrorHandlerClient interface {
@@ -116,11 +119,6 @@ func errorHandler(logger Logger, client ErrorHandlerClient, tmplError Template, 
 			}
 
 			if err != nil {
-				if err == sirius.ErrUnauthorized {
-					http.Redirect(w, r, siriusURL+"/auth", http.StatusFound)
-					return
-				}
-
 				if redirect, ok := err.(Redirect); ok {
 					http.Redirect(w, r, prefix+redirect.To(), http.StatusFound)
 					return
@@ -137,10 +135,7 @@ func errorHandler(logger Logger, client ErrorHandlerClient, tmplError Template, 
 
 				w.WriteHeader(code)
 				err = tmplError.ExecuteTemplate(w, "page", errorVars{
-					Firstname: "",
-					Surname:   "",
 					SiriusURL: siriusURL,
-					Path:      "",
 					Code:      code,
 					Error:     err.Error(),
 				})
@@ -150,6 +145,16 @@ func errorHandler(logger Logger, client ErrorHandlerClient, tmplError Template, 
 					http.Error(w, err.Error(), http.StatusInternalServerError)
 				}
 			}
+		})
+	}
+}
+
+func notFoundHandler(tmplError Template, siriusURL string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_ = tmplError.ExecuteTemplate(w, "page", errorVars{
+			SiriusURL: siriusURL,
+			Code:      http.StatusNotFound,
+			Error: "Not Found",
 		})
 	}
 }
