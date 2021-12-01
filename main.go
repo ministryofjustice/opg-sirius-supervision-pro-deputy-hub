@@ -7,14 +7,12 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
-	"strings"
 	"syscall"
 	"time"
 
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/logging"
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/server"
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
-
 )
 
 func main() {
@@ -29,18 +27,6 @@ func main() {
 	layouts, _ := template.
 		New("").
 		Funcs(map[string]interface{}{
-			"join": func(sep string, items []string) string {
-				return strings.Join(items, sep)
-			},
-			"contains": func(xs []string, needle string) bool {
-				for _, x := range xs {
-					if x == needle {
-						return true
-					}
-				}
-
-				return false
-			},
 			"prefix": func(s string) string {
 				return prefix + s
 			},
@@ -62,13 +48,13 @@ func main() {
 		logger.Fatal(err)
 	}
 
-	server := &http.Server{
+	s := &http.Server{
 		Addr:    ":" + port,
 		Handler: server.New(logger, client, tmpls, prefix, siriusPublicURL, webDir),
 	}
 
 	go func() {
-		if err := server.ListenAndServe(); err != nil {
+		if err := s.ListenAndServe(); err != nil {
 			logger.Fatal(err)
 		}
 	}()
@@ -84,7 +70,7 @@ func main() {
 	tc, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	if err := server.Shutdown(tc); err != nil {
+	if err := s.Shutdown(tc); err != nil {
 		logger.Print(err)
 	}
 }
