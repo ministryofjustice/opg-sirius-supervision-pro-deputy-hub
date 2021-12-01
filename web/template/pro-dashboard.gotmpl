@@ -1,78 +1,82 @@
 {{ template "page" . }}
-    {{ define "main" }} 
-        {{ template "pro-deputy" . }}
-        {{ if .Success }}
-               {{ template "success-banner" . }}
-        {{ end }}
-        {{ template "navigation" . }}
+{{ define "main" }}
+    {{ template "pro-deputy" . }}
+    {{ if .Success }}
+        {{ template "success-banner" . }}
+    {{ end }}
+    {{ template "navigation" . }}
+
 
     <header class="title-and-buttons-inline">
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-0  govuk-!-margin-top-0">Deputy details</h1>
-      <div class="moj-button-menu">
-        <div class="moj-button-menu__wrapper">
-          <a href="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary " data-module="govuk-button">
-            Change firm
-          </a>
+        <h1
+            class="govuk-heading-l govuk-!-margin-bottom-0  govuk-!-margin-top-0">
+            Deputy details
+        </h1>
+        <div class="moj-button-menu">
+            <div class="moj-button-menu__wrapper">
+                <a
+                    href="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}"
+                    role="button"
+                    draggable="false"
+                    class="govuk-button moj-button-menu__item govuk-button--secondary "
+                    data-module="govuk-button">
+                    Change firm
+                </a>
+            </div>
         </div>
-      </div>
     </header>
 
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-            <h2 class="govuk-heading-m  govuk-!-margin-top-5">Deputy contact details</h2>
+            <h2 class="govuk-heading-m  govuk-!-margin-top-5">
+                Deputy contact details
+            </h2>
             <dl id="team-details" class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Deputy name
-                    </dt>
+                    <dt class="govuk-summary-list__key">Deputy name</dt>
                     <dd class="govuk-summary-list__value hook_deputy_name">
-                        {{ if ne .ProDeputyDetails.DeputyFirstName ""}}
-                           {{ .ProDeputyDetails.DeputyFirstName }} {{ .ProDeputyDetails.DeputySurname }}
+                        {{ if ne .ProDeputyDetails.DeputyFirstName "" }}
+                            {{ printf "%v %v" .ProDeputyDetails.DeputyFirstName .ProDeputyDetails.DeputySurname }}
                         {{ else }}
                             {{ .ProDeputyDetails.OrganisationName }}
                         {{ end }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Firm
-                    </dt>
+                    <dt class="govuk-summary-list__key">Firm</dt>
                     <dd class="govuk-summary-list__value hook_deputy_firm_name">
                         {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
-                        {{ .ProDeputyDetails.Firm.FirmName }}
+                            {{ .ProDeputyDetails.Firm.FirmName }}
                         {{ end }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Postal address
-                    </dt>
+                    <dt class="govuk-summary-list__key">Postal address</dt>
                     <dd class="govuk-summary-list__value hook_deputy_address">
                         {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
-                        {{ .ProDeputyDetails.Firm.FirmName }}
+                            {{ .ProDeputyDetails.Firm.FirmName }}
                         {{ end }}
-                        {{ .ProDeputyDetails.AddressLine1 }} <br>
-                        {{ .ProDeputyDetails.AddressLine2 }} <br>
-                        {{ .ProDeputyDetails.AddressLine3 }} <br>
-                        {{ .ProDeputyDetails.Town }} <br>
-                        {{ .ProDeputyDetails.County }} <br>
+                        {{ .ProDeputyDetails.AddressLine1 }} <br />
+                        {{ .ProDeputyDetails.AddressLine2 }} <br />
+                        {{ .ProDeputyDetails.AddressLine3 }} <br />
+                        {{ .ProDeputyDetails.Town }} <br />
+                        {{ .ProDeputyDetails.County }} <br />
                         {{ .ProDeputyDetails.Postcode }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Telephone
-                    </dt>
-                    <dd class="govuk-summary-list__value hook_deputy_phone_number">
+                    <dt class="govuk-summary-list__key">Telephone</dt>
+                    <dd
+                        class="govuk-summary-list__value hook_deputy_phone_number">
                         {{ .ProDeputyDetails.PhoneNumber }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Email
-                    </dt>
+                    <dt class="govuk-summary-list__key">Email</dt>
                     <dd class="govuk-summary-list__value hook_deputy_email">
-                        <a href="mailto:{{.ProDeputyDetails.Email}}">{{ .ProDeputyDetails.Email }}</a>
+                        <a href="mailto:{{ .ProDeputyDetails.Email }}">
+                            {{ .ProDeputyDetails.Email }}
+                        </a>
                     </dd>
                 </div>
             </dl>

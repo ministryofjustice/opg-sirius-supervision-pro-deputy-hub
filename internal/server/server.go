@@ -102,7 +102,7 @@ type errorVars struct {
 	Path      string
 	Code      int
 	Error     string
-	Errors	  string
+	Errors	  bool
 }
 
 type ErrorHandlerClient interface {
