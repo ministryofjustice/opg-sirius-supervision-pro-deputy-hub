@@ -22,6 +22,7 @@ type Client interface {
 	ProDeputyHubClientInformation
 	ProDeputyHubNotesInformation
 	FirmInformation
+	ManageDeputyDetailsInformation
 }
 
 type Template interface {
@@ -58,6 +59,10 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 	router.Handle("/deputy/{id}/add-firm",
 		wrap(
 			renderTemplateForAddFirm(client, templates["add-firm.gotmpl"])))
+
+	router.Handle("/deputy/{id}/manage-deputy-details",
+		wrap(
+			renderTemplateForManageDeputyDetails(client, templates["manage-deputy-details.gotmpl"])))
 
 	router.Handle("/health-check", healthCheck())
 
