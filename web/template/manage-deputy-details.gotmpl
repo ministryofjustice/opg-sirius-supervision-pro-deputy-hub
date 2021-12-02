@@ -14,7 +14,8 @@
             <div class="govuk-grid-column-one-half">
                 <p class="govuk-body govuk-!-margin-bottom-5"><a href="">Change the deputy&apos;s firm</a> if they&apos;ve moved to a different organisation</p>
 
-                <form class="">
+                <form id="contact-details-form" class="govuk-grid-column-full" method="post">
+                    <input type="hidden" name="xsrfToken" value="{{ .XSRFToken }}" />
                     <div class="govuk-form-group">
                             <label class="govuk-label" for="deputy-first-name">
                         Deputy first name (required)
@@ -99,7 +100,7 @@
                         <button type="submit" class="govuk-button" data-module="govuk-button">
                             Save deputy contact details
                         </button>
-                        <a class="govuk-link" href="{{ prefix (printf "/deputy/%d/" .ProDeputyDetails.ID) }}">
+                        <a class="govuk-link" href="{{ prefix (printf "/deputy/%d" .ProDeputyDetails.ID) }}">
                             Cancel
                         </a>
                     </div>

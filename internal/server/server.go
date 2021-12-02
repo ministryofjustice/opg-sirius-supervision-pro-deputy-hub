@@ -22,7 +22,7 @@ type Client interface {
 	ProDeputyHubClientInformation
 	ProDeputyHubNotesInformation
 	FirmInformation
-	ManageDeputyDetailsInformation
+	DeputyContactDetailsInformation
 }
 
 type Template interface {
