@@ -9,22 +9,22 @@ import (
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 )
 
-type ManageDeputyDetailsInformation interface {
+type DeputyContactDetailsInformation interface {
 	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
-	UpdateDeputyDetails(sirius.Context, sirius.ProDeputyDetails) error
+	UpdateDeputyContactDetails(sirius.Context, int, sirius.DeputyContactDetails) error
 }
 
 type manageDeputyDetailsVars struct {
-	Path          string
-	XSRFToken     string
-	DeputyDetails sirius.ProDeputyDetails
-	Error         string
-	Errors        sirius.ValidationErrors
-	Success       bool
-	DeputyId      int
+	Path             string
+	XSRFToken        string
+	ProDeputyDetails sirius.ProDeputyDetails
+	Error            string
+	Errors           sirius.ValidationErrors
+	Success          bool
+	DeputyId         int
 }
 
-func renderTemplateForManageDeputyDetails(client ManageDeputyDetailsInformation, tmpl Template) Handler {
+func renderTemplateForManageDeputyDetails(client DeputyContactDetailsInformation, tmpl Template) Handler {
 	return func(perm sirius.PermissionSet, w http.ResponseWriter, r *http.Request) error {
 
 		ctx := getContext(r)
@@ -41,16 +41,16 @@ func renderTemplateForManageDeputyDetails(client ManageDeputyDetailsInformation,
 		case http.MethodGet:
 
 			vars := manageDeputyDetailsVars{
-				Path:          r.URL.Path,
-				XSRFToken:     ctx.XSRFToken,
-				DeputyId:      deputyId,
-				DeputyDetails: proDeputyDetails,
+				Path:             r.URL.Path,
+				XSRFToken:        ctx.XSRFToken,
+				DeputyId:         deputyId,
+				ProDeputyDetails: proDeputyDetails,
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
 		case http.MethodPost:
-			form := sirius.ProDeputyDetails{
+			form := sirius.DeputyContactDetails{
 				DeputyFirstName: r.PostFormValue("deputy-first-name"),
 				DeputySurname:   r.PostFormValue("deputy-last-name"),
 				AddressLine1:    r.PostFormValue("address-line-1"),
@@ -63,21 +63,21 @@ func renderTemplateForManageDeputyDetails(client ManageDeputyDetailsInformation,
 				Email:           r.PostFormValue("email"),
 			}
 
-			err := client.UpdateDeputyDetails(ctx, form)
+			err := client.UpdateDeputyContactDetails(ctx, deputyId, form)
 
 			if verr, ok := err.(sirius.ValidationError); ok {
 				verr.Errors = renameManageDeputyDetailsValidationErrorMessages(verr.Errors)
 				vars := manageDeputyDetailsVars{
-					Path:          r.URL.Path,
-					XSRFToken:     ctx.XSRFToken,
-					DeputyId:      deputyId,
-					DeputyDetails: proDeputyDetails,
-					Errors:        verr.Errors,
+					Path:             r.URL.Path,
+					XSRFToken:        ctx.XSRFToken,
+					DeputyId:         deputyId,
+					ProDeputyDetails: proDeputyDetails,
+					Errors:           verr.Errors,
 				}
 				return tmpl.ExecuteTemplate(w, "page", vars)
 			}
 
-			return Redirect(fmt.Sprintf("/deputy/%d/?success=deputyDetails", deputyId))
+			return Redirect(fmt.Sprintf("/deputy/%d?success=deputyDetails", deputyId))
 		default:
 			return StatusError(http.StatusMethodNotAllowed)
 		}
