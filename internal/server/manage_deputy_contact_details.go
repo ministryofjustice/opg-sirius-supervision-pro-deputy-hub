@@ -20,7 +20,6 @@ type manageDeputyDetailsVars struct {
 	ProDeputyDetails sirius.ProDeputyDetails
 	Error            string
 	Errors           sirius.ValidationErrors
-	Success          bool
 	DeputyId         int
 }
 
