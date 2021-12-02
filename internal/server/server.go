@@ -2,13 +2,12 @@ package server
 
 import (
 	"fmt"
+	"github.com/gorilla/mux"
+	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 	"html/template"
 	"io"
 	"net/http"
 	"net/url"
-
-	"github.com/gorilla/mux"
-	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 )
 
 type Logger interface {
