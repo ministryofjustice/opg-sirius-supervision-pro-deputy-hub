@@ -1,7 +1,7 @@
 {{ template "page" . }}
-{{ template "page" . }}
 {{ define "main" }}
     {{ template "pro-deputy" . }}
+    {{ template "navigation" . }}
     <div class="main">
         <header>
             <h1
@@ -186,11 +186,11 @@
                         <td class="govuk-table__cell visit_type nowrap">
                             {{ if ne .LatestCompletedVisit.VisitCompletedDate "" }}
                                 {{ .LatestCompletedVisit.VisitCompletedDate }}
-                                <br>
+                                <br />
                                 <span class="secondary">
                                     {{ printf "%v visit" .LatestCompletedVisit.VisitUrgency }}
                                 </span>
-                                <br>
+                                <br />
                                 <span
                                     class="secondary rag {{ .LatestCompletedVisit.RagRatingLowerCase }}">
                                     {{ if ne .LatestCompletedVisit.VisitReportMarkedAs "" }}
@@ -213,7 +213,7 @@
                                 {{ end }}
                                 <br />
                                 <span class="secondary">
-                                   {{ .OldestReport.StatusLabel }}
+                                    {{ .OldestReport.StatusLabel }}
                                 </span>
                             {{ else }}
                                 -

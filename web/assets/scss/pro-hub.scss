@@ -28,7 +28,7 @@
     header {
       display: flex;
       justify-content: space-between;
-      padding: 1em 0 0.5em;
+      padding: 0.5em 0 0.5em;
       border-bottom: 1px solid #b1b4b6;
       margin-bottom: 2em;
     }
@@ -50,27 +50,23 @@
     max-width: 40em;
   }
 
-  .title-and-buttons-inline {
-    margin-bottom: 1em !important;
+  span.rag {
+    font-weight: bold;
+    &.green {
+      color: #28a197 !important;
+    }
+    &.amber {
+      color: #f47738 !important;
+    }
+    &.red {
+      color: #d4351c !important;
+    }
   }
 
-  span.rag {
-      font-weight: bold;
-      &.green {
-        color: #28a197 !important;
-      }
-      &.amber {
-        color: #f47738 !important;
-      }
-      &.red {
-        color: #d4351c !important;
-      }
-    }
-
-span.secondary {
+  span.secondary {
     color: #505a5f;
     font-size: 16px;
     font-size: 1rem;
     line-height: 1.25;
-}
+  }
 }
