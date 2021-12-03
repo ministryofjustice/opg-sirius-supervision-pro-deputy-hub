@@ -39,14 +39,14 @@ func TestUpdateDeputyContactDetails(t *testing.T) {
 	}
 
 	formData := DeputyContactDetails{
-		Email:                            "email",
-		PhoneNumber:                      "telephone",
-		AddressLine1:                     "address-line-1",
-		AddressLine2:                     "address-line-2",
-		AddressLine3:                     "address-line-3",
-		Town:                             "town",
-		County:                           "county",
-		Postcode:                         "postcode",
+		Email:        "email",
+		PhoneNumber:  "telephone",
+		AddressLine1: "address-line-1",
+		AddressLine2: "address-line-2",
+		AddressLine3: "address-line-3",
+		Town:         "town",
+		County:       "county",
+		Postcode:     "postcode",
 	}
 
 	err := client.UpdateDeputyContactDetails(getContext(nil), ID, formData)
@@ -62,14 +62,14 @@ func TestUpdateDeputyContactDetailsReturnsNewStatusError(t *testing.T) {
 	client, _ := NewClient(http.DefaultClient, svr.URL)
 
 	formData := DeputyContactDetails{
-		Email:                            "email",
-		PhoneNumber:                      "telephone",
-		AddressLine1:                     "address-line-1",
-		AddressLine2:                     "address-line-2",
-		AddressLine3:                     "address-line-3",
-		Town:                             "town",
-		County:                           "county",
-		Postcode:                         "postcode",
+		Email:        "email",
+		PhoneNumber:  "telephone",
+		AddressLine1: "address-line-1",
+		AddressLine2: "address-line-2",
+		AddressLine3: "address-line-3",
+		Town:         "town",
+		County:       "county",
+		Postcode:     "postcode",
 	}
 
 	err := client.UpdateDeputyContactDetails(getContext(nil), ID, formData)
@@ -90,14 +90,14 @@ func TestUpdateDeputyContactDetailsReturnsUnauthorisedClientError(t *testing.T) 
 	client, _ := NewClient(http.DefaultClient, svr.URL)
 
 	formData := DeputyContactDetails{
-		Email:                            "email",
-		PhoneNumber:                      "telephone",
-		AddressLine1:                     "address-line-1",
-		AddressLine2:                     "address-line-2",
-		AddressLine3:                     "address-line-3",
-		Town:                             "town",
-		County:                           "county",
-		Postcode:                         "postcode",
+		Email:        "email",
+		PhoneNumber:  "telephone",
+		AddressLine1: "address-line-1",
+		AddressLine2: "address-line-2",
+		AddressLine3: "address-line-3",
+		Town:         "town",
+		County:       "county",
+		Postcode:     "postcode",
 	}
 
 	err := client.UpdateDeputyContactDetails(getContext(nil), ID, formData)
