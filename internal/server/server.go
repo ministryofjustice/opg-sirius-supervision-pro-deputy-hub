@@ -106,7 +106,7 @@ type errorVars struct {
 	Path      string
 	Code      int
 	Error     string
-	Errors	  bool
+	Errors    bool
 }
 
 type ErrorHandlerClient interface {
@@ -158,7 +158,7 @@ func notFoundHandler(tmplError Template, siriusURL string) http.HandlerFunc {
 		_ = tmplError.ExecuteTemplate(w, "page", errorVars{
 			SiriusURL: siriusURL,
 			Code:      http.StatusNotFound,
-			Error: "Not Found",
+			Error:     "Not Found",
 		})
 	}
 }
