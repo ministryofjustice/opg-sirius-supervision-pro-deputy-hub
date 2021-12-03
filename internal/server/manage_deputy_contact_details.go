@@ -90,7 +90,19 @@ func renameManageDeputyDetailsValidationErrorMessages(siriusError sirius.Validat
 		for errorType, errorMessage := range value {
 			err := make(map[string]string)
 
-			if fieldName == "organisationName" && errorType == "stringLengthTooLong" {
+			if fieldName == "firstname" && errorType == "stringLengthTooLong" {
+				err[errorType] = "The deputy's first name must be 255 characters or fewer"
+				errorCollection["firstname"] = err
+			} else if fieldName == "firstname" && errorType == "isEmpty" {
+				err[errorType] = "The deputy's first name is required and can't be empty"
+				errorCollection["firstname"] = err
+			} else if fieldName == "firstname" && errorType == "stringLengthTooLong" {
+				err[errorType] = "The deputy's surname must be 255 characters or fewer"
+				errorCollection["surname"] = err
+			} else if fieldName == "firstname" && errorType == "isEmpty" {
+				err[errorType] = "The deputy's surname is required and can't be empty"
+				errorCollection["surname"] = err
+			} else if fieldName == "organisationName" && errorType == "stringLengthTooLong" {
 				err[errorType] = "The deputy name must be 255 characters or fewer"
 				errorCollection["organisationName"] = err
 			} else if fieldName == "organisationName" && errorType == "isEmpty" {
@@ -100,11 +112,8 @@ func renameManageDeputyDetailsValidationErrorMessages(siriusError sirius.Validat
 				err[errorType] = "The telephone number must be 255 characters or fewer"
 				errorCollection["workPhoneNumber"] = err
 			} else if fieldName == "email" && errorType == "stringLengthTooLong" {
-				err[errorType] = "The email number must be 255 characters or fewer"
+				err[errorType] = "The email must be 255 characters or fewer"
 				errorCollection["email"] = err
-			} else if fieldName == "organisationTeamOrDepartmentName" && errorType == "stringLengthTooLong" {
-				err[errorType] = "The team or department must be 255 characters or fewer"
-				errorCollection["organisationTeamOrDepartmentName"] = err
 			} else if fieldName == "addressLine1" && errorType == "stringLengthTooLong" {
 				err[errorType] = "The building or street must be 255 characters or fewer"
 				errorCollection["addressLine1"] = err
@@ -112,7 +121,7 @@ func renameManageDeputyDetailsValidationErrorMessages(siriusError sirius.Validat
 				err[errorType] = "Address line 2 must be 255 characters or fewer"
 				errorCollection["addressLine2"] = err
 			} else if fieldName == "addressLine3" && errorType == "stringLengthTooLong" {
-				err[errorType] = "AddressLine 3 must be 255 characters or fewer"
+				err[errorType] = "Address line 3 must be 255 characters or fewer"
 				errorCollection["addressLine3"] = err
 			} else if fieldName == "town" && errorType == "stringLengthTooLong" {
 				err[errorType] = "The town or city must be 255 characters or fewer"

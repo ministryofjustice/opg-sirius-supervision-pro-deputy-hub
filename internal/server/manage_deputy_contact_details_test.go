@@ -25,7 +25,7 @@ func (m *mockManageDeputyDetailsInformation) GetProDeputyDetails(ctx sirius.Cont
 	return m.deputyData, m.err
 }
 
-func (m *mockManageDeputyDetailsInformation) UpdateDeputyDetails(ctx sirius.Context, _ sirius.ProDeputyDetails) error {
+func (m *mockManageDeputyDetailsInformation) UpdateDeputyContactDetails(ctx sirius.Context, _ int, _ sirius.DeputyContactDetails) error {
 	m.count += 1
 	m.lastCtx = ctx
 
@@ -124,7 +124,7 @@ func TestErrorManageDeputyDetailsMessageWhenStringLengthTooLong(t *testing.T) {
 		}, "workPhoneNumber": {
 			"stringLengthTooLong": "The telephone number must be 255 characters or fewer",
 		}, "email": {
-			"stringLengthTooLong": "The email number must be 255 characters or fewer",
+			"stringLengthTooLong": "The email must be 255 characters or fewer",
 		}, "organisationTeamOrDepartmentName": {
 			"stringLengthTooLong": "The team or department must be 255 characters or fewer",
 		}, "addressLine1": {
@@ -132,7 +132,7 @@ func TestErrorManageDeputyDetailsMessageWhenStringLengthTooLong(t *testing.T) {
 		}, "addressLine2": {
 			"stringLengthTooLong": "Address line 2 must be 255 characters or fewer",
 		}, "addressLine3": {
-			"stringLengthTooLong": "AddressLine 3 must be 255 characters or fewer",
+			"stringLengthTooLong": "Address line 3 must be 255 characters or fewer",
 		}, "town": {
 			"stringLengthTooLong": "The town or city must be 255 characters or fewer",
 		}, "county": {

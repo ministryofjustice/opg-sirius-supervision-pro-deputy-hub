@@ -2,6 +2,7 @@
 {{ define "main" }}
 {{ template "pro-deputy" . }}
 {{ template "navigation" . }}
+{{ template "error-summary" .Errors }}
 
 <div class="govuk-grid-row govuk-!-margin-top-5">
     <div class="govuk-grid-column-full">
@@ -39,7 +40,7 @@
                             <label class="govuk-label" for="firm">
                                 Firm
                             </label>
-                            <input class="govuk-input" id="firm" name="firm" type="text" value="{{ .ProDeputyDetails.Firm }}" disabled>
+                            <input class="govuk-input" id="firm" name="firm" type="text" value="{{ .ProDeputyDetails.Firm.FirmName }}" disabled>
                         </div>
 
                         <div class="govuk-form-group">
@@ -100,7 +101,7 @@
                         <button type="submit" class="govuk-button" data-module="govuk-button">
                             Save deputy contact details
                         </button>
-                        <a class="govuk-link" href="{{ prefix (printf "/deputy/%d" .ProDeputyDetails.ID) }}">
+                        <a class="govuk-link" href="{{ prefix (printf "/deputy/%d" .ProDeputyDetails.ID) }}" data-cy="cancel-btn">
                             Cancel
                         </a>
                     </div>
