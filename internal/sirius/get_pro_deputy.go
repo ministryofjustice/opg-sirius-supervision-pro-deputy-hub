@@ -15,11 +15,16 @@ type firm struct {
 	FirmName string `json:"firmName"`
 }
 
+type deputySubType struct {
+	SubType string `json:"handle"`
+}
+
 type ProDeputyDetails struct {
 	ID                               int                  `json:"id"`
 	DeputyFirstName                  string               `json:"firstname"`
 	DeputySurname                    string               `json:"surname"`
 	DeputyNumber                     int                  `json:"deputyNumber"`
+	DeputySubType                    deputySubType        `json:"deputySubType"`
 	OrganisationName                 string               `json:"organisationName"`
 	OrganisationTeamOrDepartmentName string               `json:"organisationTeamOrDepartmentName"`
 	ExecutiveCaseManager             executiveCaseManager `json:"executiveCaseManager"`

@@ -8,16 +8,18 @@ import (
 )
 
 type DeputyContactDetails struct {
-	DeputyFirstName string `json:"firstname"`
-	DeputySurname   string `json:"surname"`
-	Email           string `json:"email"`
-	PhoneNumber     string `json:"phoneNumber"`
-	AddressLine1    string `json:"addressLine1"`
-	AddressLine2    string `json:"addressLine2"`
-	AddressLine3    string `json:"addressLine3"`
-	Town            string `json:"town"`
-	County          string `json:"county"`
-	Postcode        string `json:"postcode"`
+	OrganisationName string `json:"organisationName"`
+	DeputyFirstName  string `json:"firstname"`
+	DeputySurname    string `json:"surname"`
+	Email            string `json:"email"`
+	PhoneNumber      string `json:"workPhoneNumber"`
+	AddressLine1     string `json:"addressLine1"`
+	AddressLine2     string `json:"addressLine2"`
+	AddressLine3     string `json:"addressLine3"`
+	Town             string `json:"town"`
+	County           string `json:"county"`
+	Postcode         string `json:"postcode"`
+	DeputySubType    string `json:"deputySubType"`
 }
 
 func (c *Client) UpdateDeputyContactDetails(ctx Context, deputyId int, deputyDetails DeputyContactDetails) error {
@@ -27,7 +29,7 @@ func (c *Client) UpdateDeputyContactDetails(ctx Context, deputyId int, deputyDet
 		return err
 	}
 
-	requestURL := fmt.Sprintf("/api/v1/deputies/%d", deputyId)
+	requestURL := fmt.Sprintf("/api/v1/deputies/%d/contact-details", deputyId)
 
 	req, err := c.newRequest(ctx, http.MethodPut, requestURL, &body)
 

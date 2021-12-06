@@ -1,7 +1,7 @@
 {{ define "pro-deputy" }}
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
-            {{ if ne .ProDeputyDetails.DeputyFirstName "" }}
+            {{ if eq .ProDeputyDetails.DeputySubType.SubType "PERSON" }}
                 <h2
                     class="govuk-heading-m govuk-!-margin-bottom-0 hook_header_deputy_name">
                     {{ printf "%v %v" .ProDeputyDetails.DeputyFirstName .ProDeputyDetails.DeputySurname }}

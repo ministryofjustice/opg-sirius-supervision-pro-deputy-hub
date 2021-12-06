@@ -14,7 +14,7 @@ type DeputyContactDetailsInformation interface {
 	UpdateDeputyContactDetails(sirius.Context, int, sirius.DeputyContactDetails) error
 }
 
-type manageDeputyDetailsVars struct {
+type manageDeputyContactDetailsVars struct {
 	Path             string
 	XSRFToken        string
 	ProDeputyDetails sirius.ProDeputyDetails
@@ -23,7 +23,7 @@ type manageDeputyDetailsVars struct {
 	DeputyId         int
 }
 
-func renderTemplateForManageDeputyDetails(client DeputyContactDetailsInformation, tmpl Template) Handler {
+func renderTemplateForManageDeputyContactDetails(client DeputyContactDetailsInformation, tmpl Template) Handler {
 	return func(perm sirius.PermissionSet, w http.ResponseWriter, r *http.Request) error {
 
 		ctx := getContext(r)
@@ -39,7 +39,7 @@ func renderTemplateForManageDeputyDetails(client DeputyContactDetailsInformation
 		switch r.Method {
 		case http.MethodGet:
 
-			vars := manageDeputyDetailsVars{
+			vars := manageDeputyContactDetailsVars{
 				Path:             r.URL.Path,
 				XSRFToken:        ctx.XSRFToken,
 				DeputyId:         deputyId,
@@ -50,23 +50,25 @@ func renderTemplateForManageDeputyDetails(client DeputyContactDetailsInformation
 
 		case http.MethodPost:
 			form := sirius.DeputyContactDetails{
-				DeputyFirstName: r.PostFormValue("deputy-first-name"),
-				DeputySurname:   r.PostFormValue("deputy-last-name"),
-				AddressLine1:    r.PostFormValue("address-line-1"),
-				AddressLine2:    r.PostFormValue("address-line-2"),
-				AddressLine3:    r.PostFormValue("address-line-3"),
-				Town:            r.PostFormValue("town"),
-				County:          r.PostFormValue("county"),
-				Postcode:        r.PostFormValue("postcode"),
-				PhoneNumber:     r.PostFormValue("telephone"),
-				Email:           r.PostFormValue("email"),
+				DeputySubType:    proDeputyDetails.DeputySubType.SubType,
+				DeputyFirstName:  r.PostFormValue("deputy-first-name"),
+				DeputySurname:    r.PostFormValue("deputy-last-name"),
+				OrganisationName: r.PostFormValue("organisation-name"),
+				AddressLine1:     r.PostFormValue("address-line-1"),
+				AddressLine2:     r.PostFormValue("address-line-2"),
+				AddressLine3:     r.PostFormValue("address-line-3"),
+				Town:             r.PostFormValue("town"),
+				County:           r.PostFormValue("county"),
+				Postcode:         r.PostFormValue("postcode"),
+				PhoneNumber:      r.PostFormValue("telephone"),
+				Email:            r.PostFormValue("email"),
 			}
 
 			err := client.UpdateDeputyContactDetails(ctx, deputyId, form)
 
 			if verr, ok := err.(sirius.ValidationError); ok {
-				verr.Errors = renameManageDeputyDetailsValidationErrorMessages(verr.Errors)
-				vars := manageDeputyDetailsVars{
+				verr.Errors = renameManageDeputyContactDetailsValidationErrorMessages(verr.Errors)
+				vars := manageDeputyContactDetailsVars{
 					Path:             r.URL.Path,
 					XSRFToken:        ctx.XSRFToken,
 					DeputyId:         deputyId,
@@ -83,7 +85,7 @@ func renderTemplateForManageDeputyDetails(client DeputyContactDetailsInformation
 	}
 }
 
-func renameManageDeputyDetailsValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
+func renameManageDeputyContactDetailsValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
 	errorCollection := sirius.ValidationErrors{}
 
 	for fieldName, value := range siriusError {
@@ -91,22 +93,22 @@ func renameManageDeputyDetailsValidationErrorMessages(siriusError sirius.Validat
 			err := make(map[string]string)
 
 			if fieldName == "firstname" && errorType == "stringLengthTooLong" {
-				err[errorType] = "The deputy's first name must be 255 characters or fewer"
+				err[errorType] = "The deputy first name must be 255 characters or fewer"
 				errorCollection["firstname"] = err
 			} else if fieldName == "firstname" && errorType == "isEmpty" {
-				err[errorType] = "The deputy's first name is required and can't be empty"
+				err[errorType] = "The deputy first name is required and can't be empty"
 				errorCollection["firstname"] = err
-			} else if fieldName == "firstname" && errorType == "stringLengthTooLong" {
-				err[errorType] = "The deputy's surname must be 255 characters or fewer"
+			} else if fieldName == "surname" && errorType == "stringLengthTooLong" {
+				err[errorType] = "The deputy surname must be 255 characters or fewer"
 				errorCollection["surname"] = err
-			} else if fieldName == "firstname" && errorType == "isEmpty" {
-				err[errorType] = "The deputy's surname is required and can't be empty"
+			} else if fieldName == "surname" && errorType == "isEmpty" {
+				err[errorType] = "The deputy surname is required and can't be empty"
 				errorCollection["surname"] = err
 			} else if fieldName == "organisationName" && errorType == "stringLengthTooLong" {
-				err[errorType] = "The deputy name must be 255 characters or fewer"
+				err[errorType] = "The organisation name must be 255 characters or fewer"
 				errorCollection["organisationName"] = err
 			} else if fieldName == "organisationName" && errorType == "isEmpty" {
-				err[errorType] = "Enter a deputy name"
+				err[errorType] = "The organisation name is required and can't be empty"
 				errorCollection["organisationName"] = err
 			} else if fieldName == "workPhoneNumber" && errorType == "stringLengthTooLong" {
 				err[errorType] = "The telephone number must be 255 characters or fewer"

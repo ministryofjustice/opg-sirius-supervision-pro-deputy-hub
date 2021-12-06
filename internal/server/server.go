@@ -61,7 +61,7 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 
 	router.Handle("/deputy/{id}/manage-deputy-details",
 		wrap(
-			renderTemplateForManageDeputyDetails(client, templates["manage-deputy-details.gotmpl"])))
+			renderTemplateForManageDeputyContactDetails(client, templates["manage-deputy-contact-details.gotmpl"])))
 
 	router.Handle("/health-check", healthCheck())
 
