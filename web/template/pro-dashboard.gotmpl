@@ -35,7 +35,7 @@
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">Name</dt>
                     <dd class="govuk-summary-list__value hook_deputy_name">
-                        {{ if ne .ProDeputyDetails.DeputyFirstName "" }}
+                        {{ if eq .ProDeputyDetails.DeputySubType.SubType "PERSON" }}
                             {{ printf "%v %v" .ProDeputyDetails.DeputyFirstName .ProDeputyDetails.DeputySurname }}
                         {{ else }}
                             {{ .ProDeputyDetails.OrganisationName }}
