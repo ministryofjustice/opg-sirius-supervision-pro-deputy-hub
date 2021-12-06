@@ -173,7 +173,7 @@
                     </button>
                     <a
                         class="govuk-link"
-                        href="javascript: history.go(-1)"
+                        href="{{ prefix (printf "/deputy/%d/change-firm" .DeputyId) }}"
                         class="govuk-back-link">
                         Cancel
                     </a>
