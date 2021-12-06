@@ -106,6 +106,10 @@
                 "handle": "PRO",
                 "label": "Professional"
             },
+            "deputySubType": {
+                "handle": "PERSON",
+                "label": "Person"
+            },
             "deputyCasrecId": 10000000,
             "organisationName": ""
         },
@@ -119,8 +123,9 @@
                 "firmName": "This is the Firm Name"
             },
             "email": "email@something.com",
-            "firstname": "Update",
-            "surname": "Me",
+            "firstname": "",
+            "surname": "",
+            "organisationName": "Organisation Ltd",
             "deputyNumber": 1000,
             "addressLine1": "addressLine1",
             "addressLine2": "addressLine2",
@@ -130,7 +135,14 @@
             "postcode": "postcode",
             "phoneNumber": "1111111",
             "deputyCasrecId": 10000000,
-            "organisationName": ""
+            "deputyType": {
+                "handle": "PRO",
+                "label": "Professional"
+            },
+            "deputySubType": {
+                "handle": "ORGANISATION",
+                "label": "Organisation"
+            }
         }
     ],
     "clients": {

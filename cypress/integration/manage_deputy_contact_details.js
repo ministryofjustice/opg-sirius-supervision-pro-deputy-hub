@@ -18,7 +18,7 @@ describe("Manage Deputy Contact Details", () => {
     describe("Form functionality", () => {
         beforeEach(() => {
             cy.visit(
-                "/supervision/deputies/professional/deputy/2/manage-deputy-details"
+                "/supervision/deputies/professional/deputy/1/manage-deputy-details"
             );
         });
 
@@ -30,9 +30,12 @@ describe("Manage Deputy Contact Details", () => {
         it("should populate fields with current contact details", () => {
             cy.get("input[name=deputy-first-name]").should(
                 "have.value",
-                "Update"
+                "firstname"
             );
-            cy.get("input[name=deputy-last-name]").should("have.value", "Me");
+            cy.get("input[name=deputy-last-name]").should(
+                "have.value",
+                "surname"
+            );
             cy.get("input[name=address-line-1]").should(
                 "have.value",
                 "addressLine1"
@@ -107,7 +110,7 @@ describe("Manage Deputy Contact Details", () => {
                     .eq(5)
                     .should(
                         "contain",
-                        "The deputy's first name is required and can't be empty"
+                        "The deputy first name is required and can't be empty"
                     );
                 cy.get("li")
                     .eq(6)
@@ -125,7 +128,7 @@ describe("Manage Deputy Contact Details", () => {
                     .eq(8)
                     .should(
                         "contain",
-                        "The deputy's surname is required and can't be empty"
+                        "The deputy surname is required and can't be empty"
                     );
                 cy.get("li")
                     .eq(9)
@@ -135,5 +138,16 @@ describe("Manage Deputy Contact Details", () => {
                     );
             });
         });
+    });
+
+    it("should show 'Deputy name' field when deputy is organisation", () => {
+        cy.visit(
+            "/supervision/deputies/professional/deputy/1/manage-deputy-details"
+        );
+
+        cy.get("input[name=organisation-name]").should(
+            "have.value",
+            "Organisation Ltd"
+        );
     });
 });
