@@ -18,7 +18,7 @@ describe("Manage Deputy Contact Details", () => {
     describe("Form functionality", () => {
         beforeEach(() => {
             cy.visit(
-                "/supervision/deputies/professional/deputy/1/manage-deputy-details"
+                "/supervision/deputies/professional/deputy/1/manage-deputy-contact-details"
             );
         });
 
@@ -116,25 +116,25 @@ describe("Manage Deputy Contact Details", () => {
                     .eq(6)
                     .should(
                         "contain",
-                        "The telephone number must be 255 characters or fewer"
+                        "The postcode must be 255 characters or fewer"
                     );
                 cy.get("li")
                     .eq(7)
                     .should(
                         "contain",
-                        "The postcode must be 255 characters or fewer"
+                        "The deputy surname is required and can't be empty"
                     );
                 cy.get("li")
                     .eq(8)
                     .should(
                         "contain",
-                        "The deputy surname is required and can't be empty"
+                        "The town or city must be 255 characters or fewer"
                     );
                 cy.get("li")
                     .eq(9)
                     .should(
                         "contain",
-                        "The town or city must be 255 characters or fewer"
+                        "The telephone number must be 255 characters or fewer"
                     );
             });
         });
@@ -142,7 +142,7 @@ describe("Manage Deputy Contact Details", () => {
 
     it("should show 'Deputy name' field when deputy is organisation", () => {
         cy.visit(
-            "/supervision/deputies/professional/deputy/1/manage-deputy-details"
+            "/supervision/deputies/professional/deputy/2/manage-deputy-contact-details"
         );
 
         cy.get("input[name=organisation-name]").should(

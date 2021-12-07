@@ -59,7 +59,7 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 		wrap(
 			renderTemplateForAddFirm(client, templates["add-firm.gotmpl"])))
 
-	router.Handle("/deputy/{id}/manage-deputy-details",
+	router.Handle("/deputy/{id}/manage-deputy-contact-details",
 		wrap(
 			renderTemplateForManageDeputyContactDetails(client, templates["manage-deputy-contact-details.gotmpl"])))
 
