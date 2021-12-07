@@ -1289,31 +1289,31 @@
             "id": "firm",
             "validation_errors": {
                 "firmName": {
-                    "isEmpty": "The firm name is required and can't be empty"
+                    "isEmpty": ""
                 },
                 "addressLine1": {
-                    "stringLengthTooLong": "The building or street must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "addressLine2": {
-                    "stringLengthTooLong": "Address line 2 must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "addressLine3": {
-                    "stringLengthTooLong": "Address line 3 must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "town": {
-                    "stringLengthTooLong": "The town or city must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "county": {
-                    "stringLengthTooLong": "The county must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "postcode": {
-                    "stringLengthTooLong": "The postcode must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "phoneNumber": {
-                    "stringLengthTooLong": "The telephone number must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "email": {
-                    "stringLengthTooLong": "The email must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 }
             }
         },
@@ -1321,34 +1321,34 @@
             "id": "contact-details",
             "validation_errors": {
                 "firstname": {
-                    "isEmpty": "The deputy's first name is required and can't be empty"
+                    "isEmpty": ""
                 },
                 "surname": {
-                    "isEmpty": "The deputy's surname is required and can't be empty"
+                    "isEmpty": ""
                 },
                 "addressLine1": {
-                    "stringLengthTooLong": "The building or street must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "addressLine2": {
-                    "stringLengthTooLong": "Address line 2 must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "addressLine3": {
-                    "stringLengthTooLong": "Address line 3 must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "town": {
-                    "stringLengthTooLong": "The town or city must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "county": {
-                    "stringLengthTooLong": "The county must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "postcode": {
-                    "stringLengthTooLong": "The postcode must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
-                "phoneNumber": {
-                    "stringLengthTooLong": "The telephone number must be 255 characters or fewer"
+                "workPhoneNumber": {
+                    "stringLengthTooLong": ""
                 },
                 "email": {
-                    "stringLengthTooLong": "The email must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 }
             }
         }

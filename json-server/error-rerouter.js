@@ -4,7 +4,7 @@ const getFailRoute = (req) => {
 };
 
 module.exports = (req, res, next) => {
-    if (["POST", "PUT"].includes(req.method)) {
+    if (["POST", "PATCH"].includes(req.method)) {
         const failRoute = getFailRoute(req);
 
         if (failRoute) {

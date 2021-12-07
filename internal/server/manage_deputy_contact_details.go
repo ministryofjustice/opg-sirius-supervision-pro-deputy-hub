@@ -76,6 +76,8 @@ func renderTemplateForManageDeputyContactDetails(client DeputyContactDetailsInfo
 					Errors:           verr.Errors,
 				}
 				return tmpl.ExecuteTemplate(w, "page", vars)
+			} else if err != nil {
+				return err
 			}
 
 			return Redirect(fmt.Sprintf("/deputy/%d?success=deputyDetails", deputyId))
