@@ -1,7 +1,7 @@
 {{ template "page" . }}
-{{ template "page" . }}
 {{ define "main" }}
     {{ template "pro-deputy" . }}
+    {{ template "navigation" . }}
     <div class="main">
         <header>
             <h1
@@ -154,6 +154,7 @@
                                     -
                                 {{ end }}
                             </a>
+                            <br>
                             <span class="secondary court_ref">
                                 {{ if .CourtRef }}
                                     {{ .CourtRef }}
@@ -186,9 +187,11 @@
                         <td class="govuk-table__cell visit_type nowrap">
                             {{ if ne .LatestCompletedVisit.VisitCompletedDate "" }}
                                 {{ .LatestCompletedVisit.VisitCompletedDate }}
+                                <br />
                                 <span class="secondary">
                                     {{ printf "%v visit" .LatestCompletedVisit.VisitUrgency }}
                                 </span>
+                                <br />
                                 <span
                                     class="secondary rag {{ .LatestCompletedVisit.RagRatingLowerCase }}">
                                     {{ if ne .LatestCompletedVisit.VisitReportMarkedAs "" }}
@@ -201,6 +204,7 @@
                                 -
                             {{ end }}
                         </td>
+
                         <td class="govuk-table__cell reports nowrap due">
                             {{ if ne .OldestReport.DueDate "" }}
                                 {{ if .OldestReport.RevisedDueDate }}
@@ -209,7 +213,9 @@
                                     {{ .OldestReport.DueDate }}
                                 {{ end }}
                                 <br />
-                                {{ .OldestReport.StatusLabel }}
+                                <span class="secondary">
+                                    {{ .OldestReport.StatusLabel }}
+                                </span>
                             {{ else }}
                                 -
                             {{ end }}
