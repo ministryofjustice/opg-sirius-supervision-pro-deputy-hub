@@ -49,9 +49,13 @@
                         <div class="govuk-button-group govuk-!-margin-top-7">
                             <button
                                 class="govuk-button"
+                                type="submit"
                                 data-module="govuk-button">
                                 Save and continue
                             </button>
+                            <a class="govuk-link" href="{{ prefix (printf "/deputy/%d" .ProDeputyDetails.ID) }}">
+                            Cancel
+                            </a>
                         </div>
                     </form>
                 </div>
