@@ -11,53 +11,102 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type mockFirmInformation struct {
-	count   int
-	lastCtx sirius.Context
-	err     error
-	addFirm int
+type mockManageDeputyContactDetailsInformation struct {
+	count      int
+	lastCtx    sirius.Context
+	err        error
+	deputyData sirius.ProDeputyDetails
+	updateErr  error
 }
 
-func (m *mockFirmInformation) AddFirmDetails(ctx sirius.Context, deputyId sirius.FirmDetails) (int, error) {
+func (m *mockManageDeputyContactDetailsInformation) GetProDeputyDetails(ctx sirius.Context, _ int) (sirius.ProDeputyDetails, error) {
 	m.count += 1
 	m.lastCtx = ctx
 
-	return m.addFirm, m.err
+	return m.deputyData, m.err
 }
 
-func (m *mockFirmInformation) AssignDeputyToFirm(ctx sirius.Context, deputyId int, firmId int) error {
+func (m *mockManageDeputyContactDetailsInformation) UpdateDeputyContactDetails(ctx sirius.Context, _ int, _ sirius.DeputyContactDetails) error {
 	m.count += 1
 	m.lastCtx = ctx
 
-	return m.err
+	return m.updateErr
 }
 
-func TestGetFirm(t *testing.T) {
+func TestGetManageDeputyDetails(t *testing.T) {
 	assert := assert.New(t)
 
-	client := &mockFirmInformation{}
+	client := &mockManageDeputyContactDetailsInformation{}
 	template := &mockTemplates{}
 
 	w := httptest.NewRecorder()
-	r, _ := http.NewRequest("GET", "/path", nil)
+	r, _ := http.NewRequest("GET", "", nil)
 
-	handler := renderTemplateForAddFirm(client, template)
+	handler := renderTemplateForManageDeputyContactDetails(client, template)
 	err := handler(sirius.PermissionSet{}, w, r)
 
 	assert.Nil(err)
 
 	resp := w.Result()
 	assert.Equal(http.StatusOK, resp.StatusCode)
-
-	assert.Equal(0, client.count)
-
-	assert.Equal(1, template.count)
-	assert.Equal("page", template.lastName)
 }
 
-func TestPostAddFirm(t *testing.T) {
+func TestPostManageDeputyDetails(t *testing.T) {
 	assert := assert.New(t)
-	client := &mockFirmInformation{}
+
+	client := &mockManageDeputyContactDetailsInformation{}
+	template := &mockTemplates{}
+
+	w := httptest.NewRecorder()
+	r, _ := http.NewRequest("POST", "/123", strings.NewReader(""))
+	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	var redirect error
+
+	testHandler := mux.NewRouter()
+	testHandler.HandleFunc("/{id}", func(w http.ResponseWriter, r *http.Request) {
+		redirect = renderTemplateForManageDeputyContactDetails(client, template)(sirius.PermissionSet{}, w, r)
+	})
+
+	testHandler.ServeHTTP(w, r)
+	assert.Equal(redirect, Redirect("/deputy/123?success=deputyDetails"))
+}
+
+func TestErrorManageDeputyDetailsMessageWhenStringLengthTooLong(t *testing.T) {
+	assert := assert.New(t)
+	client := &mockManageDeputyContactDetailsInformation{}
+
+	validationErrors := sirius.ValidationErrors{
+		"firstname": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "surname": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "organisationName": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "workPhoneNumber": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "email": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "addressLine1": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "addressLine2": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "addressLine3": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "town": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "county": {
+			"stringLengthTooLong": "What sirius gives us",
+		}, "postcode": {
+			"stringLengthTooLong": "What sirius gives us",
+		},
+	}
+
+	client.updateErr = sirius.ValidationError{
+		Errors: validationErrors,
+	}
+
+	template := &mockTemplates{}
 
 	w := httptest.NewRecorder()
 	r, _ := http.NewRequest("POST", "/123", strings.NewReader(""))
@@ -67,134 +116,115 @@ func TestPostAddFirm(t *testing.T) {
 
 	testHandler := mux.NewRouter()
 	testHandler.HandleFunc("/{id}", func(w http.ResponseWriter, r *http.Request) {
-		returnedError = renderTemplateForAddFirm(client, nil)(sirius.PermissionSet{}, w, r)
-	})
-
-	testHandler.ServeHTTP(w, r)
-	assert.Equal(returnedError, Redirect("/deputy/123"))
-}
-
-func TestErrorAddFirmMessageWhenStringLengthTooLong(t *testing.T) {
-	assert := assert.New(t)
-	client := &mockFirmInformation{}
-
-	validationErrors := sirius.ValidationErrors{
-		"firmName": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "phoneNumber": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "email": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "addressLine1": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "addressLine2": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "addressLine3": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "town": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "county": {
-			"stringLengthTooLong": "What sirius gives us",
-		}, "postcode": {
-			"stringLengthTooLong": "What sirius gives us",
-		},
-	}
-
-	client.err = sirius.ValidationError{
-		Errors: validationErrors,
-	}
-
-	template := &mockTemplates{}
-
-	w := httptest.NewRecorder()
-	r, _ := http.NewRequest("POST", "/133", strings.NewReader(""))
-	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-
-	var returnedError error
-
-	testHandler := mux.NewRouter()
-	testHandler.HandleFunc("/{id}", func(w http.ResponseWriter, r *http.Request) {
-		returnedError = renderTemplateForAddFirm(client, template)(sirius.PermissionSet{}, w, r)
+		returnedError = renderTemplateForManageDeputyContactDetails(client, template)(sirius.PermissionSet{}, w, r)
 	})
 
 	testHandler.ServeHTTP(w, r)
 
 	expectedValidationErrors := sirius.ValidationErrors{
-		"firmName": {
-			"stringLengthTooLong": "The firm name must be 255 characters or fewer",
-		}, "phoneNumber": {
+		"firstname": {
+			"stringLengthTooLong": "The deputy first name must be 255 characters or fewer",
+		},
+		"surname": {
+			"stringLengthTooLong": "The deputy surname must be 255 characters or fewer",
+		},
+		"organisationName": {
+			"stringLengthTooLong": "The organisation name must be 255 characters or fewer",
+		},
+		"workPhoneNumber": {
 			"stringLengthTooLong": "The telephone number must be 255 characters or fewer",
-		}, "email": {
+		},
+		"email": {
 			"stringLengthTooLong": "The email must be 255 characters or fewer",
-		}, "addressLine1": {
+		},
+		"addressLine1": {
 			"stringLengthTooLong": "The building or street must be 255 characters or fewer",
-		}, "addressLine2": {
+		},
+		"addressLine2": {
 			"stringLengthTooLong": "Address line 2 must be 255 characters or fewer",
-		}, "addressLine3": {
+		},
+		"addressLine3": {
 			"stringLengthTooLong": "Address line 3 must be 255 characters or fewer",
-		}, "town": {
+		},
+		"town": {
 			"stringLengthTooLong": "The town or city must be 255 characters or fewer",
-		}, "county": {
+		},
+		"county": {
 			"stringLengthTooLong": "The county must be 255 characters or fewer",
-		}, "postcode": {
+		},
+		"postcode": {
 			"stringLengthTooLong": "The postcode must be 255 characters or fewer",
 		},
 	}
 
-	assert.Equal(1, client.count)
+	assert.Equal(2, client.count)
 
 	assert.Equal(1, template.count)
 	assert.Equal("page", template.lastName)
-	assert.Equal(addFirmVars{
-		Path:   "/133",
-		Errors: expectedValidationErrors,
+	assert.Equal(manageDeputyContactDetailsVars{
+		Path:     "/123",
+		DeputyId: 123,
+		Errors:   expectedValidationErrors,
 	}, template.lastVars)
 
 	assert.Nil(returnedError)
 }
 
-func TestErrorAddFirmMessageWhenIsEmpty(t *testing.T) {
+func TestErrorManageDeputyDetailsMessageWhenIsEmpty(t *testing.T) {
 	assert := assert.New(t)
-	client := &mockFirmInformation{}
+	client := &mockManageDeputyContactDetailsInformation{}
 
 	validationErrors := sirius.ValidationErrors{
-		"firmName": {
+		"firstname": {
+			"isEmpty": "What sirius gives us",
+		},
+		"surname": {
+			"isEmpty": "What sirius gives us",
+		},
+		"organisationName": {
 			"isEmpty": "What sirius gives us",
 		},
 	}
 
-	client.err = sirius.ValidationError{
+	client.updateErr = sirius.ValidationError{
 		Errors: validationErrors,
 	}
 
 	template := &mockTemplates{}
 
 	w := httptest.NewRecorder()
-	r, _ := http.NewRequest("POST", "/133", strings.NewReader(""))
+	r, _ := http.NewRequest("POST", "/123", strings.NewReader(""))
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	var returnedError error
 
 	testHandler := mux.NewRouter()
 	testHandler.HandleFunc("/{id}", func(w http.ResponseWriter, r *http.Request) {
-		returnedError = renderTemplateForAddFirm(client, template)(sirius.PermissionSet{}, w, r)
+		returnedError = renderTemplateForManageDeputyContactDetails(client, template)(sirius.PermissionSet{}, w, r)
 	})
 
 	testHandler.ServeHTTP(w, r)
 
 	expectedValidationErrors := sirius.ValidationErrors{
-		"firmName": {
-			"isEmpty": "The firm name is required and can't be empty",
+		"firstname": {
+			"isEmpty": "The deputy first name is required and can't be empty",
+		},
+		"surname": {
+			"isEmpty": "The deputy surname is required and can't be empty",
+		},
+		"organisationName": {
+			"isEmpty": "The organisation name is required and can't be empty",
 		},
 	}
 
-	assert.Equal(1, client.count)
+	assert.Equal(2, client.count)
 
 	assert.Equal(1, template.count)
 	assert.Equal("page", template.lastName)
-	assert.Equal(addFirmVars{
-		Path:   "/133",
-		Errors: expectedValidationErrors,
+	assert.Equal(manageDeputyContactDetailsVars{
+		Path:     "/123",
+		DeputyId: 123,
+		Errors:   expectedValidationErrors,
 	}, template.lastVars)
 
 	assert.Nil(returnedError)

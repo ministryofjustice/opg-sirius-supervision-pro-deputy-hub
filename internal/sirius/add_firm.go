@@ -22,17 +22,7 @@ type FirmDetails struct {
 func (c *Client) AddFirmDetails(ctx Context, addFirmForm FirmDetails) (int, error) {
 	var k FirmDetails
 	var body bytes.Buffer
-	err := json.NewEncoder(&body).Encode(FirmDetails{
-		FirmName:     addFirmForm.FirmName,
-		AddressLine1: addFirmForm.AddressLine1,
-		AddressLine2: addFirmForm.AddressLine2,
-		AddressLine3: addFirmForm.AddressLine3,
-		Town:         addFirmForm.Town,
-		County:       addFirmForm.County,
-		Postcode:     addFirmForm.Postcode,
-		Email:        addFirmForm.Email,
-		PhoneNumber:  addFirmForm.PhoneNumber,
-	})
+	err := json.NewEncoder(&body).Encode(addFirmForm)
 	if err != nil {
 		return 0, err
 	}

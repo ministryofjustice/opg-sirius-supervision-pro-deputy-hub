@@ -1,10 +1,10 @@
 const getFailRoute = (req) => {
-    return req.headers?.cookie?.match(/fail-route=(?<failRoute>\w+);/)?.groups
+    return req.headers?.cookie?.match(/fail-route=(?<failRoute>.+);/)?.groups
         .failRoute;
 };
 
 module.exports = (req, res, next) => {
-    if (req.method === "POST") {
+    if (["POST", "PATCH"].includes(req.method)) {
         const failRoute = getFailRoute(req);
 
         if (failRoute) {
