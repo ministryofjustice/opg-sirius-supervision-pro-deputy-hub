@@ -12,16 +12,17 @@ import (
 type FirmInformation interface {
 	AddFirmDetails(sirius.Context, sirius.FirmDetails) (int, error)
 	AssignDeputyToFirm(sirius.Context, int, int) error
+	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
 }
 
 type addFirmVars struct {
-	Path          string
-	XSRFToken     string
-	DeputyDetails sirius.ProDeputyDetails
-	Error         string
-	Errors        sirius.ValidationErrors
-	Success       bool
-	DeputyId      int
+	Path             string
+	XSRFToken        string
+	ProDeputyDetails sirius.ProDeputyDetails
+	Error            string
+	Errors           sirius.ValidationErrors
+	Success          bool
+	DeputyId         int
 }
 
 func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
@@ -30,13 +31,19 @@ func renderTemplateForAddFirm(client FirmInformation, tmpl Template) Handler {
 		ctx := getContext(r)
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
+		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+
+		if err != nil {
+			return err
+		}
 
 		switch r.Method {
 		case http.MethodGet:
 			vars := addFirmVars{
-				Path:      r.URL.Path,
-				XSRFToken: ctx.XSRFToken,
-				DeputyId:  deputyId,
+				Path:             r.URL.Path,
+				XSRFToken:        ctx.XSRFToken,
+				DeputyId:         deputyId,
+				ProDeputyDetails: proDeputyDetails,
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
