@@ -24,10 +24,17 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 				return err
 			}
 
+			firmDetails, err := client.GetFirms(ctx)
+
+			if err != nil {
+				return err
+			}
+
 			vars := proDeputyHubVars{
 				Path:             r.URL.Path,
 				XSRFToken:        ctx.XSRFToken,
 				ProDeputyDetails: proDeputyDetails,
+				FirmDetails: firmDetails,
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)

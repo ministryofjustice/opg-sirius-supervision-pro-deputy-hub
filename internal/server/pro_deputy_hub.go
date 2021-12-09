@@ -10,12 +10,14 @@ import (
 
 type ProDeputyHubInformation interface {
 	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
+	GetFirms(sirius.Context) ([]sirius.Firm, error)
 }
 
 type proDeputyHubVars struct {
 	Path             string
 	XSRFToken        string
 	ProDeputyDetails sirius.ProDeputyDetails
+	FirmDetails 	[]sirius.Firm
 	Error            string
 	Errors           sirius.ValidationErrors
 	Success          bool

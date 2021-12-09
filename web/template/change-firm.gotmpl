@@ -27,22 +27,60 @@
                                     Select if you want to use an existing deputy
                                     or create a new one
                                 </legend>
-                                <div
-                                    class="govuk-radios govuk-radios--conditional"
-                                    data-module="govuk-radios">
-                                    <div class="govuk-radios__item">
-                                        <input
-                                            class="govuk-radios__input"
-                                            id="new-firm"
+                                <div class="govuk-radios govuk-radios--conditional">
+                                      <div class="govuk-radios__item">
+                                        <input class="govuk-radios__input"
+                                            id="existing-firm"
                                             name="select-firm"
                                             type="radio"
-                                            value="new-firm" />
-                                        <label
-                                            class="govuk-label govuk-radios__label"
-                                            for="new-firm">
-                                            Create a new firm
-                                        </label>
-                                    </div>
+                                            value="existing-firm" />
+                                           <label class="govuk-label govuk-radios__label" for="existing-firm">Use existing firm</label>
+                                      </div>
+                                       <div class="govuk-radios__conditional" id="conditional-firm">
+                                           <label class="govuk-label govuk-radios__label" for="select-existing-firm">Enter a firm name</label>
+                                           <div class="autocomplete-wrapper" id="select-existing-firm-dropdown">
+                                              <select id="select-existing-firm" name="select-existing-firm">
+                                              <option value=""></option>
+                                                  {{range .FirmDetails}}
+                                                      <option value="{{.Id}}">{{.FirmName}}</option>
+                                                  {{end}}
+                                              </select>
+                                            </div>
+                                            <br>
+                                            <div class="govuk-form-group">
+                                              <fieldset class="govuk-fieldset">
+                                                <legend class="govuk-fieldset__legend">
+                                                  Update deputy contact details with the firm address
+                                                </legend>
+                                                <div class="govuk-radios--inline">
+                                                  <div class="govuk-radios__item">
+                                                    <input class="govuk-radios__input" id="update-deputy" name="update-deputy" type="radio" value="yes" data-dashlane-rid="c6ad5585071baecb" data-form-type="">
+                                                    <label class="govuk-label govuk-radios__label" for="update-deputy">
+                                                      Yes
+                                                    </label>
+                                                  </div>
+                                                  <div class="govuk-radios__item">
+                                                    <input class="govuk-radios__input" id="update-deputy-2" name="update-deputy" type="radio" value="no" data-dashlane-rid="86cc3de5b807c43c" data-form-type="">
+                                                    <label class="govuk-label govuk-radios__label" for="update-deputy-2">
+                                                        No
+                                                    </label>
+                                                </div>
+                                              </fieldset>
+                                            </div>
+                                       </div>
+                                        <div class="govuk-radios__item">
+                                            <input
+                                                class="govuk-radios__input"
+                                                id="new-firm"
+                                                name="select-firm"
+                                                type="radio"
+                                                value="new-firm" />
+                                            <label
+                                                class="govuk-label govuk-radios__label"
+                                                for="new-firm">
+                                                Create a new firm
+                                            </label>
+                                        </div>
                                 </div>
                             </fieldset>
                         </div>
