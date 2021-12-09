@@ -22,6 +22,7 @@ func main() {
 	webDir := getEnv("WEB_DIR", "web")
 	siriusURL := getEnv("SIRIUS_URL", "http://localhost:8080")
 	siriusPublicURL := getEnv("SIRIUS_PUBLIC_URL", "")
+	firmHubURL := getEnv("FIRM_HUB_URL", "")
 	prefix := getEnv("PREFIX", "")
 
 	layouts, _ := template.
@@ -32,6 +33,9 @@ func main() {
 			},
 			"sirius": func(s string) string {
 				return siriusPublicURL + s
+			},
+			"firmhub": func(s string) string {
+				return firmHubURL + s
 			},
 		}).
 		ParseGlob(webDir + "/template/*/*.gotmpl")
@@ -50,7 +54,7 @@ func main() {
 
 	s := &http.Server{
 		Addr:    ":" + port,
-		Handler: server.New(logger, client, tmpls, prefix, siriusPublicURL, webDir),
+		Handler: server.New(logger, client, tmpls, prefix, siriusPublicURL, firmHubURL, webDir),
 	}
 
 	go func() {
