@@ -1,14 +1,32 @@
 {{ define "pro-deputy" }}
+    <a href="javascript: history.go(-1)" class="govuk-back-link">Back</a>
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
-            {{ if ne .ProDeputyDetails.DeputyFirstName ""}}
-                <h2 class="govuk-heading-m govuk-!-margin-bottom-0">{{ .ProDeputyDetails.DeputyFirstName }} {{ .ProDeputyDetails.DeputySurname }}</h2>
+            {{ if ne .ProDeputyDetails.DeputyFirstName "" }}
+                <h2
+                    class="govuk-heading-m govuk-!-margin-bottom-0 hook_header_deputy_name">
+                    {{ printf "%v %v" .ProDeputyDetails.DeputyFirstName .ProDeputyDetails.DeputySurname }}
+                </h2>
             {{ else }}
-                <h2 class="govuk-heading-m govuk-!-margin-bottom-0">{{ .ProDeputyDetails.OrganisationName }}</h2>
+                <h2
+                    class="govuk-heading-m govuk-!-margin-bottom-0 hook_header_organisation_name">
+                    {{ .ProDeputyDetails.OrganisationName }}
+                </h2>
             {{ end }}
-            <span class="govuk-caption-m  govuk-!-margin-bottom-0">Firm: </span>
-            <span class="govuk-caption-m  govuk-!-margin-bottom-2">Deputy Number: {{ .ProDeputyDetails.DeputyNumber }}</span>
-            <span class="govuk-caption-m  govuk-!-margin-bottom-2">Executive Case Manager: {{ .ProDeputyDetails.ExecutiveCaseManager.EcmName }}</span>
+            <span
+                class="govuk-caption-m  govuk-!-margin-bottom-0 hook_header_firm_name"> Firm:
+                  <a class="moj-header__navigation-link" href="{{ firmhub (printf "/supervision/deputies/firm/%d" .ProDeputyDetails.Firm.FirmId) }}">
+                  {{ printf "%v" .ProDeputyDetails.Firm.FirmName }}</a>
+            </span>
+
+            <span
+                class="govuk-caption-m  govuk-!-margin-bottom-0  hook_header_deputy_number">
+                {{ printf "Deputy Number: %v" .ProDeputyDetails.DeputyNumber }}
+            </span>
+            <span
+                class="govuk-caption-m  govuk-!-margin-bottom-2  hook_header_ecm">
+                {{ printf "Executive Case Manager: %v" .ProDeputyDetails.ExecutiveCaseManager.EcmName }}
+            </span>
         </div>
     </div>
 {{ end }}

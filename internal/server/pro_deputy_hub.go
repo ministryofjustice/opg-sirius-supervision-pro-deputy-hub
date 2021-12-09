@@ -18,8 +18,8 @@ type proDeputyHubVars struct {
 	ProDeputyDetails sirius.ProDeputyDetails
 	Error            string
 	Errors           sirius.ValidationErrors
-	Success        	 bool
-	SuccessMessage 	 string
+	Success          bool
+	SuccessMessage   string
 }
 
 func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template) Handler {
@@ -33,6 +33,7 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
 		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+
 		if err != nil {
 			return err
 		}
