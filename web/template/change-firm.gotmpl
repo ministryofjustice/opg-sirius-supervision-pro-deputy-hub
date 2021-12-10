@@ -28,13 +28,25 @@
                                     or create a new one
                                 </legend>
                                 <div class="govuk-radios govuk-radios--conditional">
-                                      <div class="govuk-radios__item">
-                                      <form action="{{ prefix (printf "/deputy/%d/existing-firm" .ProDeputyDetails.ID) }}">
-                                          <input class="govuk-radios__input" type="submit" value="existing-firm" />
-                                      </form>
-                                       <label class="govuk-label govuk-radios__label" for="existing-firm">Use existing firm</label>
-                                      </div>
-                                       <form class="" method="post">
+                                    <form action="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}">
+                                          <div class="govuk-radios__item">
+                                              <input
+                                                  class="govuk-radios__input"
+                                                  id="existing-firm"
+                                                  name="existing-firm"
+                                                  type="submit"
+                                                  value="existing-firm" />
+                                              <label
+                                                  class="govuk-label govuk-radios__label"
+                                                  for="existing-firm">
+                                                  Use an existing firm
+                                              </label>
+                                          </div>
+                                    </form>
+                                    {{ if ne .ExistingFirm false }}
+                                           <p> Hi kate </p>
+                                        {{ end }}
+                                    <form class="" method="post">
                                         <div class="govuk-radios__item">
                                             <input
                                                 class="govuk-radios__input"

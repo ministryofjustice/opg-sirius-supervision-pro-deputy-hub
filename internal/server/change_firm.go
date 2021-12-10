@@ -15,6 +15,7 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 		ctx := getContext(r)
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
+		firm, _ := routeVars["existing-firm"]
 
 		switch r.Method {
 		case http.MethodGet:
@@ -37,14 +38,30 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 				FirmDetails: firmDetails,
 			}
 
+			if firm != "" {
+				vars.ExistingFirm = true
+			}
+
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
 		case http.MethodPost:
 			newFirm := r.PostFormValue("select-firm")
+			existingFirm := r.PostFormValue("existing-firm")
+
+			vars := proDeputyHubVars{
+				Path:             r.URL.Path,
+				XSRFToken:        ctx.XSRFToken,
+				ExistingFirm: false,
+			}
+
+			if existingFirm != "" {
+				vars.ExistingFirm = true
+			}
+
+			fmt.Println("existingFirm")
+			fmt.Println(existingFirm)
 
 			AssignToExistingFirmStringIdValue := r.PostFormValue("select-existing-firm")
-			fmt.Println("existing firm id value")
-			fmt.Println(AssignToExistingFirmStringIdValue)
 
 			if newFirm == "new-firm" {
 				return Redirect(fmt.Sprintf("/deputy/%d/add-firm", deputyId))
@@ -56,24 +73,13 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 				AssignToFirmId, _ = strconv.Atoi(AssignToExistingFirmStringIdValue)
 			}
 
-			fmt.Println("AssignToFirmId")
-			fmt.Println(AssignToFirmId)
-
-
 			assignDeputyToFirmErr := client.AssignDeputyToFirm(ctx, deputyId, AssignToFirmId)
 
 			if assignDeputyToFirmErr != nil {
 				return assignDeputyToFirmErr
 			}
 
-			//vars := proDeputyHubVars{
-			//	Path:      r.URL.Path,
-			//	XSRFToken: ctx.XSRFToken,
-			//}
-
-			return Redirect(fmt.Sprintf("/deputy/%d", deputyId))
-
-			//return tmpl.ExecuteTemplate(w, "page", vars)
+			return tmpl.ExecuteTemplate(w, "page", vars)
 		default:
 			return StatusError(http.StatusMethodNotAllowed)
 		}
