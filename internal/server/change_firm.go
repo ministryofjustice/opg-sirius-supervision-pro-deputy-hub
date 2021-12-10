@@ -41,6 +41,9 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 
 		case http.MethodPost:
 			newFirm := r.PostFormValue("select-firm")
+			existingFirm := r.PostFormValue("existing-firm")
+			print("existingFirm")
+			print(existingFirm)
 
 			if newFirm == "new-firm" {
 				return Redirect(fmt.Sprintf("/deputy/%d/add-firm", deputyId))
@@ -49,6 +52,10 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 			vars := proDeputyHubVars{
 				Path:      r.URL.Path,
 				XSRFToken: ctx.XSRFToken,
+			}
+
+			if existingFirm != "" {
+				vars.ExistingFirm = true
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)

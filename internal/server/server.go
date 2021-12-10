@@ -59,6 +59,10 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 		wrap(
 			renderTemplateForAddFirm(client, templates["add-firm.gotmpl"])))
 
+	router.Handle("/deputy/{id}/existing-firm",
+		wrap(
+			renderTemplateForChangeFirm(client, templates["existing-firm.gotmpl"])))
+
 	router.Handle("/health-check", healthCheck())
 
 	static := http.FileServer(http.Dir(webDir + "/static"))

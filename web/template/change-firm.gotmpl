@@ -10,7 +10,6 @@
             </header>
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-one-half">
-                    <form class="" method="post">
                         <p
                             class="govuk-body govuk-!-margin-bottom-5"
                             for="autocomplete-default">
@@ -29,45 +28,12 @@
                                 </legend>
                                 <div class="govuk-radios govuk-radios--conditional">
                                       <div class="govuk-radios__item">
-                                        <input class="govuk-radios__input"
-                                            id="existing-firm"
-                                            name="select-firm"
-                                            type="radio"
-                                            value="existing-firm" />
-                                           <label class="govuk-label govuk-radios__label" for="existing-firm">Use existing firm</label>
+                                      <form action="{{ prefix (printf "/deputy/%d/existing-firm" .ProDeputyDetails.ID) }}">
+                                          <input class="govuk-radios__input" type="submit" value="existing-firm" />
+                                      </form>
+                                       <label class="govuk-label govuk-radios__label" for="existing-firm">Use existing firm</label>
                                       </div>
-                                       <div class="govuk-radios__conditional" id="conditional-firm">
-                                           <label class="govuk-label govuk-radios__label" for="select-existing-firm">Enter a firm name</label>
-                                           <div class="autocomplete-wrapper" id="select-existing-firm-dropdown">
-                                              <select id="select-existing-firm" name="select-existing-firm">
-                                              <option value=""></option>
-                                                  {{range .FirmDetails}}
-                                                      <option value="{{.Id}}">{{.FirmName}}</option>
-                                                  {{end}}
-                                              </select>
-                                            </div>
-                                            <br>
-                                            <div class="govuk-form-group">
-                                              <fieldset class="govuk-fieldset">
-                                                <legend class="govuk-fieldset__legend">
-                                                  Update deputy contact details with the firm address
-                                                </legend>
-                                                <div class="govuk-radios--inline">
-                                                  <div class="govuk-radios__item">
-                                                    <input class="govuk-radios__input" id="update-deputy" name="update-deputy" type="radio" value="yes" data-dashlane-rid="c6ad5585071baecb" data-form-type="">
-                                                    <label class="govuk-label govuk-radios__label" for="update-deputy">
-                                                      Yes
-                                                    </label>
-                                                  </div>
-                                                  <div class="govuk-radios__item">
-                                                    <input class="govuk-radios__input" id="update-deputy-2" name="update-deputy" type="radio" value="no" data-dashlane-rid="86cc3de5b807c43c" data-form-type="">
-                                                    <label class="govuk-label govuk-radios__label" for="update-deputy-2">
-                                                        No
-                                                    </label>
-                                                </div>
-                                              </fieldset>
-                                            </div>
-                                       </div>
+                                       <form class="" method="post">
                                         <div class="govuk-radios__item">
                                             <input
                                                 class="govuk-radios__input"
