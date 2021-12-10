@@ -11,6 +11,7 @@
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-one-half">
                     <form class="" method="post">
+                    <input type="hidden" name="xsrfToken" value="{{ .XSRFToken }}" />
                         <p
                             class="govuk-body govuk-!-margin-bottom-5"
                             for="autocomplete-default">
@@ -34,7 +35,8 @@
                                                 id="existing-firm"
                                                 name="select-firm"
                                                 type="radio"
-                                                value="existing-firm" />
+                                                value="existing-firm"
+                                                checked="checked" />
                                             <label
                                                 class="govuk-label govuk-radios__label"
                                                 for="existing-firm">
