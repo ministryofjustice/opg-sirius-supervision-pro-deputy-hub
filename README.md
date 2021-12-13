@@ -12,7 +12,7 @@
 
 ## Local development
 
-The application ran through Docker can be accessed on `localhost:8888/supervision/deputies/professional/`.
+The application ran through Docker can be accessed on `http://localhost:8888/supervision/deputies/professional/deputy/1`.
 
 To enable debugging and hot-reloading of Go files:
 
