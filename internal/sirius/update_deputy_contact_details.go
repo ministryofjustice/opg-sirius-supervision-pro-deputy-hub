@@ -50,7 +50,7 @@ func (c *Client) UpdateDeputyContactDetails(ctx Context, deputyId int, deputyDet
 		return ErrUnauthorized
 	}
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode == http.StatusBadRequest {
 		var v struct {
 			ValidationErrors ValidationErrors `json:"validation_errors"`
 		}
@@ -60,7 +60,9 @@ func (c *Client) UpdateDeputyContactDetails(ctx Context, deputyId int, deputyDet
 				Errors: v.ValidationErrors,
 			}
 		}
+	}
 
+	if resp.StatusCode != http.StatusOK {
 		return newStatusError(resp)
 	}
 
