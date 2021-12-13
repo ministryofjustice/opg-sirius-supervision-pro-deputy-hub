@@ -1351,6 +1351,10 @@
                     "stringLengthTooLong": ""
                 }
             }
+        },
+        {
+            "id": "internal-server-error",
+            "message": "test message"
         }
     ],
     "successes": [
