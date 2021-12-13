@@ -86,7 +86,7 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 
 				vars.Errors = sirius.ValidationErrors{
 					"firmId": {
-						"isEmpty": "Select an existing firm",
+						"isEmpty": "Enter a firm name or number",
 					},
 				}
 				return tmpl.ExecuteTemplate(w, "page", vars)
@@ -112,10 +112,7 @@ func checkUrlForFirm(url string) bool {
 	splitStringByQuestion := strings.Split(url, "?")
 	if len(splitStringByQuestion) > 1 {
 		splitString := strings.Split(splitStringByQuestion[1], "=")
-		if splitString[0] == "existing-firm" {
-			return true
-		}
-		return false
+		return splitString[0] == "existing-firm"
 	}
 	return false
 }
