@@ -1248,13 +1248,6 @@
             "FirmNumber": 1000002
         }
     ],
-    "allocateToFirm": [
-        {
-            "Id": 3,
-            "FirmName": "Great Firm Corp",
-            "FirmNumber": 1000002
-        }
-    ],
     "errors": [
         {
             "id": "notes",
