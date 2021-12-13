@@ -9,6 +9,7 @@ import (
 type Firm struct {
 	Id           int             `json:"id"`
 	FirmName     string          `json:"firmName"`
+	FirmNumber 	int `json:"firmNumber"`
 }
 
 

@@ -3,6 +3,7 @@
     {{ template "pro-deputy" . }}
     <div class="govuk-grid-row govuk-!-margin-top-5">
         <div class="govuk-grid-column-full">
+            {{ template "error-summary" .Errors }}
             <header>
                 <h1 class="govuk-heading-l  govuk-!-margin-bottom-1">
                     Change firm
@@ -57,36 +58,16 @@
                                         {{if ne .ExistingFirm false}}
                                             <input type="hidden" name="xsrfToken" value="{{ .XSRFToken }}" />
                                             <div class="govuk-radios__conditional" id="conditional-firm">
-                                               <label class="govuk-label govuk-radios__label" for="select-existing-firm">Enter a firm name</label>
+                                               <label class="govuk-label govuk-radios__label" for="select-existing-firm">Enter a firm name or number</label>
                                                <div class="autocomplete-wrapper" id="select-existing-firm-dropdown">
                                                   <select id="select-existing-firm" name="select-existing-firm">
                                                   <option value=""></option>
                                                       {{range .FirmDetails}}
-                                                          <option value="{{.Id}}">{{.FirmName}}</option>
+                                                          <option value="{{.Id}}">{{.FirmName}} - {{.FirmNumber}}</option>
                                                       {{end}}
                                                   </select>
                                                 </div>
                                                 <br>
-                                                <div class="govuk-form-group">
-                                                  <fieldset class="govuk-fieldset">
-                                                    <legend class="govuk-fieldset__legend">
-                                                      Update deputy contact details with the firm address
-                                                    </legend>
-                                                    <div class="govuk-radios--inline">
-                                                      <div class="govuk-radios__item">
-                                                        <input class="govuk-radios__input" id="update-deputy" name="update-deputy" type="radio" value="yes" data-dashlane-rid="c6ad5585071baecb" data-form-type="">
-                                                        <label class="govuk-label govuk-radios__label" for="update-deputy">
-                                                          Yes
-                                                        </label>
-                                                      </div>
-                                                      <div class="govuk-radios__item">
-                                                        <input class="govuk-radios__input" id="update-deputy-2" name="update-deputy" type="radio" value="no" data-dashlane-rid="86cc3de5b807c43c" data-form-type="">
-                                                        <label class="govuk-label govuk-radios__label" for="update-deputy-2">
-                                                            No
-                                                        </label>
-                                                    </div>
-                                                  </fieldset>
-                                                </div>
                                             </div>
                                         {{ end }}
                                         <div class="govuk-radios__item">

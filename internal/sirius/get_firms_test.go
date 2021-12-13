@@ -45,14 +45,17 @@ func TestGetFirmsReturned(t *testing.T) {
 		{
 			Id:       1,
 			FirmName: "new firm 1",
+			FirmNumber: 1000000,
 		},
 		{
 			Id:       2,
 			FirmName: "firm 2",
+			FirmNumber: 1000001,
 		},
 		{
 			Id:       3,
 			FirmName: "firm 3",
+			FirmNumber: 1000002,
 		},
 	}
 

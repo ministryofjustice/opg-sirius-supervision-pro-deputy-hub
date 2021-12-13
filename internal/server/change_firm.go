@@ -16,6 +16,18 @@ type ProDeputyChangeFirmInformation interface {
 	AssignDeputyToFirm(sirius.Context, int, int) error
 }
 
+type changeFirmVars struct {
+	Path             string
+	XSRFToken        string
+	ProDeputyDetails sirius.ProDeputyDetails
+	FirmDetails 	[]sirius.Firm
+	Error            string
+	Errors           sirius.ValidationErrors
+	Success          bool
+	SuccessMessage   string
+	ExistingFirm bool
+}
+
 func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Template) Handler {
 	return func(perm sirius.PermissionSet, w http.ResponseWriter, r *http.Request) error {
 
@@ -24,21 +36,22 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 		deputyId, _ := strconv.Atoi(routeVars["id"])
 		firm := checkUrlForFirm(r.URL.String())
 
+		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+
+		if err != nil {
+			return err
+		}
+
+		firmDetails, err := client.GetFirms(ctx)
+
+		if err != nil {
+			return err
+		}
+
 		switch r.Method {
 		case http.MethodGet:
-			proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
 
-			if err != nil {
-				return err
-			}
-
-			firmDetails, err := client.GetFirms(ctx)
-
-			if err != nil {
-				return err
-			}
-
-			vars := proDeputyHubVars{
+			vars := changeFirmVars{
 				Path:             r.URL.Path,
 				XSRFToken:        ctx.XSRFToken,
 				ProDeputyDetails: proDeputyDetails,
@@ -58,6 +71,27 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 
 			AssignToFirmId := 0
 
+			fmt.Println("AssignToExistingFirmStringIdValue")
+			fmt.Println(AssignToExistingFirmStringIdValue)
+
+			if AssignToExistingFirmStringIdValue == "" {
+
+				vars := changeFirmVars{
+					Path:             r.URL.Path,
+					XSRFToken:        ctx.XSRFToken,
+					ProDeputyDetails: proDeputyDetails,
+					FirmDetails: firmDetails,
+					ExistingFirm: firm,
+				}
+
+				vars.Errors = sirius.ValidationErrors{
+					"firmId": {
+						"isEmpty": "Select an existing firm",
+					},
+				}
+				return tmpl.ExecuteTemplate(w, "page", vars)
+			}
+
 			if AssignToExistingFirmStringIdValue != "" {
 				AssignToFirmId, _ = strconv.Atoi(AssignToExistingFirmStringIdValue)
 			}
@@ -67,7 +101,7 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 			if assignDeputyToFirmErr != nil {
 				return assignDeputyToFirmErr
 			}
-			return Redirect(fmt.Sprintf("/deputy/%d", deputyId))
+			return Redirect(fmt.Sprintf("/deputy/%d?success=firm", deputyId))
 		default:
 			return StatusError(http.StatusMethodNotAllowed)
 		}
