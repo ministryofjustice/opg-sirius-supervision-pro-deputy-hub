@@ -27,7 +27,7 @@ func TestAssignDeputyToFirm(t *testing.T) {
 		}, nil
 	}
 
-	err := client.AssignDeputyToFirm(getContext(nil), 76,  1)
+	err := client.AssignDeputyToFirm(getContext(nil), 76, 1)
 	assert.Equal(t, err, ValidationError{"", ValidationErrors(nil)})
 }
 
@@ -39,7 +39,7 @@ func TestAssignDeputyToFirmReturnsNewStatusError(t *testing.T) {
 
 	client, _ := NewClient(http.DefaultClient, svr.URL)
 
-	err := client.AssignDeputyToFirm(getContext(nil), 76,  1)
+	err := client.AssignDeputyToFirm(getContext(nil), 76, 1)
 
 	assert.Equal(t, StatusError{
 		Code:   http.StatusMethodNotAllowed,
@@ -56,7 +56,7 @@ func TestAssignDeputyToFirmReturnsUnauthorisedClientError(t *testing.T) {
 
 	client, _ := NewClient(http.DefaultClient, svr.URL)
 
-	err := client.AssignDeputyToFirm(getContext(nil), 76,  1)
+	err := client.AssignDeputyToFirm(getContext(nil), 76, 1)
 
 	assert.Equal(t, ErrUnauthorized, err)
 }

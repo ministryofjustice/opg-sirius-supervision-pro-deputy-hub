@@ -7,11 +7,10 @@ import (
 )
 
 type Firm struct {
-	Id           int             `json:"id"`
-	FirmName     string          `json:"firmName"`
-	FirmNumber 	int `json:"firmNumber"`
+	Id         int    `json:"id"`
+	FirmName   string `json:"firmName"`
+	FirmNumber int    `json:"firmNumber"`
 }
-
 
 func (c *Client) GetFirms(ctx Context) ([]Firm, error) {
 	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/api/v1/firms"), nil)
@@ -39,8 +38,5 @@ func (c *Client) GetFirms(ctx Context) ([]Firm, error) {
 		return nil, err
 	}
 
-
 	return v, err
 }
-
-

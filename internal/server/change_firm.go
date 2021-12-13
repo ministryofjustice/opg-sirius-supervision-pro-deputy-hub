@@ -20,12 +20,12 @@ type changeFirmVars struct {
 	Path             string
 	XSRFToken        string
 	ProDeputyDetails sirius.ProDeputyDetails
-	FirmDetails 	[]sirius.Firm
+	FirmDetails      []sirius.Firm
 	Error            string
 	Errors           sirius.ValidationErrors
 	Success          bool
 	SuccessMessage   string
-	ExistingFirm bool
+	ExistingFirm     bool
 }
 
 func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Template) Handler {
@@ -55,8 +55,8 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 				Path:             r.URL.Path,
 				XSRFToken:        ctx.XSRFToken,
 				ProDeputyDetails: proDeputyDetails,
-				FirmDetails: firmDetails,
-				ExistingFirm: firm,
+				FirmDetails:      firmDetails,
+				ExistingFirm:     firm,
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
@@ -80,8 +80,8 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 					Path:             r.URL.Path,
 					XSRFToken:        ctx.XSRFToken,
 					ProDeputyDetails: proDeputyDetails,
-					FirmDetails: firmDetails,
-					ExistingFirm: firm,
+					FirmDetails:      firmDetails,
+					ExistingFirm:     firm,
 				}
 
 				vars.Errors = sirius.ValidationErrors{
@@ -108,15 +108,14 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 	}
 }
 
-	func checkUrlForFirm(url string) bool {
+func checkUrlForFirm(url string) bool {
 	splitStringByQuestion := strings.Split(url, "?")
-		if len(splitStringByQuestion) > 1 {
-			splitString := strings.Split(splitStringByQuestion[1], "=")
-			if splitString[0] == "existing-firm" {
-				return true
-			}
-			return false
+	if len(splitStringByQuestion) > 1 {
+		splitString := strings.Split(splitStringByQuestion[1], "=")
+		if splitString[0] == "existing-firm" {
+			return true
 		}
 		return false
 	}
-
+	return false
+}

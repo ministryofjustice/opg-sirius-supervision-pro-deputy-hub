@@ -59,4 +59,3 @@ func (c *Client) GetProDeputyDetails(ctx Context, deputyId int) (ProDeputyDetail
 	err = json.NewDecoder(resp.Body).Decode(&v)
 	return v, err
 }
-

@@ -13,7 +13,7 @@ type mockProDeputyChangeFirmInformation struct {
 	lastCtx    sirius.Context
 	err        error
 	deputyData sirius.ProDeputyDetails
-	firms []sirius.Firm
+	firms      []sirius.Firm
 }
 
 func (m *mockProDeputyChangeFirmInformation) GetProDeputyDetails(ctx sirius.Context, deputyId int) (sirius.ProDeputyDetails, error) {
@@ -54,7 +54,6 @@ func TestChangeFirm(t *testing.T) {
 	resp := w.Result()
 	assert.Equal(http.StatusOK, resp.StatusCode)
 }
-
 
 func TestCheckUrlForFirm(t *testing.T) {
 	assert.Equal(t, false, checkUrlForFirm("http://localhost:8888/supervision/deputies/professional/deputy/76/change-firm"))
