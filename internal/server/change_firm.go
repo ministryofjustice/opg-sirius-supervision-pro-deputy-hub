@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
@@ -15,7 +16,7 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 		ctx := getContext(r)
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
-		firm, _ := routeVars["existing-firm"]
+		firm := checkUrlForFirm(r.URL.String())
 
 		switch r.Method {
 		case http.MethodGet:
@@ -36,31 +37,13 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 				XSRFToken:        ctx.XSRFToken,
 				ProDeputyDetails: proDeputyDetails,
 				FirmDetails: firmDetails,
-			}
-
-			if firm != "" {
-				vars.ExistingFirm = true
+				ExistingFirm: firm,
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
 		case http.MethodPost:
 			newFirm := r.PostFormValue("select-firm")
-			existingFirm := r.PostFormValue("existing-firm")
-
-			vars := proDeputyHubVars{
-				Path:             r.URL.Path,
-				XSRFToken:        ctx.XSRFToken,
-				ExistingFirm: false,
-			}
-
-			if existingFirm != "" {
-				vars.ExistingFirm = true
-			}
-
-			fmt.Println("existingFirm")
-			fmt.Println(existingFirm)
-
 			AssignToExistingFirmStringIdValue := r.PostFormValue("select-existing-firm")
 
 			if newFirm == "new-firm" {
@@ -78,10 +61,22 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 			if assignDeputyToFirmErr != nil {
 				return assignDeputyToFirmErr
 			}
-
-			return tmpl.ExecuteTemplate(w, "page", vars)
+			return Redirect(fmt.Sprintf("/deputy/%d", deputyId))
 		default:
 			return StatusError(http.StatusMethodNotAllowed)
 		}
 	}
 }
+
+	func checkUrlForFirm(url string) bool {
+	splitStringByQuestion := strings.Split(url, "?")
+		if len(splitStringByQuestion) > 1 {
+			splitString := strings.Split(splitStringByQuestion[1], "=")
+			if splitString[1] == "existing-firm" {
+				return true
+			}
+			return false
+		}
+		return false
+	}
+

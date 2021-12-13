@@ -13,14 +13,6 @@ type FirmId struct {
 
 func (c *Client) AssignDeputyToFirm(ctx Context, deputyId int, firmId int) error {
 
-	fmt.Println("in assign deputy to firm")
-
-	fmt.Println("deputy id")
-	fmt.Println(deputyId)
-
-	fmt.Println("firm id")
-	fmt.Println(firmId)
-
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(FirmId{
 		FirmId: firmId,
@@ -29,16 +21,7 @@ func (c *Client) AssignDeputyToFirm(ctx Context, deputyId int, firmId int) error
 		return err
 	}
 
-	fmt.Println("body")
-	fmt.Println(body)
-
-	fmt.Println("err encoding")
-	fmt.Println(err)
-
 	requestURL := fmt.Sprintf("/api/v1/deputies/%d/firm", deputyId)
-
-	fmt.Println("request url")
-	fmt.Println(requestURL)
 
 	req, err := c.newRequest(ctx, http.MethodPut, requestURL, &body)
 
