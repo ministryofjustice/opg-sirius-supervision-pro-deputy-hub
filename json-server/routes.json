@@ -4,5 +4,6 @@
     "/timeline/:personId": "/timeline",
     "/deputy/:personId/notes": "/notes",
     "/users/current": "/users",
-    "/firms": "/addFirm"
+    "/firms": "/addFirm",
+    "deputies/:deputyId/firm": "/allocateToFirm"
 }

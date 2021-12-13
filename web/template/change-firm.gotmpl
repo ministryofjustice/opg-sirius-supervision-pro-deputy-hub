@@ -58,8 +58,8 @@
                                         {{if ne .ExistingFirm false}}
                                             <input type="hidden" name="xsrfToken" value="{{ .XSRFToken }}" />
                                             <div class="govuk-radios__conditional" id="conditional-firm">
-                                               <label class="govuk-label govuk-radios__label" for="select-existing-firm">Enter a firm name or number</label>
                                                <div class="autocomplete-wrapper" id="select-existing-firm-dropdown">
+                                                <label class="govuk-label govuk-radios__label" for="select-existing-firm">Enter a firm name or number</label>
                                                   <select id="select-existing-firm" name="select-existing-firm">
                                                   <option value=""></option>
                                                       {{range .FirmDetails}}
