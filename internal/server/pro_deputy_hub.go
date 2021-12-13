@@ -10,8 +10,6 @@ import (
 
 type ProDeputyHubInformation interface {
 	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
-	GetFirms(sirius.Context) ([]sirius.Firm, error)
-	AssignDeputyToFirm(sirius.Context, int, int) error
 }
 
 type proDeputyHubVars struct {

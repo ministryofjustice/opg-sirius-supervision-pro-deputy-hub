@@ -10,7 +10,13 @@ import (
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 )
 
-func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) Handler {
+type ProDeputyChangeFirmInformation interface {
+	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
+	GetFirms(sirius.Context) ([]sirius.Firm, error)
+	AssignDeputyToFirm(sirius.Context, int, int) error
+}
+
+func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Template) Handler {
 	return func(perm sirius.PermissionSet, w http.ResponseWriter, r *http.Request) error {
 
 		ctx := getContext(r)
@@ -72,7 +78,7 @@ func renderTemplateForChangeFirm(client ProDeputyHubInformation, tmpl Template) 
 	splitStringByQuestion := strings.Split(url, "?")
 		if len(splitStringByQuestion) > 1 {
 			splitString := strings.Split(splitStringByQuestion[1], "=")
-			if splitString[1] == "existing-firm" {
+			if splitString[0] == "existing-firm" {
 				return true
 			}
 			return false
