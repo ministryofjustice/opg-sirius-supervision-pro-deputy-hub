@@ -69,11 +69,6 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 				return Redirect(fmt.Sprintf("/deputy/%d/add-firm", deputyId))
 			}
 
-			AssignToFirmId := 0
-
-			fmt.Println("AssignToExistingFirmStringIdValue")
-			fmt.Println(AssignToExistingFirmStringIdValue)
-
 			if AssignToExistingFirmStringIdValue == "" {
 
 				vars := changeFirmVars{
@@ -92,8 +87,12 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 				return tmpl.ExecuteTemplate(w, "page", vars)
 			}
 
+			AssignToFirmId := 0
 			if AssignToExistingFirmStringIdValue != "" {
-				AssignToFirmId, _ = strconv.Atoi(AssignToExistingFirmStringIdValue)
+				AssignToFirmId, err = strconv.Atoi(AssignToExistingFirmStringIdValue)
+				if err != nil {
+					return err
+				}
 			}
 
 			assignDeputyToFirmErr := client.AssignDeputyToFirm(ctx, deputyId, AssignToFirmId)
