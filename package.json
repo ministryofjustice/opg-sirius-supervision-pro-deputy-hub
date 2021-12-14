@@ -4,7 +4,8 @@
     "license": "MIT",
     "dependencies": {
         "@ministryofjustice/frontend": "^0.2.5",
-        "govuk-frontend": "^3.13.0"
+        "govuk-frontend": "^3.13.0",
+        "accessible-autocomplete": "^2.0.3"
     },
     "devDependencies": {
         "@babel/core": "^7.15.0",
