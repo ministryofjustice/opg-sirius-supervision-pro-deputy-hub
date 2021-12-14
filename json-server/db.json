@@ -1228,6 +1228,39 @@
                     }
                 ]
             }
+        },
+        {
+            "id": 373,
+            "hash": "AD",
+            "timestamp": "2021-12-14 14:41:17",
+            "eventType": "Opg\\Core\\Model\\Event\\Person\\DeputyContactDetailsChanged",
+            "user": {
+                "id": 51,
+                "phoneNumber": "87654321",
+                "displayName": "case manager",
+                "email": "case.manager@opgtest.com"
+            },
+            "event": {
+                "personType": "Deputy",
+                "personId": "1",
+                "personUid": "7000-0000-2530",
+                "personName": "Mx Bob Builder",
+                "personCourtRef": null,
+                "changes": [
+                    {
+                        "fieldName": "firstname",
+                        "oldValue": "Postman",
+                        "newValue": "Bob",
+                        "type": "string"
+                    },
+                    {
+                        "fieldName": "surname",
+                        "oldValue": "Pat",
+                        "newValue": "Builder",
+                        "type": "string"
+                    }
+                ]
+            }
         }
     ],
     "notes": [
