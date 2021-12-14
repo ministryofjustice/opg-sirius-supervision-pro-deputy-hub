@@ -2,7 +2,6 @@ package sirius
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -13,7 +12,7 @@ type Firm struct {
 }
 
 func (c *Client) GetFirms(ctx Context) ([]Firm, error) {
-	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/api/v1/firms"), nil)
+	req, err := c.newRequest(ctx, http.MethodGet, "/api/v1/firms", nil)
 	if err != nil {
 		return nil, err
 	}
