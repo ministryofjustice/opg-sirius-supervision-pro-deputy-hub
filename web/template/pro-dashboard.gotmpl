@@ -1,9 +1,7 @@
 {{ template "page" . }}
 {{ define "main" }}
+    {{ template "success-banner" . }}
     {{ template "pro-deputy" . }}
-    {{ if .Success }}
-        {{ template "success-banner" . }}
-    {{ end }}
     {{ template "navigation" . }}
 
 
