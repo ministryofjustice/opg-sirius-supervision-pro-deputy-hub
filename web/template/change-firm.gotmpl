@@ -1,7 +1,9 @@
 {{ template "page" . }}
 {{ template "page" . }}
 {{ define "main" }}
-    {{ template "error-summary" .Errors }}
+    {{ if .Errors }}
+        {{ template "error-summary" .Errors }}
+    {{ end }}
     {{ template "pro-deputy" . }}
     <div class="govuk-grid-row govuk-!-margin-top-5">
         <div class="govuk-grid-column-full">
@@ -32,46 +34,53 @@
                                 </legend>
                                 <div class="govuk-radios govuk-radios--conditional">
                                   <div class="govuk-radios__item">
-                                  {{ if ne .ExistingFirm true}}
-                                      <form action="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}">
-                                          <input
-                                              class="govuk-radios__input"
-                                              id="existing-firm"
-                                              name="existing-firm"
-                                              type="submit"
-                                              value="true" />
-                                      </form>
-                                  {{else}}
-                                        <input
-                                            class="govuk-radios__input"
-                                            id="existing-firm"
-                                            name="existing-firm"
-                                            type="radio"
-                                            value="true"
-                                            checked="checked" />
-                                  {{end}}
-                                      <label
-                                          class="govuk-label govuk-radios__label"
-                                          for="existing-firm">
-                                          Use an existing firm
-                                      </label>
+                                      <div id="hidden-existing-firm-radio-button-link" {{if ne .ExistingFirm false}}class="hide"{{end}}>
+                                          <form action="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}">
+                                              <input
+                                                  class="govuk-radios__input"
+                                                  id="existing-firm"
+                                                  name="existing-firm"
+                                                  type="submit"
+                                                  value="true" />
+                                                    <label
+                                                                                                class="govuk-label govuk-radios__label"
+                                                                                                for="existing-firm">
+                                                                                                Use an existing firm
+                                                                                            </label>
+                                          </form>
+                                      </div>
+                                      <form class="" method="post">
+                                          <div id="hidden-existing-firm-radio-button-link" {{if ne .ExistingFirm true}}class="hide"{{end}}>
+                                            <input
+                                                class="govuk-radios__input"
+                                                id="existing-firm"
+                                                name="existing-firm"
+                                                type="radio"
+                                                value="existing-firm"
+                                                checked="checked" />
+
+                                          <label
+                                              class="govuk-label govuk-radios__label"
+                                              for="existing-firm">
+                                              Use an existing firm
+                                          </label>
                                           </div>
-                                    <form class="" method="post">
-                                        {{if ne .ExistingFirm false}}
-                                            <input type="hidden" name="xsrfToken" value="{{ .XSRFToken }}" />
-                                            <div class="govuk-radios__conditional" id="conditional-firm">
-                                               <div class="autocomplete-wrapper" id="select-existing-firm-dropdown">
-                                                <label class="govuk-label govuk-radios__label existing-firm-label" for="select-existing-firm">Enter a firm name or number</label>
-                                                  <select id="select-existing-firm" name="select-existing-firm">
-                                                  <option value=""></option>
-                                                      {{range .FirmDetails}}
-                                                          <option value="{{.Id}}">{{.FirmName}} - {{.FirmNumber}}</option>
-                                                      {{end}}
-                                                  </select>
-                                                </div>
-                                                <br>
+                                  </div>
+                                    <div id="hidden-autocomplete" {{if ne .ExistingFirm true}}class="hide"{{end}}>
+                                        <input type="hidden" name="xsrfToken" value="{{ .XSRFToken }}" />
+                                        <div class="govuk-radios__conditional" id="conditional-firm">
+                                           <div class="autocomplete-wrapper" id="select-existing-firm-dropdown">
+                                            <label class="govuk-label govuk-radios__label existing-firm-label" for="select-existing-firm">Enter a firm name or number</label>
+                                              <select id="select-existing-firm" name="select-existing-firm">
+                                              <option value=""></option>
+                                                  {{range .FirmDetails}}
+                                                      <option value="{{.Id}}">{{.FirmName}} - {{.FirmNumber}}</option>
+                                                  {{end}}
+                                              </select>
                                             </div>
-                                        {{ end }}
+                                            <br>
+                                        </div>
+                                    </div>
                                         <div class="govuk-radios__item">
                                             <input
                                                 class="govuk-radios__input"
