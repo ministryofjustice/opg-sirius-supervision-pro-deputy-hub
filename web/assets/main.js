@@ -13,3 +13,9 @@ if (document.querySelector("#select-existing-firm")) {
         defaultValue: "",
     });
 }
+
+document.getElementById("existing-firm").onclick = function() {toggleChangeFirmAutoCompleteHideClass()};
+
+function toggleChangeFirmAutoCompleteHideClass() {
+    document.getElementById("change-firm-autocomplete").classList.toggle("hide");
+}
