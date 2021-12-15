@@ -1,10 +1,11 @@
 {{ template "page" . }}
 {{ template "page" . }}
 {{ define "main" }}
+    {{ template "error-summary" .Errors }}
     {{ template "pro-deputy" . }}
     <div class="govuk-grid-row govuk-!-margin-top-5">
         <div class="govuk-grid-column-full">
-            {{ template "error-summary" .Errors }}
+
             <header>
                 <h1 class="govuk-heading-l  govuk-!-margin-bottom-1">
                     Change firm
