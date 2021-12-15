@@ -50,15 +50,15 @@
                                   <div id="change-firm-autocomplete" {{if ne .ExistingFirm true}}class="hide"{{end}}>
                                     <div class="govuk-radios__conditional" id="conditional-firm">
                                        <div class="autocomplete-wrapper" id="select-existing-firm-dropdown">
-                                        <label class="govuk-label govuk-radios__label existing-firm-label" for="select-existing-firm">Enter a firm name or number</label>
+                                          <label class="govuk-label govuk-radios__label existing-firm-label" for="select-existing-firm">Enter a firm name or number</label>
                                           <select id="select-existing-firm" name="select-existing-firm">
                                           <option value=""></option>
                                               {{range .FirmDetails}}
                                                   <option value="{{.Id}}">{{.FirmName}} - {{.FirmNumber}}</option>
                                               {{end}}
                                           </select>
-                                        </div>
-                                        <br>
+                                       </div>
+                                       <br>
                                     </div>
                                   </div>
                                   <div class="govuk-radios__item">

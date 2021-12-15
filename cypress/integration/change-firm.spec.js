@@ -33,10 +33,7 @@ describe("Change Firm", () => {
 
         it("has a button that will show existing firm details", () => {
             cy.get("#existing-firm").click();
-            cy.url().should(
-                "contain",
-                "/supervision/deputies/professional/deputy/1/change-firm?existing-firm=true"
-            );
+            cy.get("#select-existing-firm-dropdown").should("be.visible")
         });
 
         it("has a cancel button that can redirect to deputy details page", () => {
@@ -50,11 +47,12 @@ describe("Change Firm", () => {
     describe("Changing a firm to an existing firm", () => {
         beforeEach(() => {
             cy.visit(
-                "/supervision/deputies/professional/deputy/1/change-firm?existing-firm=true"
+                "/supervision/deputies/professional/deputy/1/change-firm"
             );
         });
 
         it("has a dropdown with the existing firm options", () => {
+            cy.get("#existing-firm").click();
             cy.get("#select-existing-firm-dropdown > .govuk-label").should(
                 "contain",
                 "Enter a firm name or number"
@@ -67,6 +65,7 @@ describe("Change Firm", () => {
 
         it("will redirect and show success banner when deputy allocated to firm", () => {
             cy.setCookie("success-route", "allocateToFirm");
+            cy.get("#existing-firm").click();
             cy.get("#select-existing-firm-dropdown > .govuk-label").should(
                 "contain",
                 "Enter a firm name or number"
@@ -82,6 +81,7 @@ describe("Change Firm", () => {
         });
 
         it("will show a validation error if no options available", () => {
+            cy.get("#existing-firm").click();
             cy.setCookie("fail-route", "allocateToFirm");
             cy.get("#select-existing-firm").click().type("Great");
             cy.get("#existing-firm-or-new-firm-form").submit();
