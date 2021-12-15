@@ -6,7 +6,7 @@ const getFailRoute = (req) => {
 const getStatusCode = (req) => {
     return req.headers?.cookie?.match(/fail-code=(?<statusCode>[^;]+);/)?.groups
         .statusCode;
-}
+};
 
 module.exports = (req, res, next) => {
     if (["POST", "PATCH"].includes(req.method)) {
