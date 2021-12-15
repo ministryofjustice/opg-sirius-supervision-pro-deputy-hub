@@ -76,7 +76,7 @@ describe("Change Firm", () => {
                 "#select-existing-firm__option--0",
                 "Great Firm Corp - 1000002"
             ).click();
-            cy.get("form").submit();
+            cy.get("#existing-firm-or-new-firm-form").submit();
             cy.get(".moj-banner").should("contain", "Firm changed to");
             cy.get("h1").should("contain", "Deputy details");
         });
@@ -84,7 +84,7 @@ describe("Change Firm", () => {
         it("will show a validation error if no options available", () => {
             cy.setCookie("fail-route", "allocateToFirm");
             cy.get("#select-existing-firm").click().type("Great");
-            cy.get("form").submit();
+            cy.get("#existing-firm-or-new-firm-form").submit();
             cy.get(".govuk-error-summary__title").should(
                 "contain",
                 "There is a problem"

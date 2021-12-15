@@ -35,7 +35,7 @@
                                 <div class="govuk-radios govuk-radios--conditional">
                                   <div class="govuk-radios__item">
                                       <div id="hidden-existing-firm-radio-button-link" {{if ne .ExistingFirm false}}class="hide"{{end}}>
-                                          <form action="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}">
+                                          <form id="existing-firm-button" action="{{ prefix (printf "/deputy/%d/change-firm" .ProDeputyDetails.ID) }}">
                                               <input
                                                   class="govuk-radios__input"
                                                   id="existing-firm"
@@ -49,7 +49,7 @@
                                                                                             </label>
                                           </form>
                                       </div>
-                                      <form class="" method="post">
+                                      <form id="existing-firm-or-new-firm-form" class="" method="post">
                                           <div id="hidden-existing-firm-radio-button-link" {{if ne .ExistingFirm true}}class="hide"{{end}}>
                                             <input
                                                 class="govuk-radios__input"
