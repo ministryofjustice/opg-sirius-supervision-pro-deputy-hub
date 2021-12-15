@@ -17,7 +17,7 @@ describe("Firm", () => {
                 "There is a problem"
             );
             cy.get(".govuk-error-summary__list").within(() => {
-                cy.get("li:first").should(
+                cy.get("li:firstnotthere").should(
                     "contain",
                     "The building or street must be 255 characters or fewer"
                 );
