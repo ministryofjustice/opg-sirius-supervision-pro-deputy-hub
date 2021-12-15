@@ -12,6 +12,7 @@ type FirmId struct {
 }
 
 func (c *Client) AssignDeputyToFirm(ctx Context, deputyId int, firmId int) error {
+
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(FirmId{
 		FirmId: firmId,
