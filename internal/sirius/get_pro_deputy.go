@@ -13,7 +13,7 @@ type executiveCaseManager struct {
 
 type firm struct {
 	FirmName string `json:"firmName"`
-	FirmId int `json:"id"`
+	FirmId   int    `json:"id"`
 }
 
 type ProDeputyDetails struct {
