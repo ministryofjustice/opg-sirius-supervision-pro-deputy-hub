@@ -80,10 +80,40 @@ describe("Change Firm", () => {
             cy.get("h1").should("contain", "Deputy details");
         });
 
+        it("will allow searching based on firm id", () => {
+            cy.setCookie("success-route", "allocateToFirm");
+            cy.get("#existing-firm").click();
+            cy.get("#select-existing-firm-dropdown > .govuk-label").should(
+                "contain",
+                "Enter a firm name or number"
+            );
+            cy.get("#select-existing-firm").click().type("1000002");
+            cy.contains(
+                "#select-existing-firm__option--0",
+                "Great Firm Corp - 1000002"
+            ).click();
+            cy.get("#existing-firm-or-new-firm-form").submit();
+            cy.get(".moj-banner").should("contain", "Firm changed to");
+            cy.get("h1").should("contain", "Deputy details");
+        });
+
         it("will show a validation error if no options available", () => {
             cy.get("#existing-firm").click();
             cy.setCookie("fail-route", "allocateToFirm");
-            cy.get("#select-existing-firm").click().type("Great");
+            cy.get("#select-existing-firm").click().type("Unknown option for firm name");
+            cy.get("#existing-firm-or-new-firm-form").submit();
+            cy.get(".govuk-error-summary__title").should(
+                "contain",
+                "There is a problem"
+            );
+            cy.get(".govuk-error-summary__list").within(() => {
+                cy.get("li:first").should("contain", "Enter a firm name or number");
+            });
+        });
+
+        it("will show a validation error if form submitted when autocomplete empty", () => {
+            cy.get("#existing-firm").click();
+            cy.setCookie("fail-route", "allocateToFirm");
             cy.get("#existing-firm-or-new-firm-form").submit();
             cy.get(".govuk-error-summary__title").should(
                 "contain",

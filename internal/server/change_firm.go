@@ -25,7 +25,6 @@ type changeFirmVars struct {
 	Errors           sirius.ValidationErrors
 	Success          bool
 	SuccessMessage   string
-	ExistingFirm     bool
 }
 
 func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Template) Handler {
@@ -34,7 +33,6 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 		ctx := getContext(r)
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
-		firm := checkUrlForFirm(r.URL.String())
 
 		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
 
@@ -56,7 +54,6 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 				XSRFToken:        ctx.XSRFToken,
 				ProDeputyDetails: proDeputyDetails,
 				FirmDetails:      firmDetails,
-				ExistingFirm:     firm,
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
@@ -76,7 +73,6 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 					XSRFToken:        ctx.XSRFToken,
 					ProDeputyDetails: proDeputyDetails,
 					FirmDetails:      firmDetails,
-					ExistingFirm:     firm,
 				}
 
 				vars.Errors = sirius.ValidationErrors{
