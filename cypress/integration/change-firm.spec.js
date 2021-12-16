@@ -32,7 +32,7 @@ describe("Change Firm", () => {
         });
 
         it("has a button that will show existing firm details", () => {
-            cy.get("#existing-firm").click();
+            cy.get("#f-existing-firm").click();
             cy.get("#select-existing-firm-dropdown").should("be.visible")
         });
 
@@ -52,7 +52,7 @@ describe("Change Firm", () => {
         });
 
         it("has a dropdown with the existing firm options", () => {
-            cy.get("#existing-firm").click();
+            cy.get("#f-existing-firm").click();
             cy.get("#select-existing-firm-dropdown > .govuk-label").should(
                 "contain",
                 "Enter a firm name or number"
@@ -65,7 +65,7 @@ describe("Change Firm", () => {
 
         it("will redirect and show success banner when deputy allocated to firm", () => {
             cy.setCookie("success-route", "allocateToFirm");
-            cy.get("#existing-firm").click();
+            cy.get("#f-existing-firm").click();
             cy.get("#select-existing-firm-dropdown > .govuk-label").should(
                 "contain",
                 "Enter a firm name or number"
@@ -82,7 +82,7 @@ describe("Change Firm", () => {
 
         it("will allow searching based on firm id", () => {
             cy.setCookie("success-route", "allocateToFirm");
-            cy.get("#existing-firm").click();
+            cy.get("#f-existing-firm").click();
             cy.get("#select-existing-firm-dropdown > .govuk-label").should(
                 "contain",
                 "Enter a firm name or number"
@@ -98,8 +98,8 @@ describe("Change Firm", () => {
         });
 
         it("will show a validation error if no options available", () => {
-            cy.get("#existing-firm").click();
             cy.setCookie("fail-route", "allocateToFirm");
+            cy.get("#f-existing-firm").click();
             cy.get("#select-existing-firm").click().type("Unknown option for firm name");
             cy.get("#existing-firm-or-new-firm-form").submit();
             cy.get(".govuk-error-summary__title").should(
@@ -112,8 +112,8 @@ describe("Change Firm", () => {
         });
 
         it("will show a validation error if form submitted when autocomplete empty", () => {
-            cy.get("#existing-firm").click();
             cy.setCookie("fail-route", "allocateToFirm");
+            cy.get("#f-existing-firm").click();
             cy.get("#existing-firm-or-new-firm-form").submit();
             cy.get(".govuk-error-summary__title").should(
                 "contain",

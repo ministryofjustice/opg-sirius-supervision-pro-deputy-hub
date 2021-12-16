@@ -1261,6 +1261,14 @@
             }
         },
         {
+            "id": "allocateToFirm",
+            "validation_errors": {
+                "firmId": {
+                    "notGreaterThanInclusive": "The input is not greater than or equal to '1'"
+                }
+            }
+        },
+        {
             "id": "firm",
             "validation_errors": {
                 "firmName": {

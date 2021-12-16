@@ -14,8 +14,8 @@ if (document.querySelector("#select-existing-firm")) {
     });
 }
 
-if (document.querySelector("#existing-firm")) {
-    document.getElementById("existing-firm").onclick = function () {
+if (document.querySelector("#f-existing-firm")) {
+    document.getElementById("f-existing-firm").onclick = function () {
         toggleChangeFirmAutoCompleteHideClass()
     };
 }

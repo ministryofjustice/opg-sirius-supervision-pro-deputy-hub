@@ -59,28 +59,12 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
 		case http.MethodPost:
+			var vars changeFirmVars
 			newFirm := r.PostFormValue("select-firm")
 			AssignToExistingFirmStringIdValue := r.PostFormValue("select-existing-firm")
 
 			if newFirm == "new-firm" {
 				return Redirect(fmt.Sprintf("/deputy/%d/add-firm", deputyId))
-			}
-
-			if AssignToExistingFirmStringIdValue == "" {
-
-				vars := changeFirmVars{
-					Path:             r.URL.Path,
-					XSRFToken:        ctx.XSRFToken,
-					ProDeputyDetails: proDeputyDetails,
-					FirmDetails:      firmDetails,
-				}
-
-				vars.Errors = sirius.ValidationErrors{
-					"firmId": {
-						"isEmpty": "Enter a firm name or number",
-					},
-				}
-				return tmpl.ExecuteTemplate(w, "page", vars)
 			}
 
 			AssignToFirmId := 0
@@ -93,8 +77,20 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 
 			assignDeputyToFirmErr := client.AssignDeputyToFirm(ctx, deputyId, AssignToFirmId)
 
-			if assignDeputyToFirmErr != nil {
-				return assignDeputyToFirmErr
+			if verr, ok := assignDeputyToFirmErr.(sirius.ValidationError); ok {
+
+				verr.Errors = renameChangeFirmValidationErrorMessages(verr.Errors)
+
+				vars = changeFirmVars{
+					Path:             r.URL.Path,
+					XSRFToken:        ctx.XSRFToken,
+					Errors:           verr.Errors,
+				}
+
+				w.WriteHeader(http.StatusBadRequest)
+				return tmpl.ExecuteTemplate(w, "page", vars)
+			} else if err != nil {
+				return err
 			}
 			return Redirect(fmt.Sprintf("/deputy/%d?success=firm", deputyId))
 		default:
@@ -110,4 +106,23 @@ func checkUrlForFirm(url string) bool {
 		return splitString[0] == "existing-firm"
 	}
 	return false
+}
+
+func renameChangeFirmValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
+	errorCollection := sirius.ValidationErrors{}
+
+	for fieldName, value := range siriusError {
+		for errorType, errorMessage := range value {
+			err := make(map[string]string)
+
+			if fieldName == "firmId" && errorType == "notGreaterThanInclusive" {
+				err[errorType] = "Enter a firm name or number"
+				errorCollection["existing-firm"] = err
+			} else {
+				err[errorType] = errorMessage
+				errorCollection[fieldName] = err
+			}
+		}
+	}
+	return errorCollection
 }
