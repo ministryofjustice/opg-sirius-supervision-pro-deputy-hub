@@ -72,7 +72,27 @@ func TestGetNotes(t *testing.T) {
 	assert.Equal(1, template.count)
 	assert.Equal("page", template.lastName)
 	assert.Equal(proDeputyHubNotesVars{
+		Path: "/path",
+	}, template.lastVars)
+}
+
+func TestGetNotes_withSuccessMessage(t *testing.T) {
+	assert := assert.New(t)
+
+	client := &mockProDeputyHubNotesInformation{}
+	template := &mockTemplates{}
+
+	w := httptest.NewRecorder()
+	r, _ := http.NewRequest("GET", "/path?success=true", nil)
+
+	handler := renderTemplateForProDeputyHubNotes(client, template)
+	err := handler(sirius.PermissionSet{}, w, r)
+
+	assert.Nil(err)
+
+	assert.Equal(proDeputyHubNotesVars{
 		Path:           "/path",
+		Success:        true,
 		SuccessMessage: "Note added",
 	}, template.lastVars)
 }

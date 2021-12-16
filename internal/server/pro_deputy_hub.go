@@ -38,14 +38,15 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			return err
 		}
 
-		hasSuccess := hasSuccessInUrl(r.URL.String(), "/deputy/"+strconv.Itoa(deputyId)+"/")
-
 		vars := proDeputyHubVars{
 			Path:             r.URL.Path,
 			XSRFToken:        ctx.XSRFToken,
 			ProDeputyDetails: proDeputyDetails,
-			Success:          hasSuccess,
-			SuccessMessage:   "Team details updated",
+		}
+
+		if _, ok := r.URL.Query()["success"]; ok {
+			vars.Success = true
+			vars.SuccessMessage = "Deputy details updated"
 		}
 
 		return tmpl.ExecuteTemplate(w, "page", vars)
