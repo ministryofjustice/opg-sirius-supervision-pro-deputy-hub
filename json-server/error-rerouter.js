@@ -4,7 +4,7 @@ const getFailRoute = (req) => {
 };
 
 module.exports = (req, res, next) => {
-    if (req.method === "POST") {
+    if (req.method === "POST" || req.method === "PUT") {
         const failRoute = getFailRoute(req);
 
         if (failRoute) {
@@ -13,5 +13,6 @@ module.exports = (req, res, next) => {
             res.status(400);
         }
     }
+
     next();
 };

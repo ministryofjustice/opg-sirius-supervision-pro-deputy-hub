@@ -129,7 +129,6 @@ func renameValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.V
 	for fieldName, value := range siriusError {
 		for errorType, errorMessage := range value {
 			err := make(map[string]string)
-
 			if fieldName == "name" && errorType == "stringLengthTooLong" {
 				err[errorType] = "The title must be 255 characters or fewer"
 				errorCollection["1-title"] = err
