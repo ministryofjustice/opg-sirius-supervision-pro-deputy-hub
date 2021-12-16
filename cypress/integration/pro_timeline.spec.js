@@ -24,11 +24,11 @@ describe("Timeline", () => {
             cy.wrap(item).contains("time", "14/12/2021 14:41:17");
             cy.wrap(item).contains(
                 ".govuk-list > :nth-child(1)",
-                "firstname: Bob"
+                "First name: Bob"
             );
             cy.wrap(item).contains(
                 ".govuk-list > :nth-child(2)",
-                "surname: Builder"
+                "Surname: Builder"
             );
         });
 
