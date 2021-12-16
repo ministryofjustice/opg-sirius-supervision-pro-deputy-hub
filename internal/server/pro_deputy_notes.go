@@ -6,7 +6,6 @@ import (
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 	"net/http"
 	"strconv"
-	"strings"
 )
 
 type ProDeputyHubNotesInformation interface {
@@ -40,11 +39,6 @@ type addNoteVars struct {
 	ProDeputyDetails sirius.ProDeputyDetails
 }
 
-func hasSuccessInUrl(url string, prefix string) bool {
-	urlTrim := strings.TrimPrefix(url, prefix)
-	return urlTrim == "?success=true"
-}
-
 func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmpl Template) Handler {
 	return func(perm sirius.PermissionSet, w http.ResponseWriter, r *http.Request) error {
 
@@ -64,15 +58,16 @@ func renderTemplateForProDeputyHubNotes(client ProDeputyHubNotesInformation, tmp
 				return err
 			}
 
-			hasSuccess := hasSuccessInUrl(r.URL.String(), "/deputy/"+strconv.Itoa(deputyId)+"/notes")
-
 			vars := proDeputyHubNotesVars{
 				Path:             r.URL.Path,
 				XSRFToken:        ctx.XSRFToken,
 				ProDeputyDetails: deputyDetails,
 				DeputyNotes:      deputyNotes,
-				Success:          hasSuccess,
-				SuccessMessage:   "Note added",
+			}
+
+			if _, ok := r.URL.Query()["success"]; ok {
+				vars.Success = true
+				vars.SuccessMessage = "Note added"
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
