@@ -2,12 +2,13 @@ package server
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 	"html/template"
 	"io"
 	"net/http"
 	"net/url"
+
+	"github.com/gorilla/mux"
+	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 )
 
 type Logger interface {
@@ -23,6 +24,7 @@ type Client interface {
 	ProDeputyChangeFirmInformation
 	FirmInformation
 	DeputyContactDetailsInformation
+	ManagePiiDetailsInformation
 }
 
 type Template interface {
@@ -52,6 +54,7 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 	router.Handle("/deputy/{id}/notes/add-note",
 		wrap(
 			renderTemplateForProDeputyHubNotes(client, templates["add-notes.gotmpl"])))
+
 	router.Handle("/deputy/{id}/change-firm",
 		wrap(
 			renderTemplateForChangeFirm(client, templates["change-firm.gotmpl"])))
@@ -63,6 +66,9 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 	router.Handle("/deputy/{id}/manage-deputy-contact-details",
 		wrap(
 			renderTemplateForManageDeputyContactDetails(client, templates["manage-deputy-contact-details.gotmpl"])))
+	router.Handle("/deputy/{id}/manage-pii-details",
+		wrap(
+			renderTemplateForManagePiiDetails(client, templates["manage-pii-details.gotmpl"])))
 
 	router.Handle("/health-check", healthCheck())
 
