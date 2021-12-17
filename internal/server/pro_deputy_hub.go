@@ -60,6 +60,8 @@ func createSuccessAndSuccessMessageForVars(url, firmName string) (bool, string) 
 
 		if splitString[1] == "firm" {
 			return true, "Firm changed to " + firmName
+		} else if splitString[1] == "newfirm" {
+			return true, "Firm added"
 		}
 	}
 	return false, ""
