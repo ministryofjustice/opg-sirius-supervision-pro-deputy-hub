@@ -20,6 +20,7 @@ type Client interface {
 	ProDeputyHubTimelineInformation
 	ProDeputyHubClientInformation
 	ProDeputyHubNotesInformation
+	ProDeputyChangeFirmInformation
 	FirmInformation
 	DeputyContactDetailsInformation
 }

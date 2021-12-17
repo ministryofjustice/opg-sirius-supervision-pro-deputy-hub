@@ -3,6 +3,7 @@ package server
 import (
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
@@ -38,17 +39,33 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			return err
 		}
 
+
+		hasSuccess, successMessage := createSuccessAndSuccessMessageForVars(r.URL.String(), proDeputyDetails.Firm.FirmName)
+
 		vars := proDeputyHubVars{
 			Path:             r.URL.Path,
 			XSRFToken:        ctx.XSRFToken,
 			ProDeputyDetails: proDeputyDetails,
-		}
-
-		if _, ok := r.URL.Query()["success"]; ok {
-			vars.Success = true
-			vars.SuccessMessage = "Deputy details updated"
+			Success:          hasSuccess,
+			SuccessMessage:   successMessage,
 		}
 
 		return tmpl.ExecuteTemplate(w, "page", vars)
 	}
+}
+
+func createSuccessAndSuccessMessageForVars(url, firmName string) (bool, string) {
+	splitStringByQuestion := strings.Split(url, "?")
+	if len(splitStringByQuestion) > 1 {
+		splitString := strings.Split(splitStringByQuestion[1], "=")
+
+		if splitString[1] == "firm" {
+			return true, "Firm changed to " + firmName
+		} else if splitString[1] == "newFirm" {
+			return true, "Firm added"
+		} else if splitString[1] == "deputyDetails" {
+			return true, "Deputy details updated"
+		}
+	}
+	return false, ""
 }
