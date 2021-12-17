@@ -1410,6 +1410,8 @@
                     "": "Select a firm"
                 }
             }
+        },
+        {
             "id": "internal-server-error",
             "message": "test message"
         }

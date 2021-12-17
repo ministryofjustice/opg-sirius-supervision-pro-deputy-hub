@@ -79,7 +79,7 @@ func TestPostAddFirm(t *testing.T) {
 	})
 
 	testHandler.ServeHTTP(w, r)
-	assert.Equal(returnedError, Redirect("/deputy/123?success=newfirm"))
+	assert.Equal(returnedError, Redirect("/deputy/123?success=newFirm"))
 }
 
 func TestErrorAddFirmMessageWhenStringLengthTooLong(t *testing.T) {
