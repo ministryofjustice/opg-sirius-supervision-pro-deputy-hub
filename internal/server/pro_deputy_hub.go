@@ -39,6 +39,7 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			return err
 		}
 
+
 		hasSuccess, successMessage := createSuccessAndSuccessMessageForVars(r.URL.String(), proDeputyDetails.Firm.FirmName)
 
 		vars := proDeputyHubVars{

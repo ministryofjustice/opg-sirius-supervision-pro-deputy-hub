@@ -1,16 +1,21 @@
 const getFailRoute = (req) => {
-    return req.headers?.cookie?.match(/fail-route=(?<failRoute>\w+);/)?.groups
+    return req.headers?.cookie?.match(/fail-route=(?<failRoute>[^;]+);/)?.groups
         .failRoute;
 };
 
+const getStatusCode = (req) => {
+    return req.headers?.cookie?.match(/fail-code=(?<statusCode>[^;]+);/)?.groups
+        .statusCode;
+};
+
 module.exports = (req, res, next) => {
-    if (req.method === "POST" || req.method === "PUT") {
+    if (["POST", "PATCH", "PUT"].includes(req.method)) {
         const failRoute = getFailRoute(req);
 
         if (failRoute) {
             req.method = "GET";
             req.url = `/errors/${failRoute}`;
-            res.status(400);
+            res.status(getStatusCode(req) ?? 400);
         }
     }
 

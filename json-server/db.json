@@ -106,8 +106,43 @@
                 "handle": "PRO",
                 "label": "Professional"
             },
+            "deputySubType": {
+                "handle": "PERSON",
+                "label": "Person"
+            },
             "deputyCasrecId": 10000000,
             "organisationName": ""
+        },
+        {
+            "id": 2,
+            "executiveCaseManager": {
+                "id": 223,
+                "displayName": "displayName"
+            },
+            "firm": {
+                "firmName": "This is the Firm Name"
+            },
+            "email": "email@something.com",
+            "firstname": "",
+            "surname": "",
+            "organisationName": "Organisation Ltd",
+            "deputyNumber": 1000,
+            "addressLine1": "addressLine1",
+            "addressLine2": "addressLine2",
+            "addressLine3": "addressLine3",
+            "town": "town",
+            "county": "county",
+            "postcode": "postcode",
+            "phoneNumber": "1111111",
+            "deputyCasrecId": 10000000,
+            "deputyType": {
+                "handle": "PRO",
+                "label": "Professional"
+            },
+            "deputySubType": {
+                "handle": "ORGANISATION",
+                "label": "Organisation"
+            }
         }
     ],
     "clients": {
@@ -1193,6 +1228,39 @@
                     }
                 ]
             }
+        },
+        {
+            "id": 373,
+            "hash": "AD",
+            "timestamp": "2021-12-14 14:41:17",
+            "eventType": "Opg\\Core\\Model\\Event\\Person\\DeputyContactDetailsChanged",
+            "user": {
+                "id": 51,
+                "phoneNumber": "87654321",
+                "displayName": "case manager",
+                "email": "case.manager@opgtest.com"
+            },
+            "event": {
+                "personType": "Deputy",
+                "personId": "1",
+                "personUid": "7000-0000-2530",
+                "personName": "Mx Bob Builder",
+                "personCourtRef": null,
+                "changes": [
+                    {
+                        "fieldName": "firstname",
+                        "oldValue": "Postman",
+                        "newValue": "Bob",
+                        "type": "string"
+                    },
+                    {
+                        "fieldName": "surname",
+                        "oldValue": "Pat",
+                        "newValue": "Builder",
+                        "type": "string"
+                    }
+                ]
+            }
         }
     ],
     "notes": [
@@ -1272,31 +1340,66 @@
             "id": "firm",
             "validation_errors": {
                 "firmName": {
-                    "isEmpty": "The firm name is required and can't be empty"
+                    "isEmpty": ""
                 },
                 "addressLine1": {
-                    "stringLengthTooLong": "The building or street must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "addressLine2": {
-                    "stringLengthTooLong": "Address line 2 must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "addressLine3": {
-                    "stringLengthTooLong": "Address line 3 must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "town": {
-                    "stringLengthTooLong": "The town or city must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "county": {
-                    "stringLengthTooLong": "The county must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "postcode": {
-                    "stringLengthTooLong": "The postcode must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "phoneNumber": {
-                    "stringLengthTooLong": "The telephone number must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
                 },
                 "email": {
-                    "stringLengthTooLong": "The email must be 255 characters or fewer"
+                    "stringLengthTooLong": ""
+                }
+            }
+        },
+        {
+            "id": "contact-details",
+            "validation_errors": {
+                "firstname": {
+                    "isEmpty": ""
+                },
+                "surname": {
+                    "isEmpty": ""
+                },
+                "addressLine1": {
+                    "stringLengthTooLong": ""
+                },
+                "addressLine2": {
+                    "stringLengthTooLong": ""
+                },
+                "addressLine3": {
+                    "stringLengthTooLong": ""
+                },
+                "town": {
+                    "stringLengthTooLong": ""
+                },
+                "county": {
+                    "stringLengthTooLong": ""
+                },
+                "postcode": {
+                    "stringLengthTooLong": ""
+                },
+                "workPhoneNumber": {
+                    "stringLengthTooLong": ""
+                },
+                "email": {
+                    "stringLengthTooLong": ""
                 }
             }
         },
@@ -1307,6 +1410,8 @@
                     "": "Select a firm"
                 }
             }
+            "id": "internal-server-error",
+            "message": "test message"
         }
     ],
     "successes": [

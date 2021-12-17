@@ -82,7 +82,7 @@ func TestPostAddFirm(t *testing.T) {
 	assert.Equal(returnedError, Redirect("/deputy/123?success=newfirm"))
 }
 
-func TestErrorEditDeputyMessageWhenStringLengthTooLong(t *testing.T) {
+func TestErrorAddFirmMessageWhenStringLengthTooLong(t *testing.T) {
 	assert := assert.New(t)
 	client := &mockFirmInformation{}
 

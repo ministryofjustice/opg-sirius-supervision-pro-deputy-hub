@@ -9,31 +9,55 @@ describe("Timeline", () => {
         cy.get(".main > header").should("contain", "Timeline");
     });
 
-    it("contains appropriate test data for a timeline event", () => {
-        cy.get(".moj-timeline__title").should(
-            "contain",
-            "New client added to deputyship"
-        );
-        cy.get(".moj-timeline__byline").should(
-            "contain",
-            "by system admin (12345678)"
-        );
-        cy.get("time").should("contain", "09/09/2021 14:01:59");
-        cy.get(".govuk-list > :nth-child(1)").should(
-            "contain",
-            "Order number: 03305972"
-        );
-        cy.get(".govuk-list > :nth-child(2)").should(
-            "contain",
-            "Sirius ID: 7000-0000-1995"
-        );
-        cy.get(".govuk-list > :nth-child(3)").should(
-            "contain",
-            "Order type: pfa"
-        );
-        cy.get(".govuk-list > :nth-child(4)").should(
-            "contain",
-            "Client: Duke John Fearless"
-        );
+    it("lists timeline events in date ascending order", () => {
+        const timelineItems = cy.get(".moj-timeline__item");
+
+        timelineItems.first().within((item) => {
+            cy.wrap(item).contains(
+                ".moj-timeline__title",
+                "Deputy contact details changed"
+            );
+            cy.wrap(item).contains(
+                ".moj-timeline__byline",
+                "by case manager (87654321)"
+            );
+            cy.wrap(item).contains("time", "14/12/2021 14:41:17");
+            cy.wrap(item).contains(
+                ".govuk-list > :nth-child(1)",
+                "First name: Bob"
+            );
+            cy.wrap(item).contains(
+                ".govuk-list > :nth-child(2)",
+                "Surname: Builder"
+            );
+        });
+
+        timelineItems.next().within((item) => {
+            cy.wrap(item).contains(
+                ".moj-timeline__title",
+                "New client added to deputyship"
+            );
+            cy.wrap(item).contains(
+                ".moj-timeline__byline",
+                "by system admin (12345678)"
+            );
+            cy.wrap(item).contains("time", "09/09/2021 14:01:59");
+            cy.wrap(item).contains(
+                ".govuk-list > :nth-child(1)",
+                "Order number: 03305972"
+            );
+            cy.wrap(item).contains(
+                ".govuk-list > :nth-child(2)",
+                "Sirius ID: 7000-0000-1995"
+            );
+            cy.wrap(item).contains(
+                ".govuk-list > :nth-child(3)",
+                "Order type: pfa"
+            );
+            cy.wrap(item).contains(
+                ".govuk-list > :nth-child(4)",
+                "Client: Duke John Fearless"
+            );
+        });
     });
 });
