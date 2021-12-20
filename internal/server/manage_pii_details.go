@@ -31,12 +31,12 @@ func renderTemplateForManagePiiDetails(client ManagePiiDetailsInformation, tmpl 
 
 		ctx := getContext(r)
 		routeVars := mux.Vars(r)
-		firmId, _ := strconv.Atoi(routeVars["id"])
+		deputyId, _ := strconv.Atoi(routeVars["id"])
 
 		switch r.Method {
 		case http.MethodGet:
 
-			deputyDetails, err := client.GetProDeputyDetails(ctx, firmId)
+			deputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
 			if err != nil {
 				return err
 			}
@@ -54,17 +54,18 @@ func renderTemplateForManagePiiDetails(client ManagePiiDetailsInformation, tmpl 
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
 		case http.MethodPost:
+			deputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+
+			if err != nil {
+				return err
+			}
+
 			addFirmDetailForm := sirius.PiiDetails{
-				FirmId:       firmId,
+				FirmId:       deputyDetails.Firm.FirmId,
 				PiiReceived:  r.PostFormValue("pii-received"),
 				PiiExpiry:    r.PostFormValue("pii-expiry"),
 				PiiAmount:    r.PostFormValue("pii-amount"),
 				PiiRequested: r.PostFormValue("pii-requested"),
-			}
-
-			_, err := client.GetProDeputyDetails(ctx, deputyId)
-			if err != nil {
-				return err
 			}
 
 			err = client.EditPiiCertificate(ctx, addFirmDetailForm)
@@ -89,7 +90,7 @@ func renderTemplateForManagePiiDetails(client ManagePiiDetailsInformation, tmpl 
 				return err
 			}
 
-			return Redirect(fmt.Sprintf("/deputy/%d/notes?success=true", firmId))
+			return Redirect(fmt.Sprintf("/deputy/%d/notes?success=true", deputyId))
 
 		default:
 			return StatusError(http.StatusMethodNotAllowed)

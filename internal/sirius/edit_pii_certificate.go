@@ -19,7 +19,6 @@ func (c *Client) EditPiiCertificate(ctx Context, editPiiData PiiDetails) error {
 	var k PiiDetails
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(PiiDetails{
-		FirmId:       editPiiData.FirmId,
 		PiiReceived:  editPiiData.PiiReceived,
 		PiiExpiry:    editPiiData.PiiExpiry,
 		PiiAmount:    editPiiData.PiiAmount,
@@ -29,7 +28,7 @@ func (c *Client) EditPiiCertificate(ctx Context, editPiiData PiiDetails) error {
 		return err
 	}
 
-	requestURL := fmt.Sprintf("/api/v1/firm/%d/pii", editPiiData.FirmId)
+	requestURL := fmt.Sprintf("/api/v1/firms/%d/pii", editPiiData.FirmId)
 
 	req, err := c.newRequest(ctx, http.MethodPut, requestURL, &body)
 	if err != nil {
