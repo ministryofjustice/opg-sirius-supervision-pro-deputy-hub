@@ -1,8 +1,10 @@
 {
     "/api/v1/*": "/$1",
     "/deputies/pro/:id/clients": "/clients",
+    "/deputies/:id/contact-details": "/deputies/:id",
     "/timeline/:personId": "/timeline",
     "/deputy/:personId/notes": "/notes",
     "/users/current": "/users",
-    "/firm": "/addFirm"
+    "/firms": "/addFirm",
+    "deputies/:deputyId/firm": "/allocateToFirm"
 }

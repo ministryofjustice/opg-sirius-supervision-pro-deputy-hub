@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"sort"
 	"strings"
 	"time"
 )
@@ -92,13 +93,21 @@ func editProDeputyEvents(v ProDeputyEventCollection) ProDeputyEventCollection {
 
 		list = append(list, event)
 	}
-	return list
+	return sortByTimestampAsc(list)
+}
+
+func sortByTimestampAsc(v ProDeputyEventCollection) ProDeputyEventCollection {
+	sort.Slice(v, func(i, j int) bool {
+		changeToTimeTypeI, _ := time.Parse("02/01/2006 15:04:05", v[i].Timestamp)
+		changeToTimeTypeJ, _ := time.Parse("02/01/2006 15:04:05", v[j].Timestamp)
+		return changeToTimeTypeJ.Before(changeToTimeTypeI)
+	})
+	return v
 }
 
 func reformatTimestamp(dateString string) string {
-	stringTodateTime, _ := time.Parse("2006-01-02 15:04:05", dateString)
-	dateTime := stringTodateTime.Format("02/01/2006 15:04:05")
-	return dateTime
+	dateTime, _ := time.Parse("2006-01-02 15:04:05", dateString)
+	return dateTime.Format("02/01/2006 15:04:05")
 }
 
 func reformatEventType(event string) string {

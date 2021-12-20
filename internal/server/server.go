@@ -2,13 +2,12 @@ package server
 
 import (
 	"fmt"
+	"github.com/gorilla/mux"
+	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 	"html/template"
 	"io"
 	"net/http"
 	"net/url"
-
-	"github.com/gorilla/mux"
-	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 )
 
 type Logger interface {
@@ -21,7 +20,9 @@ type Client interface {
 	ProDeputyHubTimelineInformation
 	ProDeputyHubClientInformation
 	ProDeputyHubNotesInformation
+	ProDeputyChangeFirmInformation
 	FirmInformation
+	DeputyContactDetailsInformation
 }
 
 type Template interface {
@@ -58,6 +59,10 @@ func New(logger Logger, client Client, templates map[string]*template.Template, 
 	router.Handle("/deputy/{id}/add-firm",
 		wrap(
 			renderTemplateForAddFirm(client, templates["add-firm.gotmpl"])))
+
+	router.Handle("/deputy/{id}/manage-deputy-contact-details",
+		wrap(
+			renderTemplateForManageDeputyContactDetails(client, templates["manage-deputy-contact-details.gotmpl"])))
 
 	router.Handle("/health-check", healthCheck())
 
@@ -102,7 +107,7 @@ type errorVars struct {
 	Path      string
 	Code      int
 	Error     string
-	Errors	  bool
+	Errors    bool
 }
 
 type ErrorHandlerClient interface {
@@ -154,7 +159,7 @@ func notFoundHandler(tmplError Template, siriusURL string) http.HandlerFunc {
 		_ = tmplError.ExecuteTemplate(w, "page", errorVars{
 			SiriusURL: siriusURL,
 			Code:      http.StatusNotFound,
-			Error: "Not Found",
+			Error:     "Not Found",
 		})
 	}
 }
