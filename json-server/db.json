@@ -48,7 +48,11 @@
                 "displayName": "displayName"
             },
             "firm": {
-                "firmName": "This is the Firm Name"
+                "firmName": "This is the Firm Name",
+                "piiReceived": "20/12/2000",
+                "piiExpiry": "12/05/2200",
+                "piiAmount": "1000",
+                "piiRequested": "15/11/2000"
             },
             "email": "email@something.com",
             "dob": "",
@@ -1404,6 +1408,20 @@
             }
         },
         {
+            "id": "pii-details",
+            "validation_errors": {
+                "piiReceived": {
+                    "isEmpty": ""
+                },
+                "piiExpiry": {
+                    "isEmpty": ""
+                },
+                "piiAmount": {
+                    "stringLengthTooLong": ""
+                }
+            }
+        },
+        {
             "id": "change-firm",
             "validation_errors": {
                 "Change Firm": {
@@ -1425,6 +1443,9 @@
             "id": "allocateToFirm",
             "deputyId": 76,
             "firmId": 2
+        },
+        {
+            "id": "editPii"
         }
     ]
 }

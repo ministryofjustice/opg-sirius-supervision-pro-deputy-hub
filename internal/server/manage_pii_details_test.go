@@ -125,5 +125,3 @@ func TestErrorManagePiiMessageWhenIsEmpty(t *testing.T) {
 
 	assert.Equal(expectedValidationErrors, returnedError)
 }
-
-//write for expiry being before recived date

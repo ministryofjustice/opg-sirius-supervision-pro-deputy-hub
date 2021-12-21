@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/mocks"
@@ -41,36 +42,33 @@ func TestEditPii(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-// func TestAddFirmReturnsNewStatusError(t *testing.T) {
-// 	svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		w.WriteHeader(http.StatusMethodNotAllowed)
-// 	}))
-// 	defer svr.Close()
+func TestEditPiiReturnsNewStatusError(t *testing.T) {
+	svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}))
+	defer svr.Close()
 
-// 	client, _ := NewClient(http.DefaultClient, svr.URL)
+	client, _ := NewClient(http.DefaultClient, svr.URL)
 
-// 	int, err := client.AddFirmDetails(getContext(nil), FirmDetails{})
+	err := client.EditPiiCertificate(getContext(nil), PiiDetails{})
 
-// 	assert.Equal(t, StatusError{
-// 		Code:   http.StatusMethodNotAllowed,
-// 		URL:    svr.URL + "/api/v1/firms",
-// 		Method: http.MethodPost,
-// 	}, err)
+	assert.Equal(t, StatusError{
+		Code:   http.StatusMethodNotAllowed,
+		URL:    svr.URL + "/api/v1/firms/0/pii",
+		Method: http.MethodPut,
+	}, err)
+}
 
-// 	assert.Equal(t, 0, int)
-// }
+func TestEditPiiReturnsUnauthorisedClientError(t *testing.T) {
+	svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusUnauthorized)
+	}))
+	defer svr.Close()
 
-// func TestAddFirmReturnsUnauthorisedClientError(t *testing.T) {
-// 	svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		w.WriteHeader(http.StatusUnauthorized)
-// 	}))
-// 	defer svr.Close()
+	client, _ := NewClient(http.DefaultClient, svr.URL)
 
-// 	client, _ := NewClient(http.DefaultClient, svr.URL)
+	err := client.EditPiiCertificate(getContext(nil), PiiDetails{})
 
-// 	int, err := client.AddFirmDetails(getContext(nil), FirmDetails{})
+	assert.Equal(t, ErrUnauthorized, err)
 
-// 	assert.Equal(t, ErrUnauthorized, err)
-// 	assert.Equal(t, 0, int)
-
-// }
+}

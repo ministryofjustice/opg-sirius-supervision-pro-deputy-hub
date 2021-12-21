@@ -6,5 +6,6 @@
     "/deputy/:personId/notes": "/notes",
     "/users/current": "/users",
     "/firms": "/addFirm",
-    "deputies/:deputyId/firm": "/allocateToFirm"
+    "deputies/:deputyId/firm": "/allocateToFirm",
+    "firms/:deputyId/editPii": "/edit"
 }
