@@ -19,7 +19,7 @@ func TestEditPii(t *testing.T) {
 		"piiReceived":"20/01/2020",
 		"piiExpiry":"20/01/2025",
 		"piiAmount":"254",
-		"piiRequested":"10/01/2020",
+		"piiRequested":"10/01/2020"
 		}`
 
 	r := ioutil.NopCloser(bytes.NewReader([]byte(json)))
@@ -32,6 +32,7 @@ func TestEditPii(t *testing.T) {
 	}
 
 	piiDetails := PiiDetails{
+		FirmId:       21,
 		PiiReceived:  "20/01/2020",
 		PiiExpiry:    "20/01/2025",
 		PiiAmount:    "254",
