@@ -39,7 +39,6 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			return err
 		}
 
-
 		hasSuccess, successMessage := createSuccessAndSuccessMessageForVars(r.URL.String(), proDeputyDetails.Firm.FirmName)
 
 		vars := proDeputyHubVars{
@@ -65,6 +64,8 @@ func createSuccessAndSuccessMessageForVars(url, firmName string) (bool, string) 
 			return true, "Firm added"
 		} else if splitString[1] == "deputyDetails" {
 			return true, "Deputy details updated"
+		} else if splitString[1] == "piiDetails" {
+			return true, "Pii details updated"
 		}
 	}
 	return false, ""

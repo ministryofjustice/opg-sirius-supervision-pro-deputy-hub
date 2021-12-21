@@ -33,7 +33,7 @@ describe("Change Firm", () => {
 
         it("has a button that will show existing firm details", () => {
             cy.get("#f-existing-firm").click();
-            cy.get("#select-existing-firm-dropdown").should("be.visible")
+            cy.get("#select-existing-firm-dropdown").should("be.visible");
         });
 
         it("has a cancel button that can redirect to deputy details page", () => {
@@ -46,9 +46,7 @@ describe("Change Firm", () => {
     });
     describe("Changing a firm to an existing firm", () => {
         beforeEach(() => {
-            cy.visit(
-                "/supervision/deputies/professional/deputy/1/change-firm"
-            );
+            cy.visit("/supervision/deputies/professional/deputy/1/change-firm");
         });
 
         it("has a dropdown with the existing firm options", () => {
@@ -100,14 +98,19 @@ describe("Change Firm", () => {
         it("will show a validation error if no options available", () => {
             cy.setCookie("fail-route", "allocateToFirm");
             cy.get("#f-existing-firm").click();
-            cy.get("#select-existing-firm").click().type("Unknown option for firm name");
+            cy.get("#select-existing-firm")
+                .click()
+                .type("Unknown option for firm name");
             cy.get("#existing-firm-or-new-firm-form").submit();
             cy.get(".govuk-error-summary__title").should(
                 "contain",
                 "There is a problem"
             );
             cy.get(".govuk-error-summary__list").within(() => {
-                cy.get("li:first").should("contain", "Enter a firm name or number");
+                cy.get("li:first").should(
+                    "contain",
+                    "Enter a firm name or number"
+                );
             });
         });
 
@@ -120,7 +123,10 @@ describe("Change Firm", () => {
                 "There is a problem"
             );
             cy.get(".govuk-error-summary__list").within(() => {
-                cy.get("li:first").should("contain", "Enter a firm name or number");
+                cy.get("li:first").should(
+                    "contain",
+                    "Enter a firm name or number"
+                );
             });
         });
     });

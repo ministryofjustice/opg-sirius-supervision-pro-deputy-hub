@@ -12,8 +12,10 @@ type executiveCaseManager struct {
 }
 
 type firm struct {
-	FirmName string `json:"firmName"`
-	FirmId   int    `json:"id"`
+	FirmName  string `json:"firmName"`
+	FirmId    int    `json:"id"`
+	PiiExpiry string `json:"piiExpiry"`
+	PiiAmount string `json:"piiAmount"`
 }
 
 type deputySubType struct {
