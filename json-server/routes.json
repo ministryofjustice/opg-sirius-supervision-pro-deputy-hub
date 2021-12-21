@@ -7,5 +7,5 @@
     "/users/current": "/users",
     "/firms": "/addFirm",
     "deputies/:deputyId/firm": "/allocateToFirm",
-    "firms/:deputyId/editPii": "/edit"
+    "firms/:deputyId/editPii": "/editPii"
 }
