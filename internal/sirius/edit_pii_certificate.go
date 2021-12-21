@@ -31,6 +31,7 @@ func (c *Client) EditPiiCertificate(ctx Context, editPiiData PiiDetails) error {
 	requestURL := fmt.Sprintf("/api/v1/firms/%d/pii", editPiiData.FirmId)
 
 	req, err := c.newRequest(ctx, http.MethodPut, requestURL, &body)
+
 	if err != nil {
 		return err
 	}

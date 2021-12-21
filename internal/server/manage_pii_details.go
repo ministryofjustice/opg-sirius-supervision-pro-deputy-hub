@@ -22,8 +22,6 @@ type proDeputyHubManagePiiVars struct {
 	Error            string
 	Errors           sirius.ValidationErrors
 	ErrorMessage     string
-	Success          bool
-	SuccessMessage   string
 }
 
 func renderTemplateForManagePiiDetails(client ManagePiiDetailsInformation, tmpl Template) Handler {
@@ -41,14 +39,10 @@ func renderTemplateForManagePiiDetails(client ManagePiiDetailsInformation, tmpl 
 				return err
 			}
 
-			//hasSuccess := hasSuccessInUrl(r.URL.String(), "/deputy/"+strconv.Itoa(deputyId)+"/notes")
-
 			vars := proDeputyHubManagePiiVars{
 				Path:             r.URL.Path,
 				XSRFToken:        ctx.XSRFToken,
 				ProDeputyDetails: deputyDetails,
-				//Success:        hasSuccess,
-				//SuccessMessage: "Note added",
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
@@ -70,30 +64,43 @@ func renderTemplateForManagePiiDetails(client ManagePiiDetailsInformation, tmpl 
 
 			err = client.EditPiiCertificate(ctx, addFirmDetailForm)
 
-			// if verr, ok := err.(sirius.ValidationError); ok {
-
-			// 	verr.Errors = renameValidationErrorMessages(verr.Errors)
-
-			// 	vars = addNoteVars{
-			// 		Path:             r.URL.Path,
-			// 		XSRFToken:        ctx.XSRFToken,
-			// 		Title:            title,
-			// 		Note:             note,
-			// 		Errors:           verr.Errors,
-			// 		ProDeputyDetails: deputyDetails,
-			// 	}
-
-			// 	w.WriteHeader(http.StatusBadRequest)
-			// 	return tmpl.ExecuteTemplate(w, "page", vars)
-			// } else
-			if err != nil {
-				return err
+			if verr, ok := err.(sirius.ValidationError); ok {
+				verr.Errors = renameEditPiiValidationErrorMessages(verr.Errors)
+				vars := proDeputyHubManagePiiVars{
+					Path:      r.URL.Path,
+					XSRFToken: ctx.XSRFToken,
+					Errors:    verr.Errors,
+				}
+				return tmpl.ExecuteTemplate(w, "page", vars)
 			}
 
-			return Redirect(fmt.Sprintf("/deputy/%d/notes?success=true", deputyId))
+			return Redirect(fmt.Sprintf("/deputy/%d?success=piiDetails", deputyId))
 
 		default:
 			return StatusError(http.StatusMethodNotAllowed)
 		}
 	}
+}
+
+func renameEditPiiValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
+	errorCollection := sirius.ValidationErrors{}
+	for fieldName, value := range siriusError {
+		for errorType, errorMessage := range value {
+			err := make(map[string]string)
+			if fieldName == "piiReceived" && errorType == "isEmpty" {
+				err[errorType] = "The pii received date is required and can't be empty"
+				errorCollection["piiReceived"] = err
+			} else if fieldName == "piiExpiry" && errorType == "isEmpty" {
+				err[errorType] = "The pii expiry is required and can't be empty"
+				errorCollection["piiExpiry"] = err
+			} else if fieldName == "piiAmount" && errorType == "isEmpty" {
+				err[errorType] = "The pii amount is required and can't be empty"
+				errorCollection["piiAmount"] = err
+			} else {
+				err[errorType] = errorMessage
+				errorCollection[fieldName] = err
+			}
+		}
+	}
+	return errorCollection
 }
