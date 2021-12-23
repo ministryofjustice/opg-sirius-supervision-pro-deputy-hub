@@ -53,9 +53,6 @@
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">Postal address</dt>
                     <dd class="govuk-summary-list__value hook_deputy_address">
-                        {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
-                            {{ .ProDeputyDetails.Firm.FirmName }}
-                        {{ end }}
                         {{ .ProDeputyDetails.AddressLine1 }} <br />
                         {{ .ProDeputyDetails.AddressLine2 }} <br />
                         {{ .ProDeputyDetails.AddressLine3 }} <br />
