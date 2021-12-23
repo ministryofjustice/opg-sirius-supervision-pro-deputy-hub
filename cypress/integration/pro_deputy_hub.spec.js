@@ -49,31 +49,41 @@ describe("Pro Deputy Hub", () => {
 
     describe("Pro deputy details", () => {
         it("the page should contain the deputy name", () => {
-            cy.get(".hook_header_deputy_name").should(
-                "contain",
-                "firstname surname"
-            );
+            cy.contains(".hook_header_deputy_name", "firstname surname");
         });
 
         it("the page should contain the firm", () => {
-            cy.get(".hook_header_firm_name").should(
-                "contain",
-                "This is the Firm Name"
-            );
+            cy.contains(".hook_header_firm_name", "This is the Firm Name");
         });
 
         it("the page should contain the deputy number", () => {
-            cy.get(".hook_header_deputy_number").should(
-                "contain",
-                "Deputy Number: 1000"
-            );
+            cy.contains(".hook_header_deputy_number", "Deputy Number: 1000");
         });
 
         it("the page should contain the executive case manager", () => {
-            cy.get(".hook_header_ecm").should(
-                "contain",
-                "Executive Case Manager: displayName"
-            );
+            cy.contains(".hook_header_ecm", "Executive Case Manager: displayName");
+        });
+
+        it("the page should contain the address without the firm name", () => {
+            const expected = [
+                "addressLine1",
+                "",
+                "addressLine2",
+                "",
+                "addressLine3",
+                "",
+                "town",
+                "",
+                "county",
+                "",
+                "postcode",
+            ];
+            cy.get(".hook_deputy_address").each((el, i) => {
+                // address rows are separated by <br/> tags
+                if (i % 2 !== 0) {
+                    cy.wrap(el).contains(expected[i]);
+                }
+            });
         });
     });
 });
