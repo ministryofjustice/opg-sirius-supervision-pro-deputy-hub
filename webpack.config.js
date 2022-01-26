@@ -49,6 +49,10 @@ module.exports = {
                     from: "node_modules/@ministryofjustice/frontend/moj/assets/images",
                     to: path.resolve(__dirname, "web/static/assets/images"),
                 },
+                {
+                    from: "node_modules/@fortawesome/fontawesome-free/webfonts",
+                    to: path.resolve(__dirname, "web/static/assets/fonts"),
+                },
             ],
         }),
         new MiniCssExtractPlugin({
