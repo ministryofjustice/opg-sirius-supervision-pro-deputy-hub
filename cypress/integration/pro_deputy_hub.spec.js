@@ -52,6 +52,10 @@ describe("Pro Deputy Hub", () => {
             cy.contains(".hook_header_deputy_name", "firstname surname");
         });
 
+        it("the page should contain the deputy status", () => {
+            cy.contains(".hook_header_deputy_status_person", "Active");
+        });
+
         it("the page should contain the firm", () => {
             cy.contains(".hook_header_firm_name", "This is the Firm Name");
         });
