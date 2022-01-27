@@ -61,7 +61,7 @@ describe("Pro Deputy Hub", () => {
         });
 
         it("the page should contain the executive case manager", () => {
-            cy.contains(".hook_header_ecm", "Executive Case Manager: displayName");
+            cy.contains(".hook_header_ecm", "Executive Case Manager: ProTeam1 User1");
         });
 
         it("the page should contain the address without the firm name", () => {

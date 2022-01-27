@@ -23,3 +23,10 @@ if (document.querySelector("#f-existing-firm")) {
 function toggleChangeFirmAutoCompleteHideClass() {
     document.getElementById("change-firm-autocomplete").classList.toggle("hide");
 }
+
+if (document.querySelector("#select-ecm")) {
+    accessibleAutocomplete.enhanceSelectElement({
+        selectElement: document.querySelector("#select-ecm"),
+        defaultValue: "",
+    });
+}

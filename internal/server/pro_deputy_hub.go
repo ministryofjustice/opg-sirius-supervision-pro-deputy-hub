@@ -39,8 +39,7 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			return err
 		}
 
-
-		hasSuccess, successMessage := createSuccessAndSuccessMessageForVars(r.URL.String(), proDeputyDetails.Firm.FirmName)
+		hasSuccess, successMessage := createSuccessAndSuccessMessageForVars(r.URL.String(), proDeputyDetails.Firm.FirmName, proDeputyDetails.ExecutiveCaseManager.EcmName)
 
 		vars := proDeputyHubVars{
 			Path:             r.URL.Path,
@@ -54,7 +53,7 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 	}
 }
 
-func createSuccessAndSuccessMessageForVars(url, firmName string) (bool, string) {
+func createSuccessAndSuccessMessageForVars(url, firmName string, ecmName string) (bool, string) {
 	splitStringByQuestion := strings.Split(url, "?")
 	if len(splitStringByQuestion) > 1 {
 		splitString := strings.Split(splitStringByQuestion[1], "=")
@@ -65,6 +64,8 @@ func createSuccessAndSuccessMessageForVars(url, firmName string) (bool, string) 
 			return true, "Firm added"
 		} else if splitString[1] == "deputyDetails" {
 			return true, "Deputy details updated"
+		} else if splitString[1] == "ecm" {
+			return true, "Ecm changed to " + ecmName
 		}
 	}
 	return false, ""
