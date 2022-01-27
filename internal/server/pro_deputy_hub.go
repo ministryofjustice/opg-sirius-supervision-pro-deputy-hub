@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -39,7 +40,6 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			return err
 		}
 
-
 		hasSuccess, successMessage := createSuccessAndSuccessMessageForVars(r.URL.String(), proDeputyDetails.Firm.FirmName)
 
 		vars := proDeputyHubVars{
@@ -49,6 +49,9 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			Success:          hasSuccess,
 			SuccessMessage:   successMessage,
 		}
+
+		fmt.Println("pro dept server")
+		fmt.Println(vars.ProDeputyDetails)
 
 		return tmpl.ExecuteTemplate(w, "page", vars)
 	}

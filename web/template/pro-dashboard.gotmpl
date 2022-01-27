@@ -95,7 +95,7 @@
                   Complaints
                 </dt>
                 <dd class="govuk-summary-list__value">
-
+                    {{.ProDeputyDetails.DeputyImportantInformation.Complaints}}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -103,7 +103,7 @@
                   Panel deputy
                 </dt>
                 <dd class="govuk-summary-list__value">
-
+                    {{.ProDeputyDetails.DeputyImportantInformation.PanelDeputy}}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -111,7 +111,7 @@
                     Annual billing preference
                   </dt>
                   <dd class="govuk-summary-list__value">
-
+                    {{.ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label}}
                   </dd>
                 </div>
               <div class="govuk-summary-list__row">
@@ -119,7 +119,7 @@
                   Other important information
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <p> imp </p>
+                  <p>{{.ProDeputyDetails.DeputyImportantInformation.OtherImportantInformation}}</p>
                 </dd>
               </div>
             </dl>

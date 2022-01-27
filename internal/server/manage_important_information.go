@@ -53,7 +53,6 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 				ProDeputyDetails: proDeputyDetails,
 				AnnualBillingInvoiceTypes: annualBillingInvoiceTypes,
 			}
-
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
 
@@ -65,15 +64,23 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 				return err
 			}
 
+			if r.PostFormValue("complaints") != "" {
+				complaintsBool, err = strconv.ParseBool(r.PostFormValue("complaints"))
+				if err != nil{
+					return err
+				}
+			}
+
+			if err != nil{
+				return err
+			}
+
 			importantInfoForm := sirius.ImportantInformationDetails{
 				Complaints:  complaintsBool,
 				PanelDeputy:  panelDeputyBool,
 				AnnualBillingInvoice: r.PostFormValue("annual-billing"),
 				OtherImportantInformation:     r.PostFormValue("other-information"),
 			}
-
-			fmt.Println("imp info form abi")
-			fmt.Println(importantInfoForm.AnnualBillingInvoice)
 
 			err = client.UpdateImportantInformation(ctx, deputyId, importantInfoForm)
 

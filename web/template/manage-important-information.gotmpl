@@ -30,13 +30,13 @@
                     </legend>
                     <div class="govuk-radios">
                       <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="complaints-yes" name="complaints" type="radio" value="true">
+                        <input class="govuk-radios__input" id="complaints-yes" name="complaints" type="radio" value="true" {{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints true}} checked="true"{{end}}>
                         <label class="govuk-label govuk-radios__label" for="complaints-yes">
                           Yes
                         </label>
                       </div>
                       <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="complaints-no" name="complaints" type="radio" value="false">
+                        <input class="govuk-radios__input" id="complaints-no" name="complaints" type="radio" value="false" {{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints false}} checked="false"{{end}}>
                         <label class="govuk-label govuk-radios__label" for="complaints-no">
                           No
                         </label>
@@ -52,13 +52,13 @@
                     </legend>
                     <div class="govuk-radios">
                       <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="panel-deputy-yes" name="panel-deputy" type="radio" value="true">
+                        <input class="govuk-radios__input" id="panel-deputy-yes" name="panel-deputy" type="radio" value="true" {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy true}} checked="true"{{end}}>
                         <label class="govuk-label govuk-radios__label" for="panel-deputy-yes">
                           Yes
                         </label>
                       </div>
                       <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="panel-deputy-no" name="panel-deputy" type="radio" value="false">
+                        <input class="govuk-radios__input" id="panel-deputy-no" name="panel-deputy" type="radio" value="false" {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy false}} checked="false"{{end}}>
                         <label class="govuk-label govuk-radios__label" for="panel-deputy-no">
                           No
                         </label>
@@ -73,15 +73,16 @@
                     <legend class="govuk-fieldset__legend">
                       Annual billing preference
                     </legend>
+                    {{$currentAnnualBillingInvoiceLabel:=.ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label}}
                     <div class="govuk-radios">
-                      {{range .AnnualBillingInvoiceTypes}}
-                        <div class="govuk-radios__item">
-                          <input class="govuk-radios__input" id="annual-billing-{{.Label}}" name="annual-billing" type="radio" value="{{.Label}}">
-                          <label class="govuk-label govuk-radios__label" for="annual-billing-{{.Label}}">
-                            {{.Label}}
-                          </label>
-                        </div>
-                      {{ end }}
+                        {{ range .AnnualBillingInvoiceTypes }}
+                            <div class="govuk-radios__item">
+                              <input class="govuk-radios__input" id="annual-billing-{{.Label}}" name="annual-billing" type="radio" value="{{.Label}}" {{if eq $currentAnnualBillingInvoiceLabel .Label}} checked="false"{{end}}>
+                              <label class="govuk-label govuk-radios__label" for="annual-billing-{{.Label}}">
+                                {{.Label}}
+                              </label>
+                            </div>
+                        {{end}}
                     </div>
                   </fieldset>
                 </div>
@@ -91,7 +92,7 @@
                     <label class="govuk-label" for="with-hint">
                         Other important information
                       </label>
-                    <textarea class="govuk-textarea govuk-js-character-count" id="other-information" name="other-information" rows="5"></textarea>
+                    <textarea class="govuk-textarea govuk-js-character-count" id="other-information" name="other-information" rows="5">{{.ProDeputyDetails.DeputyImportantInformation.OtherImportantInformation}}</textarea>
                     <div id="other-information-character-count" class="govuk-hint govuk-character-count__message" aria-live="polite">You have characters remaining</div>
                   </div>
                 </div>
