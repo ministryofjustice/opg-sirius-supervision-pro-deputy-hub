@@ -52,7 +52,14 @@ func TestDeputyClientReturned(t *testing.T) {
               "handle": "ACTIVE",
               "label": "Active",
               "deprecated": false
-            }
+            },
+            "deputies": [
+              {
+                "relationshipToClient": {
+                  "handle": "PANEL"
+                }
+              }
+            ]
           },
           {
             "id": 60,
@@ -107,6 +114,7 @@ func TestDeputyClientReturned(t *testing.T) {
 				StatusLabel:    "Pending",
 			},
 			SupervisionLevel: "General",
+			IsPanelClient: true,
 		},
 	}
 
