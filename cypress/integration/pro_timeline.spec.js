@@ -35,6 +35,18 @@ describe("Timeline", () => {
         timelineItems.next().within((item) => {
             cy.wrap(item).contains(
                 ".moj-timeline__title",
+                "Execute Case Manager changed to ProTeam1 User1"
+            );
+            cy.wrap(item).contains(
+                ".moj-timeline__byline",
+                "by case maanager (12345678)"
+            );
+            cy.wrap(item).contains("time", "09/09/2021 11:01:59");
+        });
+
+        timelineItems.next().within((item) => {
+            cy.wrap(item).contains(
+                ".moj-timeline__title",
                 "New client added to deputyship"
             );
             cy.wrap(item).contains(

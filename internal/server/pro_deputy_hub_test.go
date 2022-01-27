@@ -40,3 +40,39 @@ func TestNavigateToProDeputyHub(t *testing.T) {
 	resp := w.Result()
 	assert.Equal(http.StatusOK, resp.StatusCode)
 }
+
+func TestCreateSuccessAndSuccessMessageForVarsReturnsMessageOnEcmSuccess(t *testing.T) {
+	Success, SuccessMessage := createSuccessAndSuccessMessageForVars("/deputy/76/?success=ecm", "firm Name", "Jon Snow")
+	assert.Equal(t, true, Success)
+	assert.Equal(t, SuccessMessage, "Ecm changed to Jon Snow")
+}
+
+func TestCreateSuccessAndSuccessMessageForVarsReturnsMessageOnDeputyDetailsSuccess(t *testing.T) {
+	Success, SuccessMessage := createSuccessAndSuccessMessageForVars("/deputy/76/?success=deputyDetails", "firm Name", "Jon Snow")
+	assert.Equal(t, true, Success)
+	assert.Equal(t, SuccessMessage, "Deputy details updated")
+}
+
+func TestCreateSuccessAndSuccessMessageForVarsReturnsMessageOnChangeFirmSuccess(t *testing.T) {
+	Success, SuccessMessage := createSuccessAndSuccessMessageForVars("/deputy/76/?success=firm", "firm Name", "Jon Snow")
+	assert.Equal(t, true, Success)
+	assert.Equal(t, SuccessMessage, "Firm changed to firm Name")
+}
+
+func TestCreateSuccessAndSuccessMessageForVarsReturnsMessageAddFirmSuccess(t *testing.T) {
+	Success, SuccessMessage := createSuccessAndSuccessMessageForVars("/deputy/76/?success=newFirm", "firm Name", "Jon Snow")
+	assert.Equal(t, true, Success)
+	assert.Equal(t, SuccessMessage, "Firm added")
+}
+
+func TestCreateSuccessAndSuccessMessageForVarsReturnsNilForAnyOtherText(t *testing.T) {
+	Success, SuccessMessage := createSuccessAndSuccessMessageForVars("/deputy/76/?success=otherMessage", "firm Name", "Jon Snow")
+	assert.Equal(t, false, Success)
+	assert.Equal(t, SuccessMessage, "")
+}
+
+func TestCreateSuccessAndSuccessMessageForVarsReturnsNilIfNoSuccess(t *testing.T) {
+	Success, SuccessMessage := createSuccessAndSuccessMessageForVars("/deputy/76/", "firm Name", "Jon Snow")
+	assert.Equal(t, false, Success)
+	assert.Equal(t, SuccessMessage, "")
+}
