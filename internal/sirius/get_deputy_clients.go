@@ -18,10 +18,19 @@ type apiOrder struct {
 			Label string `json:"label"`
 		}
 	}
-	OrderDate string `json:"orderDate"`
+	OrderDate string      `json:"orderDate"`
+	Deputies  apiDeputies `json:"deputies"`
 }
 
 type apiOrders []apiOrder
+
+type apiDeputy struct {
+	RelationshipToClient struct {
+		Handle string `json:"handle"`
+	} `json:"relationshipToClient"`
+}
+
+type apiDeputies []apiDeputy
 
 type apiReport struct {
 	DueDate        string `json:"dueDate"`
@@ -89,6 +98,7 @@ type DeputyClient struct {
 	SupervisionLevel     string
 	OldestReport         reportReturned
 	LatestCompletedVisit latestCompletedVisit
+	IsPanelClient        bool
 }
 
 type DeputyClientDetails []DeputyClient
@@ -150,6 +160,7 @@ func (c *Client) GetDeputyClients(ctx Context, deputyId int, columnBeingSorted s
 					t.LatestCompletedVisit.VisitUrgency.Label,
 					strings.ToLower(t.LatestCompletedVisit.VisitReportMarkedAs.Label),
 				},
+				IsPanelClient: isPanelClient(t.Orders),
 			}
 
 			clients = append(clients, client)
@@ -310,4 +321,15 @@ func reformatCompletedDate(unformattedDate string) string {
 		return date.Format("02/01/2006")
 	}
 	return ""
+}
+
+func isPanelClient(apiOrders apiOrders) bool {
+	for _, order := range apiOrders {
+		for _, deputy := range order.Deputies {
+			if deputy.RelationshipToClient.Handle == "PANEL" {
+				return true
+			}
+		}
+	}
+	return false
 }

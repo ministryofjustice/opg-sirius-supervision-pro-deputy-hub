@@ -706,3 +706,46 @@ func TestRestructureOrdersReturnsEmptyStringForNilSupervisionLevel(t *testing.T)
 	}
 	assert.Equal(t, expectedResponse, restructureOrders(unformattedData))
 }
+
+func TestIsPanelClientReturnsTrueForPanelDeputy(t *testing.T) {
+	testDeputy1 := apiDeputy{}
+	testDeputy1.RelationshipToClient.Handle = "PANEL"
+	testDeputies1 := apiDeputies{
+		testDeputy1,
+	}
+
+	testDeputy2 := apiDeputy{}
+	testDeputy2.RelationshipToClient.Handle = "SOLICITOR"
+	testDeputies2 := apiDeputies{
+		testDeputy2,
+	}
+
+	testOrderData1 := apiOrder{}
+	testOrderData1.Deputies = testDeputies1
+	testOrderData2 := apiOrder{}
+	testOrderData2.Deputies = testDeputies2
+
+	testOrders := apiOrders{
+		testOrderData1,
+		testOrderData2,
+	}
+
+	assert.Equal(t, true, isPanelClient(testOrders))
+}
+
+func TestIsPanelClientReturnsFalseForNonPanelDeputy(t *testing.T) {
+	testDeputy := apiDeputy{}
+	testDeputy.RelationshipToClient.Handle = "SOLICITOR"
+	testDeputies := apiDeputies{
+		testDeputy,
+	}
+
+	testOrderData := apiOrder{}
+	testOrderData.Deputies = testDeputies
+
+	testOrders := apiOrders{
+		testOrderData,
+	}
+
+	assert.Equal(t, false, isPanelClient(testOrders))
+}

@@ -53,6 +53,19 @@ describe("Clients tab", () => {
         );
     });
 
+    it("Panel client flag is displayed for panel clients and not displayed for non panel clients", () => {
+        cy.get(":nth-child(1) > .client_name_ref > .panel").should(
+            "not.exist"
+        );
+        cy.get(":nth-child(2) > .client_name_ref > .panel").should(
+           "not.exist"
+        );
+        cy.get(":nth-child(3) > .client_name_ref > .panel").should(
+            "contain",
+            "Panel client"
+        );
+    });
+
     it("Clients surname have been sorted in order of descending", () => {
         cy.get('[label="sort-name-column-ascending"] > button').click();
         cy.get(":nth-child(1) > .client_name_ref > .govuk-link").should(

@@ -162,6 +162,11 @@
                                     -
                                 {{ end }}
                             </span>
+                            {{ if .IsPanelClient }}
+                                <span class="warning panel">
+                                    <i class="fas fa-flag" aria-hidden="true"></i>Panel client
+                                </span>
+                            {{ end }}
                         </td>
                         <td class="govuk-table__cell">
                             {{ if .AccommodationType }}
