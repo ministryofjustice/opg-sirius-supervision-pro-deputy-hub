@@ -9,9 +9,10 @@ import (
 	"github.com/ministryofjustice/opg-sirius-supervision-pro-deputy-hub/internal/sirius"
 )
 
-type DeputyImportantInformation interface {
+type ManageDeputyImportantInformation interface {
 	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
-	UpdateAdditionalInformation(sirius.Context, int, sirius.AdditionalInformationDetails) error
+	UpdateImportantInformation(sirius.Context, int, sirius.ImportantInformationDetails) error
+	GetDeputyAnnualInvoiceBillingTypes(ctx sirius.Context) ([]sirius.DeputyAnnualBillingInvoiceTypes, error)
 }
 
 type manageDeputyImportantInformationVars struct {
@@ -21,9 +22,10 @@ type manageDeputyImportantInformationVars struct {
 	Error            string
 	Errors           sirius.ValidationErrors
 	DeputyId         int
+	AnnualBillingInvoiceTypes []sirius.DeputyAnnualBillingInvoiceTypes
 }
 
-func renderTemplateForAdditionalInformation(client DeputyImportantInformation, tmpl Template) Handler {
+func renderTemplateForImportantInformation(client ManageDeputyImportantInformation, tmpl Template) Handler {
 	return func(perm sirius.PermissionSet, w http.ResponseWriter, r *http.Request) error {
 
 		ctx := getContext(r)
@@ -36,6 +38,11 @@ func renderTemplateForAdditionalInformation(client DeputyImportantInformation, t
 			return err
 		}
 
+		annualBillingInvoiceTypes, err := client.GetDeputyAnnualInvoiceBillingTypes(ctx)
+		if err != nil {
+			return err
+		}
+
 		switch r.Method {
 		case http.MethodGet:
 
@@ -44,27 +51,31 @@ func renderTemplateForAdditionalInformation(client DeputyImportantInformation, t
 				XSRFToken:        ctx.XSRFToken,
 				DeputyId:         deputyId,
 				ProDeputyDetails: proDeputyDetails,
+				AnnualBillingInvoiceTypes: annualBillingInvoiceTypes,
 			}
 
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
+
 		case http.MethodPost:
-			additionalInfoForm := sirius.AdditionalInformationDetails{
-				//DeputySubType:    proDeputyDetails.DeputySubType.SubType,
-				//DeputyFirstName:  r.PostFormValue("deputy-first-name"),
-				//DeputySurname:    r.PostFormValue("deputy-last-name"),
-				//OrganisationName: r.PostFormValue("organisation-name"),
-				//AddressLine1:     r.PostFormValue("address-line-1"),
-				//AddressLine2:     r.PostFormValue("address-line-2"),
-				//AddressLine3:     r.PostFormValue("address-line-3"),
-				//Town:             r.PostFormValue("town"),
-				//County:           r.PostFormValue("county"),
-				//Postcode:         r.PostFormValue("postcode"),
-				//PhoneNumber:      r.PostFormValue("telephone"),
-				//Email:            r.PostFormValue("email"),
+			var complaintsBool bool
+
+			panelDeputyBool, err := strconv.ParseBool(r.PostFormValue("panel-deputy"))
+			if err != nil{
+				return err
 			}
 
-			err := client.UpdateAdditionalInformation(ctx, deputyId, additionalInfoForm)
+			importantInfoForm := sirius.ImportantInformationDetails{
+				Complaints:  complaintsBool,
+				PanelDeputy:  panelDeputyBool,
+				AnnualBillingInvoice: r.PostFormValue("annual-billing"),
+				OtherImportantInformation:     r.PostFormValue("other-information"),
+			}
+
+			fmt.Println("imp info form abi")
+			fmt.Println(importantInfoForm.AnnualBillingInvoice)
+
+			err = client.UpdateImportantInformation(ctx, deputyId, importantInfoForm)
 
 			if verr, ok := err.(sirius.ValidationError); ok {
 				//verr.Errors = renameUpdateAdditionalInformationValidationErrorMessages(verr.Errors)
@@ -80,7 +91,7 @@ func renderTemplateForAdditionalInformation(client DeputyImportantInformation, t
 				return err
 			}
 
-			return Redirect(fmt.Sprintf("/deputy/%d?success=additionalInformation", deputyId))
+			return Redirect(fmt.Sprintf("/deputy/%d?success=importantInformation", deputyId))
 		default:
 			return StatusError(http.StatusMethodNotAllowed)
 		}

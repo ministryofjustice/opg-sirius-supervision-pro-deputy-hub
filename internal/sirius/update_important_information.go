@@ -4,23 +4,30 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 )
 
-type AdditionalInformationDetails struct {
-	Complaints string `json:"complaints"`
-	PanelDeputy  string `json:"panelDeputy"`
-	AnnualBillingPreference    string `json:"annualBillingPreference"`
+type ImportantInformationDetails struct {
+	Complaints bool `json:"complaints"`
+	PanelDeputy  bool `json:"panelDeputy"`
+	AnnualBillingInvoice  string `json:"annualBillingInvoice"`
+	OtherImportantInformation string `json:"otherImportantInformation"`
 }
 
-func (c *Client) UpdateAdditionalInformation(ctx Context, deputyId int, additionalInfoForm AdditionalInformationDetails) error {
+func (c *Client) UpdateImportantInformation(ctx Context, deputyId int, importantInfoForm ImportantInformationDetails) error {
 	var body bytes.Buffer
-	err := json.NewEncoder(&body).Encode(additionalInfoForm)
+
+	fmt.Println("sirius important info")
+	fmt.Println(importantInfoForm)
+
+	err := json.NewEncoder(&body).Encode(importantInfoForm)
 	if err != nil {
 		return err
 	}
 
-	requestURL := fmt.Sprintf("/api/v1/deputies/%d/additional-information", deputyId)
+	requestURL := fmt.Sprintf("/api/v1/deputies/%d/important-information", deputyId)
 
 	req, err := c.newRequest(ctx, http.MethodPut, requestURL, &body)
 
@@ -35,23 +42,34 @@ func (c *Client) UpdateAdditionalInformation(ctx Context, deputyId int, addition
 		return err
 	}
 
+	io.Copy(os.Stdout, resp.Body)
+
 	defer resp.Body.Close()
+
+
 
 	if resp.StatusCode == http.StatusUnauthorized {
 		return ErrUnauthorized
 	}
 
 	if resp.StatusCode == http.StatusBadRequest {
+
 		var v struct {
 			ValidationErrors ValidationErrors `json:"validation_errors"`
 		}
+		fmt.Println("errors in internal sirius")
+		fmt.Println(v.ValidationErrors)
 
 		if err := json.NewDecoder(resp.Body).Decode(&v); err == nil {
+			fmt.Println("errors in internal sirius")
+			fmt.Println(v.ValidationErrors)
 			return ValidationError{
 				Errors: v.ValidationErrors,
 			}
 		}
 	}
+
+
 
 	if resp.StatusCode != http.StatusOK {
 		return newStatusError(resp)

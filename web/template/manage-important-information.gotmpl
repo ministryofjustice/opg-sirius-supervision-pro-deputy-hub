@@ -12,117 +12,109 @@
           <div class="govuk-grid-row">
 
 
-          <div class="govuk-grid-column-one-half">
-          <form class="" >
+              <div class="govuk-grid-column-one-half">
+              <form
+                  id="important-information-form"
+                  method="post"
+                  autocomplete="off"
+                  novalidate>
+                  <input
+                      type="hidden"
+                      name="xsrfToken"
+                      value="{{ .XSRFToken }}" />
 
-            <div class="govuk-form-group">
-              <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend">
-                  Complaints
-                </legend>
-                <div class="govuk-radios">
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="visitor-charges" name="visitor-charges" type="radio" value="yes" data-dashlane-rid="3c27f6b5687e5b1d" data-form-type="">
-                    <label class="govuk-label govuk-radios__label" for="visitor-charges">
-                      Yes
-                    </label>
-                  </div>
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="visitor-charges-2" name="visitor-charges" type="radio" value="no" checked="" data-dashlane-rid="efb97575913344ed" data-form-type="">
-                    <label class="govuk-label govuk-radios__label" for="visitor-charges-2">
-                      No
-                    </label>
-                  </div>
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="visitor-charges-3" name="visitor-charges" type="radio" value="unknown" data-dashlane-rid="4be265f6d283d9a8" data-form-type="">
-                    <label class="govuk-label govuk-radios__label" for="visitor-charges-3">
-                      Unknown
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-
-            <div class="govuk-form-group">
-              <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend">
-                    Panel deputy
-                </legend>
-                <div class="govuk-radios">
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="panel-deputy" name="panel-deputy" type="radio" value="yes" data-dashlane-rid="f503c80bd8ec6652" data-form-type="">
-                    <label class="govuk-label govuk-radios__label" for="panel-deputy">
-                      Yes
-                    </label>
-                  </div>
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="panel-deputy-2" name="panel-deputy" type="radio" value="no" checked="" data-dashlane-rid="959f6b092fff6534" data-form-type="">
-                    <label class="govuk-label govuk-radios__label" for="panel-deputy-2">
-                      No
-                    </label>
-                  </div>
-                </div>
-
-              </fieldset>
-            </div>
-
-            <div class="govuk-form-group">
-              <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend">
-                  Annual billing preference
-                </legend>
-                <div class="govuk-radios">
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="annual-billing" name="annual-billing" type="radio" value="invoice" checked="">
-                    <label class="govuk-label govuk-radios__label" for="annual-billing-invoice">
-                      Invoice
-                    </label>
-                  </div>
-                  <div class="govuk-radios__item">
-                      <input class="govuk-radios__input" id="annual-billing" name="annual-billing" type="radio" value="schedule" checked="">
-                      <label class="govuk-label govuk-radios__label" for="annual-billing-schedule">
-                        Schedule
-                      </label>
+                <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend">
+                      Complaints
+                    </legend>
+                    <div class="govuk-radios">
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="complaints-yes" name="complaints" type="radio" value="true">
+                        <label class="govuk-label govuk-radios__label" for="complaints-yes">
+                          Yes
+                        </label>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="complaints-no" name="complaints" type="radio" value="false">
+                        <label class="govuk-label govuk-radios__label" for="complaints-no">
+                          No
+                        </label>
+                      </div>
                     </div>
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="annual-billing" name="annual-billing" type="radio" value="scheduleAndInvoice">
-                    <label class="govuk-label govuk-radios__label" for="annual-billing-schedule-and-invoice">
-                      Schedule and invoice
-                    </label>
-                  </div>
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="annual-billing" name="annual-billing" type="radio" value="unknown">
-                    <label class="govuk-label govuk-radios__label" for="annual-billing-unknown">
-                      Unknown
-                    </label>
+                  </fieldset>
+                </div>
+
+                <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend">
+                        Panel deputy
+                    </legend>
+                    <div class="govuk-radios">
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="panel-deputy-yes" name="panel-deputy" type="radio" value="true">
+                        <label class="govuk-label govuk-radios__label" for="panel-deputy-yes">
+                          Yes
+                        </label>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="panel-deputy-no" name="panel-deputy" type="radio" value="false">
+                        <label class="govuk-label govuk-radios__label" for="panel-deputy-no">
+                          No
+                        </label>
+                      </div>
+                    </div>
+
+                  </fieldset>
+                </div>
+
+                <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend">
+                      Annual billing preference
+                    </legend>
+                    <div class="govuk-radios">
+                      {{range .AnnualBillingInvoiceTypes}}
+                        <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="annual-billing-{{.Label}}" name="annual-billing" type="radio" value="{{.Label}}">
+                          <label class="govuk-label govuk-radios__label" for="annual-billing-{{.Label}}">
+                            {{.Label}}
+                          </label>
+                        </div>
+                      {{ end }}
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="1000">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label" for="with-hint">
+                        Other important information
+                      </label>
+                    <textarea class="govuk-textarea govuk-js-character-count" id="other-information" name="other-information" rows="5"></textarea>
+                    <div id="other-information-character-count" class="govuk-hint govuk-character-count__message" aria-live="polite">You have characters remaining</div>
                   </div>
                 </div>
-              </fieldset>
-            </div>
 
-            <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="1000">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="with-hint">
-                    Other important information
-                  </label>
-                <textarea class="govuk-textarea govuk-js-character-count" id="with-hint" name="with-hint" rows="5" aria-describedby="with-hint-info with-hint-hint" data-dashlane-rid="d8c27e93b1841a28" data-form-type=""></textarea><div id="with-hint-info" class="govuk-hint govuk-character-count__message" aria-live="polite">You have 1000 characters remaining</div>
+              <div class="govuk-button-group govuk-!-margin-top-7">
+                <button
+                    type="submit"
+                    class="govuk-button"
+                    data-module="govuk-button">
+                    Save important information
+                </button>
+
+               <a
+                   class="govuk-link"
+                   href="{{ prefix (printf "/deputy/%d" .ProDeputyDetails.ID) }}">
+                   Cancel
+               </a>
+
               </div>
 
-
+              </form>
             </div>
-
-          <div class="govuk-button-group govuk-!-margin-top-7">
-            <a class="govuk-button" href="/sirius/pro-hub/1-1/person-deputy/deputy-hub/" data-module="govuk-button">
-              Save important information
-            </a>
-
-            <a class="govuk-link" href="javascript: history.go(-1)">Cancel</a>
-
           </div>
-
-          </form>
-        </div>
-      </div>
 
       </div>
 
