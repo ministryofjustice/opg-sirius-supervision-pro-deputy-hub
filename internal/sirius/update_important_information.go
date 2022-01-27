@@ -4,9 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
-	"os"
 )
 
 type ImportantInformationDetails struct {
@@ -18,9 +16,6 @@ type ImportantInformationDetails struct {
 
 func (c *Client) UpdateImportantInformation(ctx Context, deputyId int, importantInfoForm ImportantInformationDetails) error {
 	var body bytes.Buffer
-
-	fmt.Println("sirius important info")
-	fmt.Println(importantInfoForm)
 
 	err := json.NewEncoder(&body).Encode(importantInfoForm)
 	if err != nil {
@@ -42,11 +37,7 @@ func (c *Client) UpdateImportantInformation(ctx Context, deputyId int, important
 		return err
 	}
 
-	io.Copy(os.Stdout, resp.Body)
-
 	defer resp.Body.Close()
-
-
 
 	if resp.StatusCode == http.StatusUnauthorized {
 		return ErrUnauthorized
@@ -57,19 +48,13 @@ func (c *Client) UpdateImportantInformation(ctx Context, deputyId int, important
 		var v struct {
 			ValidationErrors ValidationErrors `json:"validation_errors"`
 		}
-		fmt.Println("errors in internal sirius")
-		fmt.Println(v.ValidationErrors)
 
 		if err := json.NewDecoder(resp.Body).Decode(&v); err == nil {
-			fmt.Println("errors in internal sirius")
-			fmt.Println(v.ValidationErrors)
 			return ValidationError{
 				Errors: v.ValidationErrors,
 			}
 		}
 	}
-
-
 
 	if resp.StatusCode != http.StatusOK {
 		return newStatusError(resp)

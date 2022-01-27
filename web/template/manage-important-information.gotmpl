@@ -30,13 +30,13 @@
                     </legend>
                     <div class="govuk-radios">
                       <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="complaints-yes" name="complaints" type="radio" value="true" {{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints true}} checked="true"{{end}}>
+                        <input class="govuk-radios__input" id="complaints-yes" name="complaints" type="radio" value="true" {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label "" }}{{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints true}} checked="true"{{end}}{{end}}>
                         <label class="govuk-label govuk-radios__label" for="complaints-yes">
                           Yes
                         </label>
                       </div>
                       <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="complaints-no" name="complaints" type="radio" value="false" {{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints false}} checked="false"{{end}}>
+                        <input class="govuk-radios__input" id="complaints-no" name="complaints" type="radio" value="false" {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label ""}}{{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints false}} checked="true"{{end}}{{end}}>
                         <label class="govuk-label govuk-radios__label" for="complaints-no">
                           No
                         </label>
@@ -58,7 +58,7 @@
                         </label>
                       </div>
                       <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="panel-deputy-no" name="panel-deputy" type="radio" value="false" {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy false}} checked="false"{{end}}>
+                        <input class="govuk-radios__input" id="panel-deputy-no" name="panel-deputy" type="radio" value="false" {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy false}} checked="true"{{end}}>
                         <label class="govuk-label govuk-radios__label" for="panel-deputy-no">
                           No
                         </label>
@@ -77,7 +77,7 @@
                     <div class="govuk-radios">
                         {{ range .AnnualBillingInvoiceTypes }}
                             <div class="govuk-radios__item">
-                              <input class="govuk-radios__input" id="annual-billing-{{.Label}}" name="annual-billing" type="radio" value="{{.Label}}" {{if eq $currentAnnualBillingInvoiceLabel .Label}} checked="false"{{end}}>
+                              <input class="govuk-radios__input" id="annual-billing-{{.Label}}" name="annual-billing" type="radio" value="{{.Label}}" {{if ne $currentAnnualBillingInvoiceLabel "" }}{{if eq $currentAnnualBillingInvoiceLabel .Label}} checked="true"{{end}}{{else if eq .Label "Unknown"}}checked="true"{{end}}>
                               <label class="govuk-label govuk-radios__label" for="annual-billing-{{.Label}}">
                                 {{.Label}}
                               </label>

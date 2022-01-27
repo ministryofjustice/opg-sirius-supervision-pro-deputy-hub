@@ -95,7 +95,7 @@
                   Complaints
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{.ProDeputyDetails.DeputyImportantInformation.Complaints}}
+                    {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label "" }}{{.ProDeputyDetails.DeputyImportantInformation.Complaints}}{{end}}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -103,7 +103,7 @@
                   Panel deputy
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{.ProDeputyDetails.DeputyImportantInformation.PanelDeputy}}
+                    {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label "" }}{{.ProDeputyDetails.DeputyImportantInformation.PanelDeputy}}{{end}}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">

@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -50,9 +49,6 @@ func renderTemplateForProDeputyHub(client ProDeputyHubInformation, tmpl Template
 			SuccessMessage:   successMessage,
 		}
 
-		fmt.Println("pro dept server")
-		fmt.Println(vars.ProDeputyDetails)
-
 		return tmpl.ExecuteTemplate(w, "page", vars)
 	}
 }
@@ -68,6 +64,8 @@ func createSuccessAndSuccessMessageForVars(url, firmName string) (bool, string) 
 			return true, "Firm added"
 		} else if splitString[1] == "deputyDetails" {
 			return true, "Deputy details updated"
+		} else if splitString[1] == "importantInformation" {
+			return true, "Deputy important information updated"
 		}
 	}
 	return false, ""
