@@ -11,6 +11,10 @@ type executiveCaseManager struct {
 	EcmName string `json:"displayName"`
 }
 
+type ExecutiveCaseManagerOutgoing struct {
+	EcmId int `json:"ecmId"`
+}
+
 type firm struct {
 	FirmName string `json:"firmName"`
 	FirmId   int    `json:"id"`

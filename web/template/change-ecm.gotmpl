@@ -1,0 +1,58 @@
+{{ template "page" . }}
+{{ define "main" }}
+    {{ if .Errors }}
+        {{ template "error-summary" .Errors }}
+    {{ end }}
+    <div class="main">  
+        {{ template "pro-deputy" . }}
+        <div class="govuk-grid-row govuk-!-margin-top-5">
+            <div class="govuk-grid-column-full">
+                <header>
+                    <h1 class="govuk-heading-l  govuk-!-margin-bottom-1">
+                        Change Executive Case Manager
+                    </h1>
+                </header>
+                <div class="govuk-grid-row">
+                    <form id="change-ecm-form"
+                        class="change-ecm govuk-grid-column-one-half"
+                        method="post">
+                        <input
+                        type="hidden"
+                        name="xsrfToken"
+                        value="{{ .XSRFToken }}" />
+                        <p class="govuk-body govuk-!-margin-bottom-5" for="autocomplete-default">
+                            Current ECM: 
+                            {{ if ne .ProDeputyDetails.ExecutiveCaseManager.EcmId 0 }}
+                                {{ .ProDeputyDetails.ExecutiveCaseManager.EcmName }}
+                            {{ end }}
+                        </p>
+                        <label class="govuk-label" for="autocomplete-progressiveEnhancement">
+                            Enter an Executive Case Manager name
+                        </label>
+                        <div
+                            class="autocomplete-wrapper"
+                            id="select-ecm-dropdown">
+                            <select id="select-ecm" name="select-ecm">
+                                <option value=""></option>
+                                {{ range .EcmTeamsDetails }}
+                                    <!-- prettier-ignore -->
+                                    <option value="{{ .ID }}" {{ if eq .CurrentEcm .ID }} selected="selected" {{ end }}>{{ .DisplayName }}
+                                </option>
+                                {{ end }}
+                            </select>
+                        </div>
+                        <div class="govuk-button-group govuk-!-margin-top-7">
+                            <button class="govuk-button" type="submit" data-module="govuk-button">
+                                Save ECM
+                            </button>
+                            <a class="govuk-link data-emc-cancel" href="{{ prefix (printf "/deputy/%d" .ProDeputyDetails.ID) }}">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ end }}
+
