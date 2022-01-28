@@ -106,7 +106,7 @@ func TestGetProDeputyTeamUsersReturnsNewStatusError(t *testing.T) {
 	assert.Equal(t, expectedResponse, paDeputyTeam)
 	assert.Equal(t, StatusError{
 		Code:   http.StatusMethodNotAllowed,
-		URL:    svr.URL + "/api/v1/teams?type='PRO'",
+		URL:    svr.URL + "/api/v1/teams?type=PRO",
 		Method: http.MethodGet,
 	}, err)
 }
