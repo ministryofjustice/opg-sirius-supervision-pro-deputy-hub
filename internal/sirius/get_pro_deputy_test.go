@@ -20,6 +20,7 @@ func TestProDeputyDetailsReturned(t *testing.T) {
 		"firstname": "firstname",
 		"surname": "surname",
 		"deputyNumber": 1000,
+		"deputyStatus": "INACTIVE",
 		"organisationName": "organisationName",
 		"executiveCaseManager": {
 			"id": 223,
@@ -44,6 +45,7 @@ func TestProDeputyDetailsReturned(t *testing.T) {
 		DeputyFirstName:  "firstname",
 		DeputySurname:    "surname",
 		DeputyNumber:     1000,
+		DeputyStatus:     "INACTIVE",
 		OrganisationName: "organisationName",
 		ExecutiveCaseManager: executiveCaseManager{
 			EcmId:   223,
@@ -75,6 +77,7 @@ func TestGetDeputyDetailsReturnsNewStatusError(t *testing.T) {
 		DeputyFirstName:  "",
 		DeputySurname:    "",
 		DeputyNumber:     0,
+		DeputyStatus:     "",
 		OrganisationName: "",
 		ExecutiveCaseManager: executiveCaseManager{
 			EcmId:   0,
@@ -105,6 +108,7 @@ func TestGetDeputyDetailsReturnsUnauthorisedClientError(t *testing.T) {
 		DeputyFirstName:  "",
 		DeputySurname:    "",
 		DeputyNumber:     0,
+		DeputyStatus:     "",
 		OrganisationName: "",
 		ExecutiveCaseManager: executiveCaseManager{
 			EcmId:   0,
