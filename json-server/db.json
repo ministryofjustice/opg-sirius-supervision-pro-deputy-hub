@@ -157,7 +157,8 @@
         "deputySubType": {
           "handle": "ORGANISATION",
           "label": "Organisation"
-        }
+        },
+        "deputyStatus": "Inactive"
       }
     ],
     "clients": {

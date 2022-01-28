@@ -30,6 +30,7 @@ type ProDeputyDetails struct {
 	DeputySurname                    string               `json:"surname"`
 	DeputyNumber                     int                  `json:"deputyNumber"`
 	DeputySubType                    deputySubType        `json:"deputySubType"`
+	DeputyStatus                     string               `json:"deputyStatus"`
 	OrganisationName                 string               `json:"organisationName"`
 	OrganisationTeamOrDepartmentName string               `json:"organisationTeamOrDepartmentName"`
 	ExecutiveCaseManager             executiveCaseManager `json:"executiveCaseManager"`
