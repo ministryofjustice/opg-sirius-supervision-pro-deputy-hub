@@ -47,7 +47,7 @@ describe("Pro Deputy Hub", () => {
         });
     });
 
-    describe("Pro deputy details", () => {
+    describe("Pro Person deputy details", () => {
         it("the page should contain the deputy name", () => {
             cy.contains(".hook_header_deputy_name", "firstname surname");
         });
@@ -88,6 +88,20 @@ describe("Pro Deputy Hub", () => {
                     cy.wrap(el).contains(expected[i]);
                 }
             });
+        });
+    });
+
+    describe("Pro Organisation details", () => {
+        beforeEach(() => {
+            cy.visit("/supervision/deputies/professional/deputy/2");
+        });
+
+        it("the page should contain the deputy name", () => {
+            cy.contains(".hook_header_organisation_name", "Organisation Ltd");
+        });
+
+        it("the page should contain the deputy status", () => {
+            cy.contains(".hook_header_deputy_status_organisation", "Inactive");
         });
     });
 });
