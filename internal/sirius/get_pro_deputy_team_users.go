@@ -25,13 +25,14 @@ type apiTeam struct {
 type TeamMember struct {
 	ID          int
 	DisplayName string
+	CurrentEcm  int
 }
 
 type Team struct {
 	Members []TeamMember
 }
 
-func (c *Client) GetProTeamsMembers(ctx Context, defaultProTeams string) ([]TeamMember, error) {
+func (c *Client) GetProTeamsMembers(ctx Context, defaultProTeams string, currentEcm int) ([]TeamMember, error) {
 	requestURL := fmt.Sprintf("/api/v1/teams?type=%s", defaultProTeams)
 	req, err := c.newRequest(ctx, http.MethodGet, requestURL, nil)
 	if err != nil {
@@ -64,6 +65,7 @@ func (c *Client) GetProTeamsMembers(ctx Context, defaultProTeams string) ([]Team
 			members = append(members, TeamMember{
 				ID:          m.ID,
 				DisplayName: m.DisplayName,
+				CurrentEcm:  currentEcm,
 			})
 		}
 	}

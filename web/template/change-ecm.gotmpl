@@ -36,7 +36,7 @@
                                 <option value=""></option>
                                 {{ range .EcmTeamsDetails }}
                                     <!-- prettier-ignore -->
-                                    <option value="{{ .ID }}">{{ .DisplayName }}
+                                    <option value="{{ .ID }}" {{ if eq .CurrentEcm .ID }} selected="selected" {{ end }}>{{ .DisplayName }}
                                 </option>
                                 {{ end }}
                             </select>

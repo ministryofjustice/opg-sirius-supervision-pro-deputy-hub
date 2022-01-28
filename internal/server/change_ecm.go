@@ -12,7 +12,7 @@ import (
 
 type ProDeputyChangeEcmInformation interface {
 	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
-	GetProTeamsMembers(sirius.Context, string) ([]sirius.TeamMember, error)
+	GetProTeamsMembers(sirius.Context, string, int) ([]sirius.TeamMember, error)
 	ChangeECM(sirius.Context, sirius.ExecutiveCaseManagerOutgoing, sirius.ProDeputyDetails) error
 }
 
@@ -39,7 +39,12 @@ func renderTemplateForChangeEcm(client ProDeputyChangeEcmInformation, tmpl Templ
 		routeVars := mux.Vars(r)
 		deputyId, _ := strconv.Atoi(routeVars["id"])
 
-		ecmTeamsDetails, err := client.GetProTeamsMembers(ctx, "PRO")
+		proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
+		if err != nil {
+			return err
+		}
+
+		ecmTeamsDetails, err := client.GetProTeamsMembers(ctx, "PRO", proDeputyDetails.ExecutiveCaseManager.EcmId)
 		if err != nil {
 			return err
 		}
@@ -47,10 +52,7 @@ func renderTemplateForChangeEcm(client ProDeputyChangeEcmInformation, tmpl Templ
 		switch r.Method {
 		case http.MethodGet:
 			var SuccessMessage string
-			proDeputyDetails, err := client.GetProDeputyDetails(ctx, deputyId)
-			if err != nil {
-				return err
-			}
+
 			hasSuccess := hasSuccessInUrl(r.URL.String(), "/deputy/"+strconv.Itoa(deputyId))
 			if hasSuccess {
 				SuccessMessage = "new ecm is" + proDeputyDetails.ExecutiveCaseManager.EcmName
