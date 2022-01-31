@@ -21,8 +21,11 @@ type deputySubType struct {
 }
 
 type deputyImportantInformation struct {
-	Id                   int  `json:"id"`
-	Complaints           bool `json:"complaints"`
+	Id         int `json:"id"`
+	Complaints struct {
+		Handle string `json:"handle"`
+		Label  string `json:"label"`
+	} `json:"complaints"`
 	PanelDeputy          bool `json:"panelDeputy"`
 	AnnualBillingInvoice struct {
 		Handle string `json:"handle"`
@@ -32,24 +35,24 @@ type deputyImportantInformation struct {
 }
 
 type ProDeputyDetails struct {
-	ID                               int                  `json:"id"`
-	DeputyFirstName                  string               `json:"firstname"`
-	DeputySurname                    string               `json:"surname"`
-	DeputyNumber                     int                  `json:"deputyNumber"`
-	DeputySubType                    deputySubType        `json:"deputySubType"`
-	DeputyImportantInformation deputyImportantInformation `json:"deputyImportantInformation"`
-	OrganisationName                 string               `json:"organisationName"`
-	OrganisationTeamOrDepartmentName string               `json:"organisationTeamOrDepartmentName"`
-	ExecutiveCaseManager             executiveCaseManager `json:"executiveCaseManager"`
-	Firm                             firm                 `json:"firm"`
-	Email                            string               `json:"email"`
-	PhoneNumber                      string               `json:"phoneNumber"`
-	AddressLine1                     string               `json:"addressLine1"`
-	AddressLine2                     string               `json:"addressLine2"`
-	AddressLine3                     string               `json:"addressLine3"`
-	Town                             string               `json:"town"`
-	County                           string               `json:"county"`
-	Postcode                         string               `json:"postcode"`
+	ID                               int                        `json:"id"`
+	DeputyFirstName                  string                     `json:"firstname"`
+	DeputySurname                    string                     `json:"surname"`
+	DeputyNumber                     int                        `json:"deputyNumber"`
+	DeputySubType                    deputySubType              `json:"deputySubType"`
+	DeputyImportantInformation       deputyImportantInformation `json:"deputyImportantInformation"`
+	OrganisationName                 string                     `json:"organisationName"`
+	OrganisationTeamOrDepartmentName string                     `json:"organisationTeamOrDepartmentName"`
+	ExecutiveCaseManager             executiveCaseManager       `json:"executiveCaseManager"`
+	Firm                             firm                       `json:"firm"`
+	Email                            string                     `json:"email"`
+	PhoneNumber                      string                     `json:"phoneNumber"`
+	AddressLine1                     string                     `json:"addressLine1"`
+	AddressLine2                     string                     `json:"addressLine2"`
+	AddressLine3                     string                     `json:"addressLine3"`
+	Town                             string                     `json:"town"`
+	County                           string                     `json:"county"`
+	Postcode                         string                     `json:"postcode"`
 }
 
 func (c *Client) GetProDeputyDetails(ctx Context, deputyId int) (ProDeputyDetails, error) {

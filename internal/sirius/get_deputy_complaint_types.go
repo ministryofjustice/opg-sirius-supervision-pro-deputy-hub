@@ -5,15 +5,15 @@ import (
 	"net/http"
 )
 
-type DeputyAnnualBillingInvoiceTypes struct {
+type DeputyComplaintTypes struct {
 	Handle string `json:"handle"`
 	Label  string `json:"label"`
 }
 
-func (c *Client) GetDeputyAnnualInvoiceBillingTypes(ctx Context) ([]DeputyAnnualBillingInvoiceTypes, error) {
-	var v []DeputyAnnualBillingInvoiceTypes
+func (c *Client) GetDeputyComplaintTypes(ctx Context) ([]DeputyComplaintTypes, error) {
+	var v []DeputyComplaintTypes
 
-	req, err := c.newRequest(ctx, http.MethodGet, "/api/v1/reference-data/annualBillingInvoice", nil)
+	req, err := c.newRequest(ctx, http.MethodGet, "/api/v1/reference-data/complaints", nil)
 	if err != nil {
 		return v, err
 	}

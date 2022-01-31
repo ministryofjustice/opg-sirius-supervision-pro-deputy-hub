@@ -17,9 +17,9 @@ func TestUpdateImportantInformation(t *testing.T) {
 	client, _ := NewClient(mockClient, "http://localhost:3000")
 
 	json := `{
-    "complaints": "true",
+    "complaints": "True",
     "panelDeputy":  "false",
-    "annualBillingInvoice": "schedule",
+    "annualBillingInvoice": "Schedule",
     "otherImportantInformation": "This is some crucial information",
 	}`
 
@@ -33,9 +33,9 @@ func TestUpdateImportantInformation(t *testing.T) {
 	}
 
 	formData := ImportantInformationDetails{
-		Complaints: true,
-		PanelDeputy: false,
-		AnnualBillingInvoice: "schedule",
+		Complaints:                "True",
+		PanelDeputy:               false,
+		AnnualBillingInvoice:      "Schedule",
 		OtherImportantInformation: "This is some crucial information",
 	}
 
@@ -52,9 +52,9 @@ func TestUpdateImportantInformationReturnsNewStatusError(t *testing.T) {
 	client, _ := NewClient(http.DefaultClient, svr.URL)
 
 	formData := ImportantInformationDetails{
-		Complaints: true,
-		PanelDeputy: false,
-		AnnualBillingInvoice: "schedule",
+		Complaints:                "True",
+		PanelDeputy:               false,
+		AnnualBillingInvoice:      "Schedule",
 		OtherImportantInformation: "This is some crucial information",
 	}
 
@@ -76,9 +76,9 @@ func TestUpdateImportantInformationReturnsUnauthorisedClientError(t *testing.T) 
 	client, _ := NewClient(http.DefaultClient, svr.URL)
 
 	formData := ImportantInformationDetails{
-		Complaints: true,
-		PanelDeputy: false,
-		AnnualBillingInvoice: "schedule",
+		Complaints:                "True",
+		PanelDeputy:               false,
+		AnnualBillingInvoice:      "schedule",
 		OtherImportantInformation: "This is some crucial information",
 	}
 

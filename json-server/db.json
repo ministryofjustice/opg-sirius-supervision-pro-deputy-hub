@@ -1316,6 +1316,38 @@
             "FirmNumber": 1000002
         }
     ],
+    "annualBillingInvoice": [
+        {
+            "handle": "INVOICE",
+            "label": "Invoice"
+        },
+        {
+            "handle": "SCHEDULE",
+            "label": "Schedule"
+        },
+        {
+            "handle": "SCHEDULE AND INVOICE",
+            "label": "Schedule and Invoice"
+        },
+        {
+            "handle": "UNKNOWN",
+            "label": "Unknown"
+        }
+    ],
+    "complaintTypes": [
+        {
+            "handle": "TRUE",
+            "label": "True"
+        },
+        {
+            "handle": "FALSE",
+            "label": "False"
+        },
+        {
+            "handle": "UNKNOWN",
+            "label": "Unknown"
+        }
+    ],
     "errors": [
         {
             "id": "notes",

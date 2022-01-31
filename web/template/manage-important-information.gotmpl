@@ -1,7 +1,7 @@
 {{ template "page" . }}
 {{ define "main" }}
-    {{ template "pro-deputy" . }}
     {{ template "error-summary" .Errors }}
+    {{ template "pro-deputy" . }}
 
     <div class="govuk-grid-row govuk-!-margin-top-5">
         <div class="govuk-grid-column-full">
@@ -29,18 +29,15 @@
                       Complaints
                     </legend>
                     <div class="govuk-radios">
-                      <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="complaints-yes" name="complaints" type="radio" value="true" {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label "" }}{{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints true}} checked="true"{{end}}{{end}}>
-                        <label class="govuk-label govuk-radios__label" for="complaints-yes">
-                          Yes
-                        </label>
-                      </div>
-                      <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="complaints-no" name="complaints" type="radio" value="false" {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label ""}}{{if eq .ProDeputyDetails.DeputyImportantInformation.Complaints false}} checked="true"{{end}}{{end}}>
-                        <label class="govuk-label govuk-radios__label" for="complaints-no">
-                          No
-                        </label>
-                      </div>
+                     {{$currentComplaintsValue:=.ProDeputyDetails.DeputyImportantInformation.Complaints.Label}}
+                      {{ range .ComplaintTypes }}
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="complaints-{{.Label}}" name="complaints" type="radio" value="{{.Label}}" {{if eq $currentComplaintsValue .Label}} checked="true"{{end}}{{if eq $currentComplaintsValue ""}}{{if eq "Unknown" .Label}} checked="true"{{end}}{{end}}>
+                            <label class="govuk-label govuk-radios__label" for="complaints-{{.Label}}">
+                              {{.Label}}
+                            </label>
+                          </div>
+                      {{end}}
                     </div>
                   </fieldset>
                 </div>
@@ -87,14 +84,31 @@
                   </fieldset>
                 </div>
 
-                <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="1000">
-                  <div class="govuk-form-group">
-                    <label class="govuk-label" for="with-hint">
-                        Other important information
-                      </label>
-                    <textarea class="govuk-textarea govuk-js-character-count" id="other-information" name="other-information" rows="5">{{.ProDeputyDetails.DeputyImportantInformation.OtherImportantInformation}}</textarea>
-                    <div id="other-information-character-count" class="govuk-hint govuk-character-count__message" aria-live="polite">You have characters remaining</div>
-                  </div>
+                <div
+                    class="govuk-character-count"
+                    data-module="govuk-character-count"
+                    data-maxlength="1000">
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="other-important-information">
+                            Other information
+                        </label>
+                        {{/* prettier-ignore-start */}}
+                        <textarea
+                            class="govuk-textarea govuk-js-character-count"
+                            id="other-info-note"
+                            name="other-info-note"
+                            rows="5"
+                            aria-describedby="other-information"
+                            ></textarea>
+                        {{/* prettier-ignore-end */}}
+                        <div
+                            id="other-info-note-info"
+                            class="govuk-hint govuk-character-count__message"
+                            aria-live="polite"
+                            aria-label="Character count">
+                            You have 1000 characters remaining
+                        </div>
+                    </div>
                 </div>
 
               <div class="govuk-button-group govuk-!-margin-top-7">

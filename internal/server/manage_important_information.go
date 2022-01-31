@@ -13,16 +13,18 @@ type ManageDeputyImportantInformation interface {
 	GetProDeputyDetails(sirius.Context, int) (sirius.ProDeputyDetails, error)
 	UpdateImportantInformation(sirius.Context, int, sirius.ImportantInformationDetails) error
 	GetDeputyAnnualInvoiceBillingTypes(ctx sirius.Context) ([]sirius.DeputyAnnualBillingInvoiceTypes, error)
+	GetDeputyComplaintTypes(ctx sirius.Context) ([]sirius.DeputyComplaintTypes, error)
 }
 
 type manageDeputyImportantInformationVars struct {
-	Path             string
-	XSRFToken        string
-	ProDeputyDetails sirius.ProDeputyDetails
-	Error            string
-	Errors           sirius.ValidationErrors
-	DeputyId         int
+	Path                      string
+	XSRFToken                 string
+	ProDeputyDetails          sirius.ProDeputyDetails
+	Error                     string
+	Errors                    sirius.ValidationErrors
+	DeputyId                  int
 	AnnualBillingInvoiceTypes []sirius.DeputyAnnualBillingInvoiceTypes
+	ComplaintTypes            []sirius.DeputyComplaintTypes
 }
 
 func renderTemplateForImportantInformation(client ManageDeputyImportantInformation, tmpl Template) Handler {
@@ -43,49 +45,50 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 			return err
 		}
 
+		complaintTypes, err := client.GetDeputyComplaintTypes(ctx)
+		if err != nil {
+			return err
+		}
+
 		switch r.Method {
 		case http.MethodGet:
 
 			vars := manageDeputyImportantInformationVars{
-				Path:             r.URL.Path,
-				XSRFToken:        ctx.XSRFToken,
-				DeputyId:         deputyId,
-				ProDeputyDetails: proDeputyDetails,
+				Path:                      r.URL.Path,
+				XSRFToken:                 ctx.XSRFToken,
+				DeputyId:                  deputyId,
+				ProDeputyDetails:          proDeputyDetails,
 				AnnualBillingInvoiceTypes: annualBillingInvoiceTypes,
+				ComplaintTypes:            complaintTypes,
 			}
 			return tmpl.ExecuteTemplate(w, "page", vars)
 
-
 		case http.MethodPost:
-			var complaintsBool bool
+			var panelDeputyBool bool
 
-			panelDeputyBool, err := strconv.ParseBool(r.PostFormValue("panel-deputy"))
-			if err != nil{
-				return err
-			}
-
-			if r.PostFormValue("complaints") != "" {
-				complaintsBool, err = strconv.ParseBool(r.PostFormValue("complaints"))
-				if err != nil{
+			if r.PostFormValue("panel-deputy") != "" {
+				panelDeputyBool, err = strconv.ParseBool(r.PostFormValue("panel-deputy"))
+				if err != nil {
 					return err
 				}
 			}
 
-			if err != nil{
+			if err != nil {
 				return err
 			}
 
 			importantInfoForm := sirius.ImportantInformationDetails{
-				Complaints:  complaintsBool,
-				PanelDeputy:  panelDeputyBool,
-				AnnualBillingInvoice: r.PostFormValue("annual-billing"),
-				OtherImportantInformation:     r.PostFormValue("other-information"),
+				Complaints:                r.PostFormValue("complaints"),
+				PanelDeputy:               panelDeputyBool,
+				AnnualBillingInvoice:      r.PostFormValue("annual-billing"),
+				OtherImportantInformation: r.PostFormValue("other-information"),
 			}
 
 			err = client.UpdateImportantInformation(ctx, deputyId, importantInfoForm)
 
 			if verr, ok := err.(sirius.ValidationError); ok {
-				//verr.Errors = renameUpdateAdditionalInformationValidationErrorMessages(verr.Errors)
+				verr.Errors = renameUpdateAdditionalInformationValidationErrorMessages(verr.Errors)
+
 				vars := manageDeputyImportantInformationVars{
 					Path:             r.URL.Path,
 					XSRFToken:        ctx.XSRFToken,
@@ -105,21 +108,20 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 	}
 }
 
-//func renameUpdateAdditionalInformationValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
-//	errorCollection := sirius.ValidationErrors{}
-//
-//	for fieldName, value := range siriusError {
-//		for errorType, errorMessage := range value {
-//			err := make(map[string]string)
-//
-//			if fieldName == "firstname" && errorType == "stringLengthTooLong" {
-//				err[errorType] = "The deputy first name must be 255 characters or fewer"
-//				errorCollection["firstname"] = err
-//			} else {
-//				err[errorType] = errorMessage
-//				errorCollection[fieldName] = err
-//			}
-//		}
-//	}
-//	return errorCollection
-//}
+func renameUpdateAdditionalInformationValidationErrorMessages(siriusError sirius.ValidationErrors) sirius.ValidationErrors {
+	errorCollection := sirius.ValidationErrors{}
+
+	for fieldName, value := range siriusError {
+		for errorType, errorMessage := range value {
+			err := make(map[string]string)
+			if fieldName == "annualBillingInvoice" && errorType == "isEmpty" {
+				err[errorType] = "The annual billing invoice is required and can't be empty"
+				errorCollection["annualBillingInvoice"] = err
+			} else {
+				err[errorType] = errorMessage
+				errorCollection[fieldName] = err
+			}
+		}
+	}
+	return errorCollection
+}

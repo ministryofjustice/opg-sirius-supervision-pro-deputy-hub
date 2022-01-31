@@ -1,4 +1,5 @@
 {
+    "/api/v1/reference-data/annualBillingInvoice": "annualBillingInvoice",
     "/api/v1/*": "/$1",
     "/deputies/pro/:id/clients": "/clients",
     "/deputies/:id/contact-details": "/deputies/:id",

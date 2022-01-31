@@ -8,9 +8,9 @@ import (
 )
 
 type ImportantInformationDetails struct {
-	Complaints bool `json:"complaints"`
-	PanelDeputy  bool `json:"panelDeputy"`
-	AnnualBillingInvoice  string `json:"annualBillingInvoice"`
+	Complaints                string `json:"complaints"`
+	PanelDeputy               bool   `json:"panelDeputy"`
+	AnnualBillingInvoice      string `json:"annualBillingInvoice"`
 	OtherImportantInformation string `json:"otherImportantInformation"`
 }
 
