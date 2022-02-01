@@ -81,7 +81,7 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 				Complaints:                r.PostFormValue("complaints"),
 				PanelDeputy:               panelDeputyBool,
 				AnnualBillingInvoice:      r.PostFormValue("annual-billing"),
-				OtherImportantInformation: r.PostFormValue("other-information"),
+				OtherImportantInformation: r.PostFormValue("other-info-note"),
 			}
 
 			err = client.UpdateImportantInformation(ctx, deputyId, importantInfoForm)

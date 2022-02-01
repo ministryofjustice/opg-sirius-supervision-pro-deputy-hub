@@ -103,7 +103,10 @@
                   Panel deputy
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label "" }}{{.ProDeputyDetails.DeputyImportantInformation.PanelDeputy}}{{end}}
+                    {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label "" }}
+                        {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy true}}Yes{{end}}
+                        {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy false}}No{{end}}
+                    {{end}}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
