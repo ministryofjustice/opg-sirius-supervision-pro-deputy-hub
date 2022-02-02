@@ -17,6 +17,8 @@ var mappings = map[string]string{
 	"FIELD.panelDeputy":               "Panel deputy",
 	"FIELD.complaints":                "Complaints",
 	"FIELD.otherImportantInformation": "Other important information",
+	"VALUE.true":                      "Yes",
+	"VALUE.false":                     "No",
 }
 
 func Translate(prefix string, s string) string {

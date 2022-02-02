@@ -76,7 +76,6 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 			if err != nil {
 				return err
 			}
-
 			importantInfoForm := sirius.ImportantInformationDetails{
 				Complaints:                r.PostFormValue("complaints"),
 				PanelDeputy:               panelDeputyBool,
