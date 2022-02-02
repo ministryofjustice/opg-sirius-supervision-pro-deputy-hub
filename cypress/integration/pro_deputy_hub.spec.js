@@ -110,6 +110,8 @@ describe("Pro Deputy Hub", () => {
         it("should show other important information", () => {
             cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(4) > .govuk-summary-list__key").should("contain", "Other important information");
             cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(4) > .govuk-summary-list__value").should("contain", "Some important information is here");
+        });
+    });
 
     describe("Pro Organisation details", () => {
         beforeEach(() => {
@@ -125,3 +127,4 @@ describe("Pro Deputy Hub", () => {
         });
     });
 });
+

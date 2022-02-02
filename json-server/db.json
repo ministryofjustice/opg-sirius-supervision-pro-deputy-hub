@@ -1678,6 +1678,14 @@
         }
       },
       {
+        "id": "importantInformation",
+        "validation_errors": {
+          "otherImportantInformation": {
+            "stringLengthTooLong": "The other important information must be 1000 characters or fewer"
+          }
+        }
+      },
+      {
         "id": "internal-server-error",
         "message": "test message"
       }
@@ -1686,14 +1694,6 @@
         {
             "id": "firm",
             "firmId": 2
-        },
-        {
-            "id": "importantInformation",
-            "validation_errors": {
-                "otherImportantInformation": {
-                    "stringLengthTooLong": "The other important information must be 1000 characters or fewer"
-                }
-            }
         },
         {
             "id": "allocateToFirm",
@@ -1707,6 +1707,19 @@
             "displayName": "Jon Snow",
             "deleted": false,
             "email": "jonsnow@opgtest.com"
+        },
+        {
+          "id": "importantInformation",
+          "complaints": {
+            "handle": "NO",
+            "label": "No"
+          },
+          "panelDeputy": false,
+          "annualBillingInvoice": {
+            "handle": "INVOICE",
+            "label": "Invoice"
+          },
+          "otherImportantInformation": "kate"
         }
     ],
 "teams": [
@@ -1759,19 +1772,6 @@
             "id": "allocateToFirm",
             "deputyId": 76,
             "firmId": 2
-        },
-        {
-            "id": "importantInformation",
-            "complaints": {
-                "handle": "NO",
-                "label": "No"
-            },
-            "panelDeputy": false,
-            "annualBillingInvoice": {
-                "handle": "INVOICE",
-                "label": "Invoice"
-            },
-            "otherImportantInformation": "kate"
         },
         {
             "id": 93,
