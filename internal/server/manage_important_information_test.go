@@ -93,8 +93,8 @@ func TestErrorManageImportantInformationMessageWhenIsEmpty(t *testing.T) {
 	client := &mockManageDeputyImportantInformation{}
 
 	validationErrors := sirius.ValidationErrors{
-		"annualBillingInvoice": {
-			"isEmpty": "What sirius gives us",
+		"otherImportantInformation": {
+			"stringLengthTooLong": "What sirius gives us",
 		},
 	}
 
@@ -118,8 +118,8 @@ func TestErrorManageImportantInformationMessageWhenIsEmpty(t *testing.T) {
 	testHandler.ServeHTTP(w, r)
 
 	expectedValidationErrors := sirius.ValidationErrors{
-		"annualBillingInvoice": {
-			"isEmpty": "The annual billing invoice is required and can't be empty",
+		"otherImportantInformation": {
+			"stringLengthTooLong": "The other important information must be 1000 characters or fewer",
 		},
 	}
 

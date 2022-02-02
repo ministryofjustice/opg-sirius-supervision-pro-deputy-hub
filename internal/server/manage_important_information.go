@@ -90,11 +90,11 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 				verr.Errors = renameUpdateAdditionalInformationValidationErrorMessages(verr.Errors)
 
 				vars := manageDeputyImportantInformationVars{
-					Path:             r.URL.Path,
-					XSRFToken:        ctx.XSRFToken,
-					DeputyId:         deputyId,
-					ProDeputyDetails: proDeputyDetails,
-					Errors:           verr.Errors,
+					Path:                      r.URL.Path,
+					XSRFToken:                 ctx.XSRFToken,
+					DeputyId:                  deputyId,
+					ProDeputyDetails:          proDeputyDetails,
+					Errors:                    verr.Errors,
 					AnnualBillingInvoiceTypes: annualBillingInvoiceTypes,
 					ComplaintTypes:            complaintTypes,
 				}

@@ -63,4 +63,3 @@ func (c *Client) UpdateImportantInformation(ctx Context, deputyId int, important
 
 	return nil
 }
-

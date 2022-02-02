@@ -50,6 +50,19 @@
             "firm": {
                 "firmName": "This is the Firm Name"
             },
+            "deputyImportantInformation": {
+                "id": 2,
+                "complaints": {
+                    "handle": "YES",
+                    "label": "Yes"
+                },
+                "panelDeputy": true,
+                "annualBillingInvoice": {
+                    "handle": "SCHEDULE",
+                    "label": "Schedule"
+                },
+                "otherImportantInformation": "Some important information is here"
+            },
             "email": "email@something.com",
             "dob": "",
             "dateOfDeath": "",
@@ -1293,6 +1306,24 @@
             "direction": null
         }
     ],
+    "annualBillingInvoice": [
+        {
+            "handle": "INVOICE",
+            "label": "Invoice"
+        },
+        {
+            "handle": "SCHEDULE",
+            "label": "Schedule"
+        },
+        {
+            "handle": "SCHEDULE AND INVOICE",
+            "label": "Schedule and Invoice"
+        },
+        {
+            "handle": "UNKNOWN",
+            "label": "Unknown"
+        }
+    ],
     "addFirm": [
         {
             "FirmName": "name",
@@ -1316,32 +1347,14 @@
             "FirmNumber": 1000002
         }
     ],
-    "annualBillingInvoice": [
+    "complaints": [
         {
-            "handle": "INVOICE",
-            "label": "Invoice"
+            "handle": "YES",
+            "label": "Yes"
         },
         {
-            "handle": "SCHEDULE",
-            "label": "Schedule"
-        },
-        {
-            "handle": "SCHEDULE AND INVOICE",
-            "label": "Schedule and Invoice"
-        },
-        {
-            "handle": "UNKNOWN",
-            "label": "Unknown"
-        }
-    ],
-    "complaintTypes": [
-        {
-            "handle": "TRUE",
-            "label": "True"
-        },
-        {
-            "handle": "FALSE",
-            "label": "False"
+            "handle": "NO",
+            "label": "No"
         },
         {
             "handle": "UNKNOWN",
@@ -1357,6 +1370,14 @@
                 },
                 "description": {
                     "isEmpty": "Value is required and can't be empty"
+                }
+            }
+        },
+        {
+            "id": "importantInformation",
+            "validation_errors": {
+                "otherImportantInformation": {
+                    "stringLengthTooLong": "The other important information must be 1000 characters or fewer"
                 }
             }
         },
@@ -1457,6 +1478,19 @@
             "id": "allocateToFirm",
             "deputyId": 76,
             "firmId": 2
+        },
+        {
+            "id": "importantInformation",
+            "complaints": {
+                "handle": "NO",
+                "label": "No"
+            },
+            "panelDeputy": false,
+            "annualBillingInvoice": {
+                "handle": "INVOICE",
+                "label": "Invoice"
+            },
+            "otherImportantInformation": "kate"
         }
     ]
 }

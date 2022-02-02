@@ -1,5 +1,4 @@
 {
-    "/api/v1/reference-data/annualBillingInvoice": "annualBillingInvoice",
     "/api/v1/*": "/$1",
     "/deputies/pro/:id/clients": "/clients",
     "/deputies/:id/contact-details": "/deputies/:id",
@@ -7,5 +6,7 @@
     "/deputy/:personId/notes": "/notes",
     "/users/current": "/users",
     "/firms": "/addFirm",
-    "deputies/:deputyId/firm": "/allocateToFirm"
+    "deputies/:deputyId/firm": "/allocateToFirm",
+    "/reference-data/annualBillingInvoice": "/annualBillingInvoice",
+    "/reference-data/complaints": "/complaints"
 }

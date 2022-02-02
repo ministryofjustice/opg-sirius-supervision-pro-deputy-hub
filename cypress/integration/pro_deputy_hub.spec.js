@@ -86,4 +86,26 @@ describe("Pro Deputy Hub", () => {
             });
         });
     });
+
+    describe("Important information", () => {
+        it("should show complaints", () => {
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(1) > .govuk-summary-list__key").should("contain", "Complaints");
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(1) > .govuk-summary-list__value").should("contain", "Yes");
+        });
+
+        it("should show panel deputy", () => {
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(2) > .govuk-summary-list__key").should("contain", "Panel deputy");
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(2) > .govuk-summary-list__value").should("contain", "Yes");
+        });
+
+        it("should shown annual billing preference", () => {
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(3) > .govuk-summary-list__key").should("contain", "Annual billing preference");
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(3) > .govuk-summary-list__value").should("contain", "Schedule");
+        });
+
+        it("should show other important information", () => {
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(4) > .govuk-summary-list__key").should("contain", "Other important information");
+            cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(4) > .govuk-summary-list__value").should("contain", "Some important information is here");
+        });
+    });
 });
