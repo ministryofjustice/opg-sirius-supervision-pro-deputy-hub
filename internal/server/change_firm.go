@@ -82,9 +82,9 @@ func renderTemplateForChangeFirm(client ProDeputyChangeFirmInformation, tmpl Tem
 				verr.Errors = renameChangeFirmValidationErrorMessages(verr.Errors)
 
 				vars = changeFirmVars{
-					Path:             r.URL.Path,
-					XSRFToken:        ctx.XSRFToken,
-					Errors:           verr.Errors,
+					Path:      r.URL.Path,
+					XSRFToken: ctx.XSRFToken,
+					Errors:    verr.Errors,
 				}
 
 				w.WriteHeader(http.StatusBadRequest)
