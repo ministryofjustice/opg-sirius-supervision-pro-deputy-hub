@@ -9,4 +9,5 @@
     "deputies/:deputyId/firm": "/allocateToFirm",
     "/reference-data/annualBillingInvoice": "/annualBillingInvoice",
     "/reference-data/complaints": "/complaints"
+    "/deputies/:deputyId/ecm": "/ecm"
 }

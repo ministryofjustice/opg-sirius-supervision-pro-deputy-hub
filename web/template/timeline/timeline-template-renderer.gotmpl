@@ -4,6 +4,9 @@
     {{ end }}
     {{ if eq .EventType "DeputyContactDetailsChanged" }}
         {{ template  "deputy-contact-details-changed" . }}
+    {{ end }}  
+    {{ if eq .EventType "DeputyAllocated" }}
+        {{ template  "pro-deputy-changed" . }}
     {{ end }}
     {{ if eq .EventType "DeputyInformationUpdated" }}
             {{ template  "deputy-information-updated" . }}

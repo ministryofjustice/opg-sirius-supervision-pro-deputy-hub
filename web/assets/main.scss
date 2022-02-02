@@ -2,9 +2,12 @@ $govuk-include-default-font-face: false;
 $govuk-moj-table-background-color: #e7f2fb;
 $moj-assets-path: "/supervision/deputies/professional/assets/";
 $govuk-assets-path: "/supervision/deputies/professional/assets/";
+$fa-font-path: "/supervision/deputies/professional/assets/fonts";
 
 @import "node_modules/govuk-frontend/govuk/all";
 @import "node_modules/@ministryofjustice/frontend/moj/all";
+@import "node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "node_modules/@fortawesome/fontawesome-free/css/all";
 @import "accessible-autocomplete";
 @import "./scss/pro-hub";
 

@@ -47,9 +47,13 @@ describe("Pro Deputy Hub", () => {
         });
     });
 
-    describe("Pro deputy details", () => {
+    describe("Pro Person deputy details", () => {
         it("the page should contain the deputy name", () => {
             cy.contains(".hook_header_deputy_name", "firstname surname");
+        });
+
+        it("the page should contain the deputy status", () => {
+            cy.contains(".hook_header_deputy_status_person", "Active");
         });
 
         it("the page should contain the firm", () => {
@@ -61,7 +65,7 @@ describe("Pro Deputy Hub", () => {
         });
 
         it("the page should contain the executive case manager", () => {
-            cy.contains(".hook_header_ecm", "Executive Case Manager: displayName");
+            cy.contains(".hook_header_ecm", "Executive Case Manager: ProTeam1 User1");
         });
 
         it("the page should contain the address without the firm name", () => {
@@ -106,6 +110,18 @@ describe("Pro Deputy Hub", () => {
         it("should show other important information", () => {
             cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(4) > .govuk-summary-list__key").should("contain", "Other important information");
             cy.get(":nth-child(2) > .govuk-summary-list > :nth-child(4) > .govuk-summary-list__value").should("contain", "Some important information is here");
+
+    describe("Pro Organisation details", () => {
+        beforeEach(() => {
+            cy.visit("/supervision/deputies/professional/deputy/2");
+        });
+
+        it("the page should contain the deputy name", () => {
+            cy.contains(".hook_header_organisation_name", "Organisation Ltd");
+        });
+
+        it("the page should contain the deputy status", () => {
+            cy.contains(".hook_header_deputy_status_organisation", "Inactive");
         });
     });
 });
