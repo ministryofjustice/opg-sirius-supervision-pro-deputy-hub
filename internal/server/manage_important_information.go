@@ -95,6 +95,8 @@ func renderTemplateForImportantInformation(client ManageDeputyImportantInformati
 					DeputyId:         deputyId,
 					ProDeputyDetails: proDeputyDetails,
 					Errors:           verr.Errors,
+					AnnualBillingInvoiceTypes: annualBillingInvoiceTypes,
+					ComplaintTypes:            complaintTypes,
 				}
 				return tmpl.ExecuteTemplate(w, "page", vars)
 			} else if err != nil {
@@ -114,9 +116,9 @@ func renameUpdateAdditionalInformationValidationErrorMessages(siriusError sirius
 	for fieldName, value := range siriusError {
 		for errorType, errorMessage := range value {
 			err := make(map[string]string)
-			if fieldName == "annualBillingInvoice" && errorType == "isEmpty" {
-				err[errorType] = "The annual billing invoice is required and can't be empty"
-				errorCollection["annualBillingInvoice"] = err
+			if fieldName == "otherImportantInformation" && errorType == "stringLengthTooLong" {
+				err[errorType] = "The other important information must be 1000 characters or fewer"
+				errorCollection["otherImportantInformation"] = err
 			} else {
 				err[errorType] = errorMessage
 				errorCollection[fieldName] = err

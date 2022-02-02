@@ -15,6 +15,7 @@ type ImportantInformationDetails struct {
 }
 
 func (c *Client) UpdateImportantInformation(ctx Context, deputyId int, importantInfoForm ImportantInformationDetails) error {
+
 	var body bytes.Buffer
 
 	err := json.NewEncoder(&body).Encode(importantInfoForm)
@@ -62,3 +63,4 @@ func (c *Client) UpdateImportantInformation(ctx Context, deputyId int, important
 
 	return nil
 }
+
