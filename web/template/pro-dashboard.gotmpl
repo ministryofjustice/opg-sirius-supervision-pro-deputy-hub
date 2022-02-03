@@ -85,14 +85,58 @@
                     </dd>
                 </div>
             </dl>
-            <a
-                href="{{ prefix (printf "/deputy/%d/manage-deputy-contact-details" .ProDeputyDetails.ID) }}"
+            <a href="{{ prefix (printf "/deputy/%d/manage-deputy-contact-details" .ProDeputyDetails.ID) }}"
                 role="button"
                 draggable="false"
                 class="govuk-button govuk-button--secondary"
                 data-module="govuk-button"
                 data-cy="manage-deputy-contact-details-btn">
                 Manage deputy contact details
+            </a>
+        </div>
+        <div class="govuk-grid-column-one-half">
+            <h2 class="govuk-heading-m">Important information</h2>
+
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Complaints
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{.ProDeputyDetails.DeputyImportantInformation.Complaints.Label}}
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Panel deputy
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{if ne .ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label "" }}
+                        {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy true}}Yes{{end}}
+                        {{if eq .ProDeputyDetails.DeputyImportantInformation.PanelDeputy false}}No{{end}}
+                    {{end}}
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Annual billing preference
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{.ProDeputyDetails.DeputyImportantInformation.AnnualBillingInvoice.Label}}
+                  </dd>
+                </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Other important information
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <p>{{.ProDeputyDetails.DeputyImportantInformation.OtherImportantInformation}}</p>
+                </dd>
+              </div>
+            </dl>
+
+            <a href="{{ prefix (printf "/deputy/%d/manage-important-information" .ProDeputyDetails.ID) }}" role="button" draggable="false" class="govuk-button govuk-button--secondary">
+              Manage important information
             </a>
         </div>
     </div>

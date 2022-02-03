@@ -114,7 +114,7 @@ func TestDeputyClientReturned(t *testing.T) {
 				StatusLabel:    "Pending",
 			},
 			SupervisionLevel: "General",
-			IsPanelClient: true,
+			IsPanelClient:    true,
 		},
 	}
 

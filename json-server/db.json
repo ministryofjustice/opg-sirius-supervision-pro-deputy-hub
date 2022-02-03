@@ -63,6 +63,19 @@
         "firm": {
           "firmName": "This is the Firm Name"
         },
+        "deputyImportantInformation": {
+          "id": 2,
+          "complaints": {
+              "handle": "YES",
+              "label": "Yes"
+          },
+          "panelDeputy": true,
+          "annualBillingInvoice": {
+              "handle": "SCHEDULE",
+              "label": "Schedule"
+          },
+          "otherImportantInformation": "Some important information is here"
+        },
         "email": "email@something.com",
         "dob": "",
         "dateOfDeath": "",
@@ -1514,6 +1527,24 @@
         "direction": null
       }
     ],
+    "annualBillingInvoice": [
+        {
+            "handle": "INVOICE",
+            "label": "Invoice"
+        },
+        {
+            "handle": "SCHEDULE",
+            "label": "Schedule"
+        },
+        {
+            "handle": "SCHEDULE AND INVOICE",
+            "label": "Schedule and Invoice"
+        },
+        {
+            "handle": "UNKNOWN",
+            "label": "Unknown"
+        }
+    ],
     "addFirm": [
       {
         "FirmName": "name",
@@ -1536,6 +1567,20 @@
         "FirmName": "Great Firm Corp",
         "FirmNumber": 1000002
       }
+    ],
+    "complaints": [
+        {
+            "handle": "YES",
+            "label": "Yes"
+        },
+        {
+            "handle": "NO",
+            "label": "No"
+        },
+        {
+            "handle": "UNKNOWN",
+            "label": "Unknown"
+        }
     ],
     "errors": [
       {
@@ -1633,6 +1678,14 @@
         }
       },
       {
+        "id": "importantInformation",
+        "validation_errors": {
+          "otherImportantInformation": {
+            "stringLengthTooLong": "The other important information must be 1000 characters or fewer"
+          }
+        }
+      },
+      {
         "id": "internal-server-error",
         "message": "test message"
       }
@@ -1654,6 +1707,19 @@
             "displayName": "Jon Snow",
             "deleted": false,
             "email": "jonsnow@opgtest.com"
+        },
+        {
+          "id": "importantInformation",
+          "complaints": {
+            "handle": "NO",
+            "label": "No"
+          },
+          "panelDeputy": false,
+          "annualBillingInvoice": {
+            "handle": "INVOICE",
+            "label": "Invoice"
+          },
+          "otherImportantInformation": "kate"
         }
     ],
 "teams": [
@@ -1698,6 +1764,15 @@
         }
     ],
     "ecm": [
+        {
+            "id": "firm",
+            "firmId": 2
+        },
+        {
+            "id": "allocateToFirm",
+            "deputyId": 76,
+            "firmId": 2
+        },
         {
             "id": 93,
             "name": "Jon",
