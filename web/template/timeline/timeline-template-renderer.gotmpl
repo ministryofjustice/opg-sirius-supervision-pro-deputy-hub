@@ -8,4 +8,7 @@
     {{ if eq .EventType "DeputyAllocated" }}
         {{ template  "pro-deputy-changed" . }}
     {{ end }}
+    {{ if eq .EventType "DeputyInformationUpdated" }}
+            {{ template  "deputy-information-updated" . }}
+        {{ end }}
 {{ end }}
