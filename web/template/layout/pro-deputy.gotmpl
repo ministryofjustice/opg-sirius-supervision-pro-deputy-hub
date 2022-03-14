@@ -25,8 +25,8 @@
                 class="govuk-caption-m  govuk-!-margin-bottom-0 hook_header_firm_name">
                 Firm:
                 <a
-                    class="moj-header__navigation-link"
-                    href="{{ firmhub (printf "/supervision/deputies/firm/%d" .ProDeputyDetails.Firm.FirmId) }}">
+                    class="govuk-link"
+                    href="{{ firmhub (printf "/%d" .ProDeputyDetails.Firm.FirmId) }}">
                     {{ printf "%v" .ProDeputyDetails.Firm.FirmName }}</a
                 >
             </span>

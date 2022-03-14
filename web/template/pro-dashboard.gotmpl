@@ -54,7 +54,11 @@
                     <dt class="govuk-summary-list__key">Firm</dt>
                     <dd class="govuk-summary-list__value hook_deputy_firm_name">
                         {{ if ne .ProDeputyDetails.Firm.FirmName "" }}
-                            {{ .ProDeputyDetails.Firm.FirmName }}
+                            <a
+                                class="govuk-link"
+                                href="{{ firmhub (printf "/%d" .ProDeputyDetails.Firm.FirmId) }}">
+                                {{ printf "%v" .ProDeputyDetails.Firm.FirmName }}</a
+                            >
                         {{ end }}
                     </dd>
                 </div>

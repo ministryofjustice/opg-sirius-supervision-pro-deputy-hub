@@ -23,7 +23,7 @@ func main() {
 	webDir := getEnv("WEB_DIR", "web")
 	siriusURL := getEnv("SIRIUS_URL", "http://localhost:8080")
 	siriusPublicURL := getEnv("SIRIUS_PUBLIC_URL", "")
-	firmHubURL := getEnv("FIRM_HUB_URL", "")
+	firmHubURL := getEnv("FIRM_HUB_URL", "/supervision/deputies/firm")
 	prefix := getEnv("PREFIX", "")
 
 	layouts, _ := template.

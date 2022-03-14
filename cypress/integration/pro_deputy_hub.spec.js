@@ -57,7 +57,10 @@ describe("Pro Deputy Hub", () => {
         });
 
         it("the page should contain the firm", () => {
-            cy.contains(".hook_header_firm_name", "This is the Firm Name");
+            cy.contains(".hook_header_firm_name", "This is the Firm Name")
+                .find('a')
+                .should("have.attr", "href")
+                .and('contain', "/supervision/deputies/firm/0");
         });
 
         it("the page should contain the deputy number", () => {
